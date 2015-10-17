@@ -13,14 +13,12 @@ Ambari stack for easily installing and managing Logsearch on HDP cluster
 ssh root@sandbox.hortonworks.com
 /root/start_ambari.sh
 ```
-- If you are running on sandbox, Logsearch is already installed under /opt/Logsearch. You can either rename this dir or install the service to different dir 
-```
-mv /opt/Logsearch /opt/Logsearch-orig
-```
+- Make sure SolrCloud and Logstash are installed and started already
+
 - To deploy the Logsearch stack, run below
 ```
 VERSION=`hdp-select status hadoop-client | sed 's/hadoop-client - \([0-9]\.[0-9]\).*/\1/'`
-sudo git clone https://github.com/abajwa-hw/Logsearch-stack.git /var/lib/ambari-server/resources/stacks/HDP/$VERSION/services/Logsearch
+sudo git clone https://github.com/abajwa-hw/logsearch-service.git /var/lib/ambari-server/resources/stacks/HDP/$VERSION/services/LOGSEARCH
 ```
 
 - Restart Ambari
@@ -47,7 +45,7 @@ On bottom left -> Actions -> Add service -> check Logsearch service -> Next -> N
 
 #### Use Logsearch 
 
-- Lauch the Logsearch webapp via navigating to http://sandbox.hortonworks.com:8983/
+- Lauch the Logsearch webapp via navigating to http://sandbox.hortonworks.com:8888/
 
 - Alternatively, you can launch it from Ambari via [iFrame view](https://github.com/abajwa-hw/iframe-view)
 ![Image](../master/screenshots/3.png?raw=true)
@@ -86,7 +84,7 @@ curl -u admin:$PASSWORD -i -H 'X-Requested-By: ambari' -X DELETE http://$AMBARI_
   - Remove artifacts 
   
     ```
-    rm -rf /var/lib/ambari-server/resources/stacks/HDP/2.2/services/Logsearch-stack
+    rm -rf /var/lib/ambari-server/resources/stacks/HDP/2.2/services/LOGSEARCH
     rm -rf /opt/Logsearch
     ```
   - Restart Ambari
