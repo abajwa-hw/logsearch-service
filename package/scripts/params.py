@@ -8,9 +8,15 @@ config = Script.get_config()
 
 hdp_version = default("/commandParams/version", None)
 
-# logsearch configs
-#logsearch_dir = config['configurations']['logsearch-config']['logsearch_dir']
-logsearch_dir = '/usr/hdp/'+hdp_version+'/logsearch'
+logsearch_downloadlocation = config['configurations']['logsearch-config']['logsearch_download_location']
+
+if logsearch_downloadlocation == 'RPM':
+  logsearch_dir = '/usr/hdp/'+hdp_version+'/logsearch'
+else:  
+  logsearch_dir = config['configurations']['logsearch-config']['logsearch_dir']
+
+
+
 logsearch_downloadlocation = config['configurations']['logsearch-config']['logsearch_download_location']
 logsearch_numshards = str(config['configurations']['logsearch-config']['logsearch_collection_numshards'])
 logsearch_repfactor = str(config['configurations']['logsearch-config']['logsearch_collection_rep_factor'])

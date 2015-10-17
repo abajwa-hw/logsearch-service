@@ -3,7 +3,21 @@
  
 <configuration>
 
+  
 
+  <property>
+    <name>logsearch_dir</name>
+    <value>/opt/logsearch</value>
+    <description>Location where Logsearch will be installed to</description>
+  </property>  
+
+  <property>
+    <name>logsearch_download_location</name>
+    <value>https://dl.dropboxusercontent.com/u/114020/logsearch/logsearch-portal.tar.gz</value>
+    <description>Location to download Logsearch from (.tgz format). If set to RPM, it will install from rpm instead</description>
+  </property>  
+  
+  
   
    <property>
     <name>logsearch_collection_numshards</name>
