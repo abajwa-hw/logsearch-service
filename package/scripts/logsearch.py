@@ -44,11 +44,11 @@ class Master(Script):
     )
 
         
-  if params.logsearch_downloadlocation == 'RPM':
-    Execute('rpm -ivh http://s3.amazonaws.com/dev2.hortonworks.com/ashishujjain/logsearch/logsearch_2_3_2_0_2950-0.0.1.2.3.2.0-2950.el6.x86_64.rpm')
-  else:  
-    Execute('cd ' + params.logsearch_dir + '; wget ' + params.logsearch_downloadlocation + ' -O logsearch-portal.tar.gz -a ' + params.logsearch_log, user=params.logsearch_user)
-    Execute('cd ' + params.logsearch_dir + '; tar -xvf logsearch-portal.tar.gz', user=params.logsearch_user)    
+    if params.logsearch_downloadlocation == 'RPM':
+      Execute('rpm -ivh http://s3.amazonaws.com/dev2.hortonworks.com/ashishujjain/logsearch/logsearch_2_3_2_0_2950-0.0.1.2.3.2.0-2950.el6.x86_64.rpm')
+    else:  
+      Execute('cd ' + params.logsearch_dir + '; wget ' + params.logsearch_downloadlocation + ' -O logsearch-portal.tar.gz -a ' + params.logsearch_log, user=params.logsearch_user)
+      Execute('cd ' + params.logsearch_dir + '; tar -xvf logsearch-portal.tar.gz', user=params.logsearch_user)    
   
        
     cmd = params.solr_bindir+'/solr create -c hadoop_logs -d '+params.logsearch_dir+'/solr_configsets/hadoop_logs/conf -s '+params.logsearch_numshards+' -rf ' + params.logsearch_repfactor
