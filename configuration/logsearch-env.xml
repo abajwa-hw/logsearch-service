@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+
+<!-- This is a special config file for properties used to monitor status of the service -->
+<configuration>
+
+  <property>
+    <name>logsearch_pid_dir</name>
+    <value>/var/run/logsearch</value>
+    <description>Logsearch Process ID Directory</description>
+  </property> 
+
+  <property>
+    <name>logsearch_log_dir</name>
+    <value>/var/log/logsearch</value>
+    <description>Log dir for Logsearch</description>
+  </property> 
+  
+  <property>
+    <name>logsearch_user</name>
+    <value>logsearch</value>
+    <property-type>USER</property-type>
+    <description>Logsearch user</description>
+  </property>  
+
+  <property>
+    <name>logsearch_group</name>
+    <value>logsearch</value>
+    <property-type>GROUP</property-type>
+    <description>Logsearch group</description>
+  </property> 
+
+
+  <!-- system.properties -->
+
+  <property>
+    <name>content</name>
+    <description>This is the jinja template for system.properties file</description>
+    <value>
+# Licensed to the Apache Software Foundation (ASF) under one or more
+# contributor license agreements.  See the NOTICE file distributed with
+# this work for additional information regarding copyright ownership.
+# The ASF licenses this file to You under the Apache License, Version 2.0
+# (the "License"); you may not use this file except in compliance with
+# the License.  You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+restapi.log.enabled=false
+solr.url=http://{{solr_host}}:{{solr_port}}/solr
+solr.enable=true
+
+#db
+db.maxResults=50
+
+#Solr Core
+solr.core.logs=hadoop_logs
+solr.core.histroy=history
+    </value>
+  </property>
+
+  
+</configuration>  

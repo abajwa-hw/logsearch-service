@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<metainfo>
+    <schemaVersion>2.0</schemaVersion>
+    <services>
+        <service>
+            <!-- Internal name for service (must be unique) -->
+            <name>LOGSEARCH</name>
+            <!-- display name for service (displayed in Ambari UI) -->
+            <displayName>Log Search</displayName>
+            <!-- Description of service - will be displayed when user clicks add service -->
+            <comment>LogSearch (aka Boscona)</comment>
+            <!-- Version of component-->
+            <version>0.0.1</version>
+            
+            <requiredServices>
+                 <service>SOLR</service>            
+            </requiredServices>            
+                
+            <components>
+                <component>
+                  <name>LOGSEARCH_MASTER</name>
+                  <displayName>Log Search</displayName>
+                  <category>MASTER</category>
+                  <cardinality>1</cardinality>
+                  <commandScript>
+                    <script>scripts/logsearch.py</script>
+                    <scriptType>PYTHON</scriptType>
+                    <timeout>5000</timeout>
+                  </commandScript>
+                </component>
+            </components>
+            <!-- what yum packages will be needed for the setup. These will be installed by install_packages() in master.py -->
+             <osSpecifics>
+              <osSpecific>
+                <osFamily>redhat6</osFamily>
+                <packages>
+                   <package><name>wget</name></package>   
+                   <package><name>tar</name></package>  
+                   <package><name>zip</name></package>                     
+                </packages>
+              </osSpecific>
+            </osSpecifics> 
+             <!-- names for config files (under configuration dir) -->
+      	    <configuration-dependencies>
+        	<config-type>logsearch-config</config-type>
+      	    </configuration-dependencies>
+            <restartRequiredAfterChange>false</restartRequiredAfterChange>
+        </service>
+    </services>
+</metainfo>
