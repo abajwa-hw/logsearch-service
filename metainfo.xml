@@ -8,7 +8,7 @@
             <!-- display name for service (displayed in Ambari UI) -->
             <displayName>Log Search</displayName>
             <!-- Description of service - will be displayed when user clicks add service -->
-            <comment>LogSearch (aka Boscona)</comment>
+            <comment>LogSearch (aka Bosc-ana)</comment>
             <!-- Version of component-->
             <version>0.0.1</version>
             
