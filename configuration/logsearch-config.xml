@@ -8,7 +8,7 @@
   <property>
     <name>logsearch_dir</name>
     <value>/opt/logsearch</value>
-    <description>Location where Logsearch will be installed to</description>
+    <description>Location where Logsearch will be installed to. If download_location is set to RPM, logsearch will be downloaded to /usr/hdp/<version>/logsearch</description>
   </property>  
 
   <property>
