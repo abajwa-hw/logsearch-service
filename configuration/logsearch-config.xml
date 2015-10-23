@@ -13,8 +13,9 @@
 
   <property>
     <name>logsearch_download_location</name>
-    <value>https://dl.dropboxusercontent.com/u/114020/logsearch/logsearch-portal.tar.gz</value>
-    <description>Location to download Logsearch from (.tgz format). If set to RPM, it will install from rpm instead</description>
+    <value>RPM</value>
+    <!-- <value>https://dl.dropboxusercontent.com/u/114020/logsearch/logsearch-portal.tar.gz</value> -->
+    <description>Location to download Logsearch from. If set to RPM, it will install from rpm. Otherwise will download from tar.gaz (e.g. https://dl.dropboxusercontent.com/u/114020/logsearch/logsearch-portal.tar.gz)</description>
   </property>  
   
   
