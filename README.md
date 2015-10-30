@@ -55,8 +55,12 @@ On bottom left -> Actions -> Add service -> check Logsearch service -> Next -> N
 ```
 export SERVICE=LOGSEARCH
 export PASSWORD=admin
-export AMBARI_HOST=sandbox.hortonworks.com
-export CLUSTER=Sandbox
+export AMBARI_HOST=localhost
+
+#detect name of cluster
+output=`curl -u admin:$PASSWORD -i -H 'X-Requested-By: ambari'  http://$AMBARI_HOST:8080/api/v1/clusters`
+CLUSTER=`echo $output | sed -n 's/.*"cluster_name" : "\([^\"]*\)".*/\1/p'`
+
 
 #get service status
 curl -u admin:$PASSWORD -i -H 'X-Requested-By: ambari' -X GET http://$AMBARI_HOST:8080/api/v1/clusters/$CLUSTER/services/$SERVICE
@@ -76,9 +80,17 @@ curl -u admin:$PASSWORD -i -H 'X-Requested-By: ambari' -X PUT -d '{"RequestInfo"
 ```
 export SERVICE=LOGSEARCH
 export PASSWORD=admin
-export AMBARI_HOST=sandbox.hortonworks.com
-export CLUSTER=Sandbox    
+export AMBARI_HOST=localhost
+
+#detect name of cluster
+output=`curl -u admin:$PASSWORD -i -H 'X-Requested-By: ambari'  http://$AMBARI_HOST:8080/api/v1/clusters`
+CLUSTER=`echo $output | sed -n 's/.*"cluster_name" : "\([^\"]*\)".*/\1/p'`
+   
 curl -u admin:$PASSWORD -i -H 'X-Requested-By: ambari' -X DELETE http://$AMBARI_HOST:8080/api/v1/clusters/$CLUSTER/services/$SERVICE
+
+#if above errors out, run below first to fully stop the service
+#curl -u admin:$PASSWORD -i -H 'X-Requested-By: ambari' -X PUT -d '{"RequestInfo": {"context" :"Stop $SERVICE via REST"}, "Body": {"ServiceInfo": {"state": "INSTALLED"}}}' http://$AMBARI_HOST:8080/api/v1/clusters/$CLUSTER/services/$SERVICE
+
 ```
   - Remove artifacts 
   
