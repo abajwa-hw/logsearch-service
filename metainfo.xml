@@ -24,7 +24,7 @@
                 </component>
                 
                 <component>
-                  <name>SOLR</name>
+                  <name>LOGSEARCH_SOLR</name>
                   <displayName>Solr</displayName>
                   <category>MASTER</category>
                   <cardinality>1+</cardinality>
@@ -36,7 +36,7 @@
                 </component>
                 
                 <component>
-                  <name>LOGFEEDER</name>
+                  <name>LOGSEARCH_LOGFEEDER</name>
                   <displayName>Log Feeder</displayName>
                   <category>SLAVE</category>
                   <cardinality>ALL</cardinality>
