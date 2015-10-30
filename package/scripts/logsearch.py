@@ -14,10 +14,6 @@ class Master(Script):
     # Install packages listed in metainfo.xml
     self.install_packages(env)
     
-    #e.g. /var/lib/ambari-agent/cache/stacks/HDP/2.3/services/LOGSEARCH/package
-    service_packagedir = os.path.realpath(__file__).split('/scripts')[0]             
-    Execute('find '+service_packagedir+' -iname "*.sh" | xargs chmod +x')
-
     try: grp.getgrnam(params.logsearch_group)
     except KeyError: Group(group_name=params.logsearch_group) 
     
@@ -83,7 +79,7 @@ class Master(Script):
     Execute('echo '  + cmd)
     Execute(cmd, ignore_failures=True)
     
-
+    Execute('find '+params.service_packagedir+' -iname "*.sh" | xargs chmod +x')
     cmd = params.service_packagedir + '/scripts/start_logsearch.sh ' + params.logsearch_dir + ' ' + params.logsearch_log + ' ' + status_params.logsearch_pid_file + ' ' + params.java64_home
   
     Execute('echo "Running cmd: ' + cmd + '"')    

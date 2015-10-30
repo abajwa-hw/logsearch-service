@@ -14,10 +14,6 @@ class Master(Script):
     # Install packages listed in metainfo.xml
     self.install_packages(env)
     
-    #e.g. /var/lib/ambari-agent/cache/stacks/HDP/2.3/services/LOGFEEDER/package
-    service_packagedir = os.path.realpath(__file__).split('/scripts')[0]             
-    Execute('find '+service_packagedir+' -iname "*.sh" | xargs chmod +x')
-
     try: grp.getgrnam(params.logfeeder_group)
     except KeyError: Group(group_name=params.logfeeder_group) 
     
@@ -74,7 +70,7 @@ class Master(Script):
     import status_params
     self.configure(env)
     
-
+    Execute('find '+params.service_packagedir+' -iname "*.sh" | xargs chmod +x')
     cmd = params.service_packagedir + '/scripts/start_logfeeder.sh ' + params.logfeeder_dir + ' ' + params.logfeeder_log + ' ' + status_params.logfeeder_pid_file + ' ' + params.java64_home
   
     Execute('echo "Running cmd: ' + cmd + '"')    

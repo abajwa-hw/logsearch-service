@@ -14,9 +14,7 @@ class Master(Script):
     # Install packages listed in metainfo.xml
     self.install_packages(env)
     
-    #e.g. /var/lib/ambari-agent/cache/stacks/HDP/2.3/services/SOLR/package
-    service_packagedir = os.path.realpath(__file__).split('/scripts')[0]             
-    Execute('find '+service_packagedir+' -iname "*.sh" | xargs chmod +x')
+    Execute('find '+params.service_packagedir+' -iname "*.sh" | xargs chmod +x')
 
     try: grp.getgrnam(params.solr_group)
     except KeyError: Group(group_name=params.solr_group) 
@@ -105,6 +103,8 @@ class Master(Script):
     #import status properties defined in -env.xml file from status_params class
     import status_params
     self.configure(env)
+    
+    Execute('find '+params.service_packagedir+' -iname "*.sh" | xargs chmod +x')
     
     #form command to invoke start.sh with its arguments and execute it
     if params.solr_cloudmode:
