@@ -121,6 +121,10 @@ service ambari-agent status
 - Deploy cluster using blueprint
 ```
 wget https://raw.githubusercontent.com/abajwa-hw/logsearch-service/master/blueprint-4node-logsearch.json
+
+#if needed change the numshards, replicas based on your setup (default is 1 for each)
+#vi blueprint-4node-logsearch.json
+
 curl -u admin:admin -H  X-Requested-By:ambari http://localhost:8080/api/v1/blueprints/logsearchBP -d @blueprint-4node-logsearch.json
 
 wget https://raw.githubusercontent.com/abajwa-hw/logsearch-service/master/cluster-4node.json
