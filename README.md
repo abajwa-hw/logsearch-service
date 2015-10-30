@@ -22,6 +22,7 @@ git clone https://github.com/abajwa-hw/logsearch-service.git /var/lib/ambari-ser
 
 - Edit the `/var/lib/ambari-server/resources/stacks/HDP/$VERSION/role_command_order.json` file by adding the below entries to the middle of the file
 ```
+    "LOGSEARCH_SOLR-START" : ["ZOOKEEPER_SERVER-START"],
     "LOGSEARCH_MASTER-START": ["LOGSEARCH_SOLR-START"],
     "LOGSEARCH_LOGFEEDER-START": ["LOGSEARCH_SOLR-START", "LOGSEARCH_MASTER-START"],
 ```
