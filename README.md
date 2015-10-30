@@ -83,13 +83,13 @@ curl -u admin:$PASSWORD -i -H 'X-Requested-By: ambari' -X PUT -d '{"RequestInfo"
 
 - Bring up 4 VMs imaged with RHEL/CentOS 6.x
 
-- On non-ambari server nodes
+- On non-ambari nodes, install ambari-agents and point them to ambari node
 ```
 export ambari_server=node1
 curl -sSL https://raw.githubusercontent.com/seanorama/ambari-bootstrap/master/ambari-bootstrap.sh | sudo -E sh
 ```
 
-- On Ambari node
+- On Ambari node, install ambari-server
 ```
 export install_ambari_server=true
 curl -sSL https://raw.githubusercontent.com/seanorama/ambari-bootstrap/master/ambari-bootstrap.sh | sudo -E sh
