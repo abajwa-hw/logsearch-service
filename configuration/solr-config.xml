@@ -27,8 +27,8 @@
 
   <property>
     <name>solr.znode</name>
-    <value>/solr</value>
-    <description>Zookeeper znode (only used if cloudmode is true)</description>
+    <value>/logsearch</value>
+    <description>Zookeeper znode</description>
   </property>  
   
   <property>
