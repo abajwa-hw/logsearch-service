@@ -90,10 +90,11 @@ class Master(Script):
     #this allows us to access the status_params.logfeeder_pid_file property as format('{logfeeder_pid_file}')
     env.set_params(status_params)
 
-    Execute (format('kill `cat {logfeeder_pid_file}` >/dev/null 2>&1'))
+    if os.path.isfile(status_params.logfeeder_pid_file):
+      Execute (format('kill `cat {logfeeder_pid_file}` >/dev/null 2>&1'))
 
-    #delete the pid file
-    Execute (format("rm -f {logfeeder_pid_file}"), user=params.logfeeder_user)
+      #delete the pid file
+      Execute (format("rm -f {logfeeder_pid_file}"), user=params.logfeeder_user)
       	
   #Called to get status of the service using the pidfile
   def status(self, env):

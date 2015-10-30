@@ -128,11 +128,13 @@ class Master(Script):
     env.set_params(status_params)
     #self.configure(env)
 
-    #kill the instances of solr
-    Execute (format('{params.solr_bindir}/solr stop -all'))  
+    if os.path.isfile(status_params.solr_pidfile):
+    
+      #kill the instances of solr
+      Execute (format('{params.solr_bindir}/solr stop -all'))  
 
-    #delete the pid file
-    Execute (format("rm -f {solr_pidfile}"), user=params.solr_user)
+      #delete the pid file
+      Execute (format("rm -f {solr_pidfile}"), user=params.solr_user)
       	
   #Called to get status of the service using the pidfile
   def status(self, env):
