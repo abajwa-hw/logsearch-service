@@ -53,7 +53,7 @@
 # limitations under the License.
 #solr.url=http://{{solr_host}}:{{solr_port}}/solr
 
-solr.zkhosts={{zookeeper_quorum}}
+solr.zkhosts={{zookeeper_quorum}}{{solr_znode}}
 solr.enable=true
 restapi.log.enabled=false
 
