@@ -13,21 +13,9 @@ PID_FILE=$3
 
 JAVA_HOME=$4
 
- 
-PID_DIR=$(dirname "$PID_FILE")
 
-#Create pid dir if it does not exist
-if [ ! -d "$PID_DIR" ]
-then
-	echo "Creating PID_DIR: $PID_DIR"
-	mkdir -p $PID_DIR
-fi
+cd $LOGSEARCH_PATH
+echo "Starting Logsearch..."	
+$JAVA_HOME/bin/java -cp 'libs/*:classes:LogSearch.jar' org.apache.ambari.logsearch.LogSearch >> $LOGFILE 2>&1 &	
+echo $! > $PID_FILE
 
-#start Solr if not already started from $START_PATH dir
-if [ ! -f "$PID_FILE" ]
-then
-	cd $LOGSEARCH_PATH
-	echo "Starting Logsearch..."	
-	$JAVA_HOME/bin/java -cp 'libs/*:classes:LogSearch.jar' org.apache.ambari.logsearch.LogSearch >> $LOGFILE 2>&1 &	
-	echo $! > $PID_FILE
-fi
