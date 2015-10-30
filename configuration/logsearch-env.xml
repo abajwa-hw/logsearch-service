@@ -51,9 +51,11 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-restapi.log.enabled=false
-solr.url=http://{{solr_host}}:{{solr_port}}/solr
+#solr.url=http://{{solr_host}}:{{solr_port}}/solr
+
+solr.zkhosts={{zookeeper_quorum}}
 solr.enable=true
+restapi.log.enabled=false
 
 #db
 db.maxResults=50

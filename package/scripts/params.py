@@ -80,9 +80,9 @@ logsearch_numshards = str(config['configurations']['logsearch-config']['logsearc
 logsearch_repfactor = str(config['configurations']['logsearch-config']['logsearch_collection_rep_factor'])
 
   
-#TODO: use zookeeper znode for solr instead once logsearch system.properties supports it
-solr_host = config['configurations']['logsearch-config']['solr_host']
-solr_port = str(config['configurations']['logsearch-config']['solr_port'])
+#using zookeeper znode for solr instead of host/port now that logsearch system.properties supports it
+#solr_host = config['configurations']['logsearch-config']['solr_host']
+#solr_port = str(config['configurations']['logsearch-config']['solr_port'])
 
 
 # logsearch-env configs

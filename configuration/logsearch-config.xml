@@ -32,8 +32,9 @@
     <description>Replication factor for Solr collections</description>
   </property> 
 
+  
 
-  <property>
+  <!-- <property>
     <name>solr_host</name>
     <value>localhost</value>
     <description>Solr hostname - TODO: change to SolrCloud</description>
@@ -43,7 +44,7 @@
     <name>solr_port</name>
     <value>8983</value>
     <description>Solr port - TODO: change to SolrCloud</description>
-  </property>  
+  </property> --> 
     
 </configuration>
 
