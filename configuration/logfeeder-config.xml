@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+ 
+<configuration>
+
+  
+
+  <property>
+    <name>logfeeder_dir</name>
+    <value>/opt/logfeeder</value>
+    <description>Location where logfeeder will be installed to. If download_location is set to RPM, logfeeder will be downloaded to /usr/hdp/_version_/logfeeder</description>
+  </property>  
+
+  <property>
+    <name>logfeeder_download_location</name>
+    <!-- <value>RPM</value> -->
+    <value>https://s3.amazonaws.com/publicrepo/logsearch-logfeeder.tgz</value>
+    <description>Location to download logfeeder tarball from (e.g. https://dl.dropboxusercontent.com/u/114020/logfeeder/logfeeder-portal.tar.gz)</description>
+  </property>  
+  
+  
+    
+</configuration>
+

@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+
+<!-- This is a special config file for properties used to monitor status of the service -->
+<configuration>
+
+  <property>
+    <name>logfeeder_pid_dir</name>
+    <value>/var/run/logfeeder</value>
+    <description>logfeeder Process ID Directory</description>
+  </property> 
+
+  <property>
+    <name>logfeeder_log_dir</name>
+    <value>/var/log/logfeeder</value>
+    <description>Log dir for logfeeder</description>
+  </property> 
+  
+  <property>
+    <name>logfeeder_user</name>
+    <value>logfeeder</value>
+    <property-type>USER</property-type>
+    <description>logfeeder user</description>
+  </property>  
+
+  <property>
+    <name>logfeeder_group</name>
+    <value>logfeeder</value>
+    <property-type>GROUP</property-type>
+    <description>logfeeder group</description>
+  </property> 
+
+
+  <!-- system.properties -->
+
+  <property>
+    <name>content</name>
+    <description>This is the jinja template for config.json file</description>
+    <value>
+{
+    "global" : {
+        "add_fields" : { "cluster": "unknown", "rowtype" : "service"},
+        "source" : "file",
+        "tail" : "true",
+        "start_position" : "beginning"
+    },
+    "input": [
+        {
+            "type": "ranger_admin",
+            "path": "/Users/bdurai/no_backup/logsearch/logfeeder/logs/xa_portal.log"
+        },
+        {
+            "type": "logsearch_portal",
+            "path": "/var/log/logsearch/logsearch.log"
+        }
+    ],
+    "filter": [
+        {
+            "filter" : "grok",
+            "conditions": [{"type": ["ranger_admin"]}],
+            "multiline_pattern" : "^(%{TIMESTAMP_ISO8601:logtime})",
+            "message_pattern": "(?m)(?s)^%{TIMESTAMP_ISO8601:logtime}%{SPACE}\\[%{DATA:thread_name}\\]%{SPACE}%{LOGLEVEL:level}%{SPACE}%{JAVACLASS:logger_name}%{SPACE}\\(%{JAVAFILE:file}:%{INT:line_number}\\)%{SPACE}-%{SPACE}%{GREEDYDATA:log_message}"
+        }
+    ],
+    "output": [
+        {
+            "destination" : "solr",
+            "zk_hosts" : "{{zookeeper_quorum}}{{solr_znode}}",
+            "collection" : "hadoop_logs",
+            "url": ""
+        }
+    ]
+}
+    </value>
+  </property>
+
+  
+</configuration>  

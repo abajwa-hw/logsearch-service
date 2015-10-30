@@ -3,20 +3,14 @@
     <schemaVersion>2.0</schemaVersion>
     <services>
         <service>
-            <!-- Internal name for service (must be unique) -->
             <name>LOGSEARCH</name>
-            <!-- display name for service (displayed in Ambari UI) -->
             <displayName>Log Search</displayName>
-            <!-- Description of service - will be displayed when user clicks add service -->
-            <comment>LogSearch (aka Bosc-ana)</comment>
-            <!-- Version of component-->
+            <comment>Log aggregation, analysis, and visualization for Hadoop</comment>
             <version>0.0.1</version>
             
-            <requiredServices>
-                 <service>SOLR</service>            
-            </requiredServices>            
-                
+
             <components>
+            
                 <component>
                   <name>LOGSEARCH_MASTER</name>
                   <displayName>Log Search</displayName>
@@ -28,8 +22,33 @@
                     <timeout>5000</timeout>
                   </commandScript>
                 </component>
+                
+                <component>
+                  <name>SOLR</name>
+                  <displayName>Solr</displayName>
+                  <category>MASTER</category>
+                  <cardinality>1+</cardinality>
+                  <commandScript>
+                    <script>scripts/solr.py</script>
+                    <scriptType>PYTHON</scriptType>
+                    <timeout>5000</timeout>
+                  </commandScript>
+                </component>
+                
+                <component>
+                  <name>LOGFEEDER</name>
+                  <displayName>Log Feeder</displayName>
+                  <category>SLAVE</category>
+                  <cardinality>ALL</cardinality>
+                  <commandScript>
+                    <script>scripts/logfeeder.py</script>
+                    <scriptType>PYTHON</scriptType>
+                    <timeout>5000</timeout>
+                  </commandScript>
+                </component>                
+                
             </components>
-            <!-- what yum packages will be needed for the setup. These will be installed by install_packages() in master.py -->
+            
              <osSpecifics>
               <osSpecific>
                 <osFamily>redhat6</osFamily>
@@ -40,9 +59,10 @@
                 </packages>
               </osSpecific>
             </osSpecifics> 
-             <!-- names for config files (under configuration dir) -->
       	    <configuration-dependencies>
-        	<config-type>logsearch-config</config-type>
+	        	<config-type>logsearch-config</config-type>
+	        	<config-type>solr-config</config-type>   
+	        	<config-type>logfeeder-config</config-type>
       	    </configuration-dependencies>
             <restartRequiredAfterChange>false</restartRequiredAfterChange>
         </service>

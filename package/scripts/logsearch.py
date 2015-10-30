@@ -50,14 +50,6 @@ class Master(Script):
       Execute('cd ' + params.logsearch_dir + '; wget ' + params.logsearch_downloadlocation + ' -O logsearch-portal.tar.gz -a ' + params.logsearch_log, user=params.logsearch_user)
       Execute('cd ' + params.logsearch_dir + '; tar -xvf logsearch-portal.tar.gz', user=params.logsearch_user)    
   
-       
-    cmd = params.solr_bindir+'/solr create -c hadoop_logs -d '+params.logsearch_dir+'/solr_configsets/hadoop_logs/conf -s '+params.logsearch_numshards+' -rf ' + params.logsearch_repfactor
-    Execute('echo '  + cmd)
-    Execute(cmd, ignore_failures=True)
-
-    cmd = params.solr_bindir+'/solr create -c history -d '+params.logsearch_dir+'/solr_configsets/history/conf -s '+params.logsearch_numshards+' -rf ' + params.logsearch_repfactor
-    Execute('echo '  + cmd)
-    Execute(cmd, ignore_failures=True)
    
     Execute ('echo "Logsearch install complete"')
 
@@ -82,8 +74,17 @@ class Master(Script):
     import status_params
     self.configure(env)
     
+    #create prerequisite Solr collections, if not already exist
+    cmd = params.solr_bindir+'/solr create -c hadoop_logs -d '+params.logsearch_dir+'/solr_configsets/hadoop_logs/conf -s '+params.logsearch_numshards+' -rf ' + params.logsearch_repfactor
+    Execute('echo '  + cmd)
+    Execute(cmd, ignore_failures=True)
 
-    cmd = params.service_packagedir + '/scripts/start.sh ' + params.logsearch_dir + ' ' + params.logsearch_log + ' ' + status_params.logsearch_pid_file + ' ' + params.java64_home
+    cmd = params.solr_bindir+'/solr create -c history -d '+params.logsearch_dir+'/solr_configsets/history/conf -s '+params.logsearch_numshards+' -rf ' + params.logsearch_repfactor
+    Execute('echo '  + cmd)
+    Execute(cmd, ignore_failures=True)
+    
+
+    cmd = params.service_packagedir + '/scripts/start_logsearch.sh ' + params.logsearch_dir + ' ' + params.logsearch_log + ' ' + status_params.logsearch_pid_file + ' ' + params.java64_home
   
     Execute('echo "Running cmd: ' + cmd + '"')    
     Execute(cmd, user=params.logsearch_user)

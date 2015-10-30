@@ -22,27 +22,27 @@
   
    <property>
     <name>logsearch_collection_numshards</name>
-    <value>3</value>
+    <value>1</value>
     <description>Number of shards for Solr collections</description>
   </property>   
   
    <property>
     <name>logsearch_collection_rep_factor</name>
-    <value>3</value>
+    <value>1</value>
     <description>Replication factor for Solr collections</description>
   </property> 
 
 
   <property>
     <name>solr_host</name>
-    <value>sandbox.hortonworks.com</value>
-    <description>Solr public hostname</description>
+    <value>localhost</value>
+    <description>Solr hostname - TODO: change to SolrCloud</description>
   </property>  
   
   <property>
     <name>solr_port</name>
     <value>8983</value>
-    <description>Solr port</description>
+    <description>Solr port - TODO: change to SolrCloud</description>
   </property>  
     
 </configuration>

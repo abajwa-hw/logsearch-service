@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+ 
+<configuration>
+
+  <!-- Define configuration paramaters for service within Ambari: property name, default value and description (shown as help text) -->
+
+
+ <!--  <property>
+    <name>solr.cloudmode</name>
+    <value>true</value>
+    <description>Whether Solr should be started in Cloud mode</description>
+  </property>  
+  
+  <property>
+    <name>solr.dir</name>
+    <value>/opt/solr</value>
+    <description>Path to Solr root. If HDPSearch is selected, it will be installed under /opt/lucidworks-hdpsearch/solr/</description>
+  </property>  
+
+  <property>
+    <name>solr.download.location</name>
+    <value>HDPSEARCH</value>
+    <description>Location to download Solr from (e.g. https://archive.apache.org/dist/lucene/solr/5.3.0/solr-5.3.0.tgz). Set this to HDPSEARCH to download HDPSearch from yum repo instead</description>
+  </property>     -->
+  
+
+  <property>
+    <name>solr.znode</name>
+    <value>/solr</value>
+    <description>Zookeeper znode (only used if cloudmode is true)</description>
+  </property>  
+  
+  <property>
+    <name>solr.port</name>
+    <value>8983</value>
+    <description>Solr port</description>
+  </property> 
+
+  <property>
+    <name>solr.minmem</name>
+    <value>512m</value>
+    <description>Solr minimum heap size e.g.512m </description>
+  </property> 
+
+  <property>
+    <name>solr.maxmem</name>
+    <value>512m</value>
+    <description>Solr maximum heap size e.g. 512m</description>
+  </property> 
+
+  <property>
+    <name>logsearch.solr.datadir</name>
+    <value>/opt/logsearch_solr/data</value>
+    <description>Dir for Logsearch Solr data</description>
+  </property> 
+  
+  <property>
+    <name>logsearch.solr.conf</name>
+    <value>/etc/logsearch/solr</value>
+    <description>Dir for Logsearch Solr configs</description>
+  </property> 
+  
+      
+</configuration>
+
