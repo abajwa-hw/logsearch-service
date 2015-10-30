@@ -17,6 +17,9 @@
           "name": "LOGSEARCH_LOGFEEDER"
         },
         {
+          "name": "ZOOKEEPER_SERVER"
+        },        
+        {
           "name": "LOGSEARCH_SOLR"
         },        
         {
@@ -34,6 +37,9 @@
         {
           "name": "JOURNALNODE"
         },
+        {
+          "name": "ZOOKEEPER_SERVER"
+        },        
         {
           "name": "LOGSEARCH_LOGFEEDER"
         },
