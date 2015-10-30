@@ -78,6 +78,56 @@ curl -u admin:$PASSWORD -i -H 'X-Requested-By: ambari' -X PUT -d '{"RequestInfo"
 #stop service
 curl -u admin:$PASSWORD -i -H 'X-Requested-By: ambari' -X PUT -d '{"RequestInfo": {"context" :"Stop $SERVICE via REST"}, "Body": {"ServiceInfo": {"state": "INSTALLED"}}}' http://$AMBARI_HOST:8080/api/v1/clusters/$CLUSTER/services/$SERVICE
 ```
+
+#### Automated deployment via blueprint
+
+- Bring up 4 VMs imaged with RHEL/CentOS 6.x
+
+- On non-ambari server nodes
+```
+export ambari_server=node1
+curl -sSL https://raw.githubusercontent.com/seanorama/ambari-bootstrap/master/ambari-bootstrap.sh | sudo -E sh
+```
+
+- On Ambari node
+```
+export install_ambari_server=true
+curl -sSL https://raw.githubusercontent.com/seanorama/ambari-bootstrap/master/ambari-bootstrap.sh | sudo -E sh
+yum install -y git
+git clone https://github.com/abajwa-hw/logsearch-service.git /var/lib/ambari-server/resources/stacks/HDP/2.3/services/LOGSEARCH
+```
+
+
+- Edit the `/var/lib/ambari-server/resources/stacks/HDP/2.3/role_command_order.json` file to include below:
+```
+    "LOGSEARCH_SOLR-START" : ["ZOOKEEPER_SERVER-START"],
+    "LOGSEARCH_MASTER-START": ["LOGSEARCH_SOLR-START"],
+    "LOGSEARCH_LOGFEEDER-START": ["LOGSEARCH_SOLR-START", "LOGSEARCH_MASTER-START"],
+```    
+
+- Restart Ambari
+```
+service ambari-server restart
+service ambari-agent restart    
+```
+
+- Confirm 4 agents were registered and agent remained up
+```
+curl -u admin:admin -H  X-Requested-By:ambari http://localhost:8080/api/v1/hosts
+service ambari-agent status
+```
+
+
+- Deploy cluster using blueprint
+```
+wget https://raw.githubusercontent.com/abajwa-hw/logsearch-service/master/blueprint-4node-logsearch.json
+curl -u admin:admin -H  X-Requested-By:ambari http://localhost:8080/api/v1/blueprints/logsearchBP -d @blueprint-4node-logsearch.json
+
+wget https://raw.githubusercontent.com/abajwa-hw/logsearch-service/master/cluster-4node.json
+curl -u admin:admin -H  X-Requested-By:ambari http://localhost:8080/api/v1/clusters/logsearchCluster -d @cluster-4node.json
+```
+
+
 #### Remove Logsearch service
 
 - To remove the Logsearch service: 
