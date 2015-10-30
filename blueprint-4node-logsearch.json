@@ -130,5 +130,14 @@
         }
       ]
     }
-  ]
+  ],
+
+ "configurations": [
+    {
+      "logsearch-config": {
+        "logsearch_collection_numshards": "1",
+        "logsearch_collection_rep_factor": "1"
+      }
+    } 
+  ]  
 }          
