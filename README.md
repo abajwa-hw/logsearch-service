@@ -13,7 +13,6 @@ Ambari stack for easily installing and managing Logsearch on HDP cluster
 ssh root@sandbox.hortonworks.com
 /root/start_ambari.sh
 ```
-- Make sure SolrCloud and Logstash are installed and started already
 
 - To deploy the Logsearch stack, run below
 ```
