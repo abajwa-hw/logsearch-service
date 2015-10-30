@@ -20,6 +20,12 @@ VERSION=`hdp-select status hadoop-client | sed 's/hadoop-client - \([0-9]\.[0-9]
 git clone https://github.com/abajwa-hw/logsearch-service.git /var/lib/ambari-server/resources/stacks/HDP/$VERSION/services/LOGSEARCH
 ```
 
+- Edit the `/var/lib/ambari-server/resources/stacks/HDP/$VERSION/role_command_order.json` file by adding the below entries to the middle of the file
+```
+    "LOGSEARCH_MASTER-START": ["SOLR-START"],
+    "LOGFEEDER-START": ["SOLR-START", "LOGSEARCH_MASTER-START"],
+```
+
 - Restart Ambari
 ```
 #on sandbox
