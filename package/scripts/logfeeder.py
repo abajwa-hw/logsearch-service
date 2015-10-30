@@ -87,7 +87,7 @@ class Master(Script):
     env.set_params(status_params)
 
     if os.path.isfile(status_params.logfeeder_pid_file):
-      Execute (format('kill `cat {logfeeder_pid_file}` >/dev/null 2>&1'))
+      Execute (format('kill `cat {logfeeder_pid_file}` >/dev/null 2>&1'), ignore_failures=True)
 
       #delete the pid file
       Execute (format("rm -f {logfeeder_pid_file}"), user=params.logfeeder_user)

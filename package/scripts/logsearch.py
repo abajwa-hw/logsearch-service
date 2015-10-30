@@ -96,7 +96,7 @@ class Master(Script):
     env.set_params(status_params)
 
     if os.path.isfile(status_params.logsearch_pid_file):
-      Execute (format('kill `cat {logsearch_pid_file}` >/dev/null 2>&1'))
+      Execute (format('kill `cat {logsearch_pid_file}` >/dev/null 2>&1'), ignore_failures=True)
 
       #delete the pid file
       Execute (format("rm -f {logsearch_pid_file}"), user=params.logsearch_user)
