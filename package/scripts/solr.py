@@ -131,7 +131,7 @@ class Master(Script):
     if os.path.isfile(status_params.solr_pidfile):
     
       #kill the instances of solr
-      Execute (format('{params.solr_bindir}/solr stop -all'))  
+      Execute (format('SOLR_INCLUDE={logsearch_solr_conf}/solr.in.sh {solr_bindir}/solr stop -all'))  
 
       #delete the pid file
       Execute (format("rm -f {solr_pidfile}"), user=params.solr_user)

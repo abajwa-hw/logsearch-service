@@ -28,12 +28,11 @@ echo "SOLR_DATA_DIR: $SOLR_DATA_DIR"  >> $LOGFILE
 #start Solr if not already started from $START_PATH dir
 cd $START_PATH
 #OUTPUT=`./solr start -cloud -z $ZOOKEEPER_HOSTS -noprompt`
-OUTPUT=`SOLR_INCLUDE=$SOLR_IN_PATH ./solr start -cloud -noprompt -s $SOLR_DATA_DIR`
+OUTPUT=`SOLR_INCLUDE=$SOLR_IN_PATH/solr.in.sh ./solr start -cloud -noprompt -s $SOLR_DATA_DIR`
 	
 echo "Starting Solr Cloud..." >> $LOGFILE	
 echo "$OUTPUT" >> $LOGFILE	
 
-echo $OUTPUT >> $LOGFILE	
 PID=`echo $OUTPUT | sed -e 's/.*pid=\(.*\)).*/\1/'`
 echo $PID > $PID_FILE
 echo "Started pid $PID"	 >> $LOGFILE	
