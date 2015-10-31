@@ -62,7 +62,7 @@ db.maxResults=50
 
 #Solr Core
 solr.core.logs=hadoop_logs
-solr.core.histroy=history
+solr.core.history=history
     </value>
   </property>
 
