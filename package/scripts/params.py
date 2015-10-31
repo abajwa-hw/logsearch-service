@@ -49,7 +49,7 @@ else:
 solr_user = config['configurations']['solr-env']['solr.user']
 solr_group = config['configurations']['solr-env']['solr.group']
 solr_log_dir = config['configurations']['solr-env']['solr.log.dir']
-solr_log = solr_log_dir+'/solr.log'
+solr_log = solr_log_dir+'/solr-install.log'
 
 solr_piddir = config['configurations']['solr-env']['stack_piddir']
 solr_pidfile = format("{solr_piddir}/solr-8983.pid")
