@@ -52,6 +52,7 @@ solr_log_dir = config['configurations']['solr-env']['solr.log.dir']
 solr_log = solr_log_dir+'/solr.log'
 
 solr_piddir = config['configurations']['solr-env']['stack_piddir']
+solr_pidfile = format("{solr_piddir}/solr-8983.pid")
 
 solr_env_content = config['configurations']['solr-env']['content']
 

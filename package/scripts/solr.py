@@ -124,8 +124,8 @@ class Master(Script):
     #import status properties defined in -env.xml file from status_params class  
     import status_params
     
-    #this allows us to access the status_params.solr_pidfile property as format('{solr_pidfile}')
-    env.set_params(status_params)
+    #this allows us to access the params.solr_pidfile property as format('{solr_pidfile}')
+    env.set_params(params)
     #self.configure(env)
 
     if os.path.isfile(status_params.solr_pidfile):
