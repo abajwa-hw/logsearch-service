@@ -78,6 +78,8 @@ class Master(Script):
     cmd = params.solr_bindir+'/solr create -c history -d '+params.logsearch_dir+'/solr_configsets/history/conf -s '+params.logsearch_numshards+' -rf ' + params.logsearch_repfactor
     Execute('echo '  + cmd)
     Execute(cmd, ignore_failures=True)
+    						 
+    Execute('chmod -R ugo+r ' + params.logsearch_dir + '/solr_configsets')
     
     Execute('find '+params.service_packagedir+' -iname "*.sh" | xargs chmod +x')
     cmd = params.service_packagedir + '/scripts/start_logsearch.sh ' + params.logsearch_dir + ' ' + params.logsearch_log + ' ' + status_params.logsearch_pid_file + ' ' + params.java64_home

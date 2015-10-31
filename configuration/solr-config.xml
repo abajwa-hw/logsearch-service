@@ -33,7 +33,7 @@
   
   <property>
     <name>solr.port</name>
-    <value>8983</value>
+    <value>8886</value>
     <description>Solr port</description>
   </property> 
 
