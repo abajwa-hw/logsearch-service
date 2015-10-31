@@ -7,7 +7,8 @@ config = Script.get_config()
 
 #solr pid file
 solr_piddir = config['configurations']['solr-env']['stack_piddir']
-solr_pidfile = format("{solr_piddir}/solr-8886.pid")
+solr_port = config['configurations']['solr-config']['solr.port']
+solr_pidfile = format("{solr_piddir}/solr-{solr_port}.pid")
 
 
 #logsearch pid file
