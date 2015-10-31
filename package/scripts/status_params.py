@@ -6,7 +6,7 @@ config = Script.get_config()
 
 #solr pid file
 solr_piddir = config['configurations']['solr-env']['stack_piddir']
-solr_pidfile = format("{solr_piddir}/solr-8983.pid")
+solr_pidfile = format("{solr_piddir}/solr-{solr_port}.pid")
 
 #logsearch pid file
 logsearch_pid_dir = config['configurations']['logsearch-env']['logsearch_pid_dir']
