@@ -47,11 +47,75 @@
     "input": [
         {
             "type": "ranger_admin",
-            "path": "/Users/bdurai/no_backup/logsearch/logfeeder/logs/xa_portal.log"
+            "path": "{{ranger_admin_log_dir}}/admin/xa_portal.log"
         },
         {
+            "type": "ranger_usersync",
+            "path": "{{ranger_usersync_log_dir}}/usersync/usersync.log"
+        },    
+        {
+            "type": "ranger_kms",
+            "path": "{{ranger_kms_log_dir}}/kms/kms.log"
+        },    
+        {
+            "type": "hdfs_datanode",
+            "path": "{{hdfs_log_dir_prefix}}/hdfs/hadoop-hdfs-datanode-*.log"
+        },  
+        {
+            "type": "hdfs_namenode",
+            "path": "{{hdfs_log_dir_prefix}}/hdfs/hadoop-hdfs-namenode-*.log"
+        },  
+        {
+            "type": "hdfs_journalnode",
+            "path": "{{hdfs_log_dir_prefix}}/hdfs/hadoop-hdfs-journalnode-*.log"
+        },              
+        {
+            "type": "hdfs_secondarynamenode",
+            "path": "{{hdfs_log_dir_prefix}}/hdfs/hadoop-hdfs-secondarynamenode-*.log"
+        },             
+        {
+            "type": "hdfs_zkfc",
+            "path": "{{hdfs_log_dir_prefix}}/hdfs/hadoop-hdfs-zkfc-*.log"
+        },             
+        {
+            "type": "yarn_nodemanager",
+            "path": "{{yarn_log_dir_prefix}}/yarn/yarn-yarn-nodemanager-*.log"
+        },             
+        {
+            "type": "yarn_resourcemanager",
+            "path": "{{yarn_log_dir_prefix}}/yarn/yarn-yarn-resourcemanager-*.log"
+        },             
+        {
+            "type": "yarn_timelineserver",
+            "path": "{{yarn_log_dir_prefix}}/yarn/yarn-yarn-timelineserver-*.log"
+        },    
+        {
+            "type": "yarn_historyserver",
+            "path": "{{yarn_log_dir_prefix}}/yarn/yarn-yarn-historyserver-*.log"
+        },   
+        {
+            "type": "yarn_jobsummary",
+            "path": "{{yarn_log_dir_prefix}}/yarn/hadoop-mapreduce.jobsummary.log"
+        }, 
+        {
+            "type": "mapred_historyserver",
+            "path": "{{hdfs_log_dir_prefix}}/mapred/mapred-mapred-historyserver*.log"
+        },         
+        {
+            "type": "zookeeper",
+            "path": "{{zk_log_dir}}/zookeeper/zookeeper.out"
+        },   
+        {
+            "type": "hbase_master",
+            "path": "{{hbase_log_dir}}/hbase-hbase-master-*.log"
+        },           
+        {
+            "type": "hbase_region",
+            "path": "{{hbase_log_dir}}/hbase-hbase-regionserver-*.log"
+        },                                                     
+        {
             "type": "logsearch_portal",
-            "path": "/var/log/logsearch/logsearch.log"
+            "path": "{{logsearch_log_dir}}/logsearch.log"
         }
     ],
     "filter": [

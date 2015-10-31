@@ -96,6 +96,23 @@ logsearch_log = logsearch_log_dir+'/logsearch.log'
 logsearch_env_content = config['configurations']['logsearch-env']['content']
 
 
+#Log dirs
+accumulo_log_dir = default('/configurations/accumulo-env/accumulo_log_dir', '/var/log')
+falcon_log_dir = default('/configurations/falcon-env/falcon_log_dir','')
+hbase_log_dir = default('/configurations/hbase-env/hbase_log_dir','/var/log')
+hdfs_log_dir_prefix = default('/configurations/hadoop-env/hdfs_log_dir_prefix','/var/log/hadoop')
+hive_log_dir = default('/configurations/hive-env/hive_log_dir','/var/log')
+kafka_log_dir = default('/configurations/kafka-env/kafka_log_dir','/var/log')
+logstash_log_dir = default('/configurations/logstash-env/logstash_log_dir','')
+oozie_log_dir = default('/configurations/oozie-env/oozie_log_dir','/var/log')
+ranger_usersync_log_dir = default('/configurations/ranger-env/ranger_usersync_log_dir', '/var/log/ranger/usersync')
+ranger_admin_log_dir = default('/configurations/ranger-env/ranger_admin_log_dir', '/var/log/ranger/admin')
+ranger_kms_log_dir = default('/configurations/kms-env/kms_log_dir', '/var/log/ranger/kms')
+storm_log_dir = default('/configurations/storm-env/storm_log_dir','/var/log')
+yarn_log_dir_prefix = default('/configurations/yarn-env/yarn_log_dir_prefix','/var/log/hadoop')
+mapred_log_dir_prefix = default('/configurations/mapred-env/mapred_log_dir_prefix','/var/log/hadoop')
+zk_log_dir = default('/configurations/zookeeper-env/zk_log_dir','/var/log/zookeeper')
+
 
 #####################################
 #Logfeeder configs
