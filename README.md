@@ -146,18 +146,21 @@ vi cluster.json
 ```
 
 
-- Deploy cluster using either minimal or full blueprint
+- Download either minimal or full blueprint
 ```
 #Pick one of the below blueprints
-#for minimal services
+#for minimal services download this one
 wget https://raw.githubusercontent.com/abajwa-hw/logsearch-service/master/blueprint-4node-logsearch-minimal.json -O blueprint-4node-logsearch.json
 
-#for most services
+#for most services download this one
 wget https://raw.githubusercontent.com/abajwa-hw/logsearch-service/master/blueprint-4node-logsearch-all.json -O blueprint-4node-logsearch.json
 
 #if needed change the numshards, replicas based on your setup (default is 2 for each)
 #vi blueprint-4node-logsearch.json
 
+
+- Upload selected blueprint and deploy cluster called logsearchCluster
+```
 curl -u admin:admin -H  X-Requested-By:ambari http://localhost:8080/api/v1/blueprints/logsearchBP -d @blueprint-4node-logsearch.json
 
 wget https://raw.githubusercontent.com/abajwa-hw/logsearch-service/master/cluster-4node.json
