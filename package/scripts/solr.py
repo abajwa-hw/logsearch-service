@@ -64,12 +64,7 @@ class Master(Script):
     
     #ensure all solr files owned   by solr
     Execute('chown -R '+params.solr_user + ':' + params.solr_group + ' ' + params.solr_dir)            
-    
-    if params.solr_cloudmode:      
-      Execute ('echo "Creating znode" ' + params.solr_znode)
-      Execute ('echo "' + params.cloud_scripts + '/zkcli.sh -zkhost ' + params.zookeeper_hosts + ' -cmd makepath ' + params.solr_znode + '"')
-      Execute (params.cloud_scripts + '/zkcli.sh -zkhost ' + params.zookeeper_hosts + ' -cmd makepath ' + params.solr_znode, user=params.solr_user, ignore_failures=True )  
-    
+       
     Execute ('echo "Solr install complete"')
 
 
@@ -106,9 +101,13 @@ class Master(Script):
     
     Execute('find '+params.service_packagedir+' -iname "*.sh" | xargs chmod +x')
     
+     
     #form command to invoke start.sh with its arguments and execute it
     if params.solr_cloudmode:
-      #cmd = params.service_packagedir + '/scripts/start_solrcloud.sh ' + params.solr_dir + ' ' + params.solr_log + ' ' + status_params.solr_pidfile + ' ' + params.solr_bindir + ' ' + params.zookeeper_hosts + params.solr_znode
+      Execute ('echo "Creating znode" ' + params.solr_znode)
+      Execute ('echo "' + params.cloud_scripts + '/zkcli.sh -zkhost ' + params.zookeeper_hosts + ' -cmd makepath ' + params.solr_znode + '"')
+      Execute (params.cloud_scripts + '/zkcli.sh -zkhost ' + params.zookeeper_hosts + ' -cmd makepath ' + params.solr_znode, user=params.solr_user, ignore_failures=True )  
+    
       cmd = params.service_packagedir + '/scripts/start_solrcloud.sh ' + params.solr_dir + ' ' + params.solr_log + ' ' + status_params.solr_pidfile + ' ' + params.solr_bindir + ' ' + params.logsearch_solr_conf + ' ' + params.logsearch_solr_datadir
     else:
       cmd = params.service_packagedir + '/scripts/start.sh ' + params.solr_dir + ' ' + params.solr_log + ' ' + status_params.solr_pidfile + ' ' + params.solr_bindir
