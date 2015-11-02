@@ -97,6 +97,15 @@ logsearch_env_content = config['configurations']['logsearch-env']['content']
 
 
 #Log dirs
+ambari_server_log_dir = '/var/log/ambari-server'
+ambari_agent_log_dir = '/var/log/ambari-agent'
+knox_log_dir = '/var/log/knox'
+
+metrics_collector_log_dir = default('/configurations/ams-env/metrics_collector_log_dir', '/var/log')
+metrics_monitor_log_dir = default('/configurations/ams-env/metrics_monitor_log_dir', '/var/log')
+
+
+atlas_log_dir = default('/configurations/atlas-env/metadata_log_dir', '/var/log')
 accumulo_log_dir = default('/configurations/accumulo-env/accumulo_log_dir', '/var/log')
 falcon_log_dir = default('/configurations/falcon-env/falcon_log_dir','')
 hbase_log_dir = default('/configurations/hbase-env/hbase_log_dir','/var/log')

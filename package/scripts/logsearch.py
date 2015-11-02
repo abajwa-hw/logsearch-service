@@ -69,6 +69,29 @@ class Master(Script):
     #import status properties defined in -env.xml file from status_params class
     import status_params
     self.configure(env)
+
+    Execute('echo ambari_server_log_dir '+params.ambari_server_log_dir+' >> ' + params.logsearch_log, user=params.logsearch_user)
+    Execute('echo ambari_agent_log_dir '+params.ambari_agent_log_dir+' >> ' + params.logsearch_log, user=params.logsearch_user)
+    Execute('echo knox_log_dir '+params.knox_log_dir+' >> ' + params.logsearch_log, user=params.logsearch_user)
+    Execute('echo metrics_collector_log_dir '+params.metrics_collector_log_dir+' >> ' + params.logsearch_log, user=params.logsearch_user)
+    Execute('echo metrics_monitor_log_dir '+params.metrics_monitor_log_dir+' >> ' + params.logsearch_log, user=params.logsearch_user)
+    Execute('echo atlas_log_dir '+params.atlas_log_dir+' >> ' + params.logsearch_log, user=params.logsearch_user)
+    Execute('echo accumulo_log_dir '+params.accumulo_log_dir+' >> ' + params.logsearch_log, user=params.logsearch_user)
+    Execute('echo falcon_log_dir '+params.falcon_log_dir+' >> ' + params.logsearch_log, user=params.logsearch_user)
+    Execute('echo hbase_log_dir '+params.hbase_log_dir+' >> ' + params.logsearch_log, user=params.logsearch_user)
+    Execute('echo hdfs_log_dir_prefix '+params.hdfs_log_dir_prefix+' >> ' + params.logsearch_log, user=params.logsearch_user)
+    Execute('echo hive_log_dir '+params.hive_log_dir+' >> ' + params.logsearch_log, user=params.logsearch_user)
+    Execute('echo kafka_log_dir '+params.kafka_log_dir+' >> ' + params.logsearch_log, user=params.logsearch_user)
+    Execute('echo logstash_log_dir '+params.logstash_log_dir+' >> ' + params.logsearch_log, user=params.logsearch_user)
+    Execute('echo oozie_log_dir '+params.oozie_log_dir+' >> ' + params.logsearch_log, user=params.logsearch_user)
+    Execute('echo ranger_usersync_log_dir '+params.ranger_usersync_log_dir+' >> ' + params.logsearch_log, user=params.logsearch_user)
+    Execute('echo ranger_admin_log_dir '+params.ranger_admin_log_dir+' >> ' + params.logsearch_log, user=params.logsearch_user)
+    Execute('echo ranger_kms_log_dir '+params.ranger_kms_log_dir+' >> ' + params.logsearch_log, user=params.logsearch_user)
+    Execute('echo storm_log_dir '+params.storm_log_dir+' >> ' + params.logsearch_log, user=params.logsearch_user)
+    Execute('echo yarn_log_dir_prefix '+params.yarn_log_dir_prefix+' >> ' + params.logsearch_log, user=params.logsearch_user)
+    Execute('echo mapred_log_dir_prefix '+params.mapred_log_dir_prefix+' >> ' + params.logsearch_log, user=params.logsearch_user)
+    Execute('echo zk_log_dir '+params.zk_log_dir+' >> ' + params.logsearch_log, user=params.logsearch_user)
+
     
     #create prerequisite Solr collections, if not already exist
     cmd = params.solr_bindir+'solr create -c hadoop_logs -d '+params.logsearch_dir+'/solr_configsets/hadoop_logs/conf -s '+params.logsearch_numshards+' -rf ' + params.logsearch_repfactor
