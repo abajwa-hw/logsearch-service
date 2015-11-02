@@ -117,6 +117,29 @@ curl -u admin:admin -H  X-Requested-By:ambari http://localhost:8080/api/v1/hosts
 service ambari-agent status
 ```
 
+- (Optional) - In general you can generate BP and cluster file using Ambari recommendations. In this example we are providing some sample blueprints which you can edit, so this is not needed
+For more details, on the bootstrap scripts see bootstrap script git
+
+```
+yum install -y python-argparse
+git clone https://github.com/seanorama/ambari-bootstrap.git
+
+#optional - limit the services for faster deployment
+export ambari_services="HDFS MAPREDUCE2 YARN ZOOKEEPER HIVE"
+
+export deploy=false
+cd ambari-bootstrap/deploy
+bash ./deploy-recommended-cluster.bash
+
+cd tmpdir*
+
+#edit the blueprint to add custom COMPONENT names (not service name) e.g. XXX_MASTER and configurations. You can use sample blueprints provided below to see how to add the custom services.
+vi blueprint.json
+
+#edit cluster file if needed
+vi cluster.json
+```
+
 
 - Deploy cluster using blueprint
 ```
