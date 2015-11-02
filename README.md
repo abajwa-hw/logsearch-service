@@ -156,8 +156,15 @@ curl -u admin:$PASSWORD -i -H 'X-Requested-By: ambari' -X DELETE http://$AMBARI_
   - Remove artifacts 
   
     ```
-    rm -rf /var/lib/ambari-server/resources/stacks/HDP/2.2/services/LOGSEARCH
-    rm -rf /opt/Logsearch
+sudo -u solr /opt/lucidworks-hdpsearch/solr/bin/solr delete -c hadoop_logs
+sudo -u solr /opt/lucidworks-hdpsearch/solr/bin/solr delete -c history
+
+rm -rf /opt/log*
+rm -rf /etc/logsearch
+rm -rf /var/log/log*
+rm -rf /var/run/log*
+    
+rm -rf /var/lib/ambari-server/resources/stacks/HDP/2.3/services/LOGSEARCH
     ```
   - Restart Ambari
     ```
