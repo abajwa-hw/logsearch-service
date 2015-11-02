@@ -135,6 +135,11 @@ curl -u admin:admin -H  X-Requested-By:ambari http://localhost:8080/api/v1/clust
 #### Remove Logsearch service
 
 - To remove the Logsearch service: 
+  - Delete the Solr collection
+```
+sudo -u solr /opt/lucidworks-hdpsearch/solr/bin/solr delete -c hadoop_logs
+sudo -u solr /opt/lucidworks-hdpsearch/solr/bin/solr delete -c history
+```  
   - Stop the service via Ambari
   - Delete the service
   
@@ -156,9 +161,6 @@ curl -u admin:$PASSWORD -i -H 'X-Requested-By: ambari' -X DELETE http://$AMBARI_
   - Remove artifacts 
   
     ```
-sudo -u solr /opt/lucidworks-hdpsearch/solr/bin/solr delete -c hadoop_logs
-sudo -u solr /opt/lucidworks-hdpsearch/solr/bin/solr delete -c history
-
 rm -rf /opt/log*
 rm -rf /etc/logsearch
 rm -rf /var/log/log*
