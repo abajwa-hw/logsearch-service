@@ -81,9 +81,9 @@ curl -u admin:$PASSWORD -i -H 'X-Requested-By: ambari' -X PUT -d '{"RequestInfo"
 
 #### Automated deployment via blueprint
 
-- Bring up 4 VMs imaged with RHEL/CentOS 6.x
+- Bring up 4 VMs imaged with RHEL/CentOS 6.x (e.g. node1-4 in this case)
 
-- On non-ambari nodes, install ambari-agents and point them to ambari node
+- On non-ambari nodes, install ambari-agents and point them to ambari node (e.g. node1 in this case)
 ```
 export ambari_server=node1
 curl -sSL https://raw.githubusercontent.com/seanorama/ambari-bootstrap/master/ambari-bootstrap.sh | sudo -E sh
