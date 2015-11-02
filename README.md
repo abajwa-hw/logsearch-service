@@ -141,7 +141,7 @@ sudo -u solr /opt/lucidworks-hdpsearch/solr/bin/solr delete -c hadoop_logs
 sudo -u solr /opt/lucidworks-hdpsearch/solr/bin/solr delete -c history
 ```  
   - Stop the service via Ambari
-  - Delete the service
+  - Delete the service from Ambari node
   
 ```
 export SERVICE=LOGSEARCH
@@ -166,7 +166,7 @@ rm -rf /etc/log*
 rm -rf /var/log/log*
 rm -rf /var/run/log*
 ```
-  - (Optional) Remove Logsearch Ambari service
+  - (Optional) Remove Logsearch Ambari service from Ambari node
 ```  
 rm -rf /var/lib/ambari-server/resources/stacks/HDP/2.3/services/LOGSEARCH
 ```
