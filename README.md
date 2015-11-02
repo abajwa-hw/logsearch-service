@@ -158,17 +158,23 @@ curl -u admin:$PASSWORD -i -H 'X-Requested-By: ambari' -X DELETE http://$AMBARI_
 #curl -u admin:$PASSWORD -i -H 'X-Requested-By: ambari' -X PUT -d '{"RequestInfo": {"context" :"Stop $SERVICE via REST"}, "Body": {"ServiceInfo": {"state": "INSTALLED"}}}' http://$AMBARI_HOST:8080/api/v1/clusters/$CLUSTER/services/$SERVICE
 
 ```
-  - Remove artifacts 
-  
-    ```
+  - Remove artifacts from all nodes
+
+```
 rm -rf /opt/log*
 rm -rf /etc/log*
 rm -rf /var/log/log*
 rm -rf /var/run/log*
-    
+```
+  - (Optional) Remove Logsearch Ambari service
+```  
 rm -rf /var/lib/ambari-server/resources/stacks/HDP/2.3/services/LOGSEARCH
-    ```
+```
   - Restart Ambari
-    ```
-    service ambari restart
-    ```
+```
+#sandbox
+service ambari restart
+    
+#nonsandbox
+service ambari-server restart
+```
