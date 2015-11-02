@@ -162,7 +162,7 @@ curl -u admin:$PASSWORD -i -H 'X-Requested-By: ambari' -X DELETE http://$AMBARI_
   
     ```
 rm -rf /opt/log*
-rm -rf /etc/logsearch
+rm -rf /etc/log*
 rm -rf /var/log/log*
 rm -rf /var/run/log*
     
