@@ -125,8 +125,12 @@ yum install -y python-argparse
 git clone https://github.com/seanorama/ambari-bootstrap.git
 
 #optional - limit the services for faster deployment
+
+#for minimal services
 export ambari_services="HDFS MAPREDUCE2 YARN ZOOKEEPER HIVE"
-#export ambari_services="ACCUMULO ATLAS FALCON FLUME HBASE HDFS HIVE KAFKA KNOX MAHOUT OOZIE PIG SLIDER SPARK SQOOP MAPREDUCE2 STORM TEZ YARN ZOOKEEPER"
+
+#for most services
+#export ambari_services="ACCUMULO FALCON FLUME HBASE HDFS HIVE KAFKA KNOX MAHOUT OOZIE PIG SLIDER SPARK SQOOP MAPREDUCE2 STORM TEZ YARN ZOOKEEPER LOGSEARCH"
 
 export deploy=false
 cd ambari-bootstrap/deploy
@@ -142,11 +146,16 @@ vi cluster.json
 ```
 
 
-- Deploy cluster using blueprint
+- Deploy cluster using either minimal or full blueprint
 ```
-wget https://raw.githubusercontent.com/abajwa-hw/logsearch-service/master/blueprint-4node-logsearch.json
+#Pick one of the below blueprints
+#for minimal services
+wget https://raw.githubusercontent.com/abajwa-hw/logsearch-service/master/blueprint-4node-logsearch-minimal.json -O blueprint-4node-logsearch.json
 
-#if needed change the numshards, replicas based on your setup (default is 1 for each)
+#for most services
+wget https://raw.githubusercontent.com/abajwa-hw/logsearch-service/master/blueprint-4node-logsearch-all.json -O blueprint-4node-logsearch.json
+
+#if needed change the numshards, replicas based on your setup (default is 2 for each)
 #vi blueprint-4node-logsearch.json
 
 curl -u admin:admin -H  X-Requested-By:ambari http://localhost:8080/api/v1/blueprints/logsearchBP -d @blueprint-4node-logsearch.json
