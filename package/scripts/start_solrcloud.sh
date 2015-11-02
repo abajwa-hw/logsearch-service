@@ -33,8 +33,8 @@ OUTPUT=`SOLR_INCLUDE=$SOLR_IN_PATH/solr.in.sh ./solr start -cloud -noprompt -s $
 echo "Starting Solr Cloud..." >> $LOGFILE	
 echo "$OUTPUT" >> $LOGFILE	
 
-PID=`echo $OUTPUT | sed -e 's/.*pid=\(.*\)).*/\1/'`
-echo $PID > $PID_FILE
-echo "Started pid $PID"	 >> $LOGFILE	
+#PID=`echo $OUTPUT | sed -e 's/.*pid=\(.*\)).*/\1/'`
+#echo $PID > $PID_FILE
+#echo "Started pid $PID"	 >> $LOGFILE	
 
 
