@@ -97,7 +97,7 @@ ENABLE_REMOTE_JMX_OPTS="false"
 
 # Location where the bin/solr script will save PID files for running instances
 # If not set, the script will create PID files in $SOLR_TIP/bin
-# SOLR_PID_DIR={{solr_piddir}}
+SOLR_PID_DIR={{solr_piddir}}
 
 # Path to a directory where Solr creates index files, the specified directory
 # must contain a solr.xml; by default, Solr will use server/solr
