@@ -157,7 +157,7 @@ wget https://raw.githubusercontent.com/abajwa-hw/logsearch-service/master/bluepr
 
 #if needed change the numshards, replicas based on your setup (default is 2 for each)
 #vi blueprint-4node-logsearch.json
-
+```
 
 - Upload selected blueprint and deploy cluster called logsearchCluster
 ```
