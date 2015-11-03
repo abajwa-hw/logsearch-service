@@ -161,7 +161,7 @@ curl -u admin:admin -H  X-Requested-By:ambari http://localhost:8080/api/v1/clust
 ![Image](../master/screenshots/3.png?raw=true)
 
 
-- After a few seconds you will see the HDP components indexed by Logsearch appear under each node.
+- After a few seconds you will see the HDP components indexed by Logsearch appear under each node. Hovering over each component will provide a summary of the types of errors (fatal, error, info etc) and the ability to drill into those messages.
 ![Image](../master/screenshots/logsearch-components.png?raw=true)
 
 - You can use the Logsearch webapp user experience to explore cluster logs:
