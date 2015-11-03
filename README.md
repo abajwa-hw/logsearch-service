@@ -169,7 +169,6 @@ curl -u admin:admin -H  X-Requested-By:ambari http://localhost:8080/api/v1/clust
   - drill into logs based on log level, custom time range, node, component etc
   - filter out (or in) messages based on keywords by selecting log text
   - view logs in tabular or file format
-  - drill into custom 
 
 
 #### Remote management 
