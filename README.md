@@ -169,16 +169,22 @@ curl -u admin:admin -H  X-Requested-By:ambari http://localhost:8080/api/v1/clust
 - The SolrCloud console should be available at http://sandbox.hortonworks.com:8886. Check that the hadoop_logs and history collections got created
 ![Image](../master/screenshots/logsearch-solr.png?raw=true)
 
-- Lauch the Logsearch webapp via navigating to http://sandbox.hortonworks.com:8888/
+- Launch the Logsearch webapp via navigating to http://sandbox.hortonworks.com:8888/
 ![Image](../master/screenshots/logsearch-dashboard.png?raw=true)
-
-- After a few seconds you will see the HDP components indexed by Logsearch appear under each node.
-![Image](../master/screenshots/logsearch-components.png?raw=true)
 
 - Alternatively, you can launch it from Ambari via [iFrame view](https://github.com/abajwa-hw/iframe-view)
 ![Image](../master/screenshots/3.png?raw=true)
 
 
+- After a few seconds you will see the HDP components indexed by Logsearch appear under each node.
+![Image](../master/screenshots/logsearch-components.png?raw=true)
+
+- You can use the Logsearch webapp user experience to explore cluster logs:
+  - visualize histogram of log events based on level (fatal, error etc)
+  - drill into logs based on log level, custom time range, node, component etc
+  - filter out (or in) messages based on keywords by selecting log text
+  - view logs in tabular or file format
+  - drill into custom 
 
 
 #### Remove Logsearch service
