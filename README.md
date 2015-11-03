@@ -49,14 +49,6 @@ On bottom left -> Actions -> Add service -> check Logsearch service -> Next -> N
 ![Image](../master/screenshots/2.png?raw=true)
 
 
-#### Use Logsearch 
-
-- Lauch the Logsearch webapp via navigating to http://sandbox.hortonworks.com:8888/
-
-- Alternatively, you can launch it from Ambari via [iFrame view](https://github.com/abajwa-hw/iframe-view)
-![Image](../master/screenshots/3.png?raw=true)
-
-
 
 - One benefit to wrapping the component in Ambari service is that you can now monitor/manage this service remotely via REST API
 ```
@@ -166,6 +158,27 @@ curl -u admin:admin -H  X-Requested-By:ambari http://localhost:8080/api/v1/bluep
 wget https://raw.githubusercontent.com/abajwa-hw/logsearch-service/master/cluster-4node.json
 curl -u admin:admin -H  X-Requested-By:ambari http://localhost:8080/api/v1/clusters/logsearchCluster -d @cluster-4node.json
 ```
+- You can monitor the progress of the deployment via Ambari (e.g. http://node1:8080). 
+
+
+#### Use Logsearch 
+
+- Once completed, you will see the Logsearch component in Ambari
+![Image](../master/screenshots/ambari-logsearch.png?raw=true)
+
+- The SolrCloud console should be available at http://sandbox.hortonworks.com:8886. Check that the hadoop_logs and history collections got created
+![Image](../master/screenshots/logsearch-solr.png?raw=true)
+
+- Lauch the Logsearch webapp via navigating to http://sandbox.hortonworks.com:8888/
+![Image](../master/screenshots/logsearch-dashboard.png?raw=true)
+
+- After a few seconds you will see the HDP components indexed by Logsearch appear under each node.
+![Image](../master/screenshots/logsearch-components.png?raw=true)
+
+- Alternatively, you can launch it from Ambari via [iFrame view](https://github.com/abajwa-hw/iframe-view)
+![Image](../master/screenshots/3.png?raw=true)
+
+
 
 
 #### Remove Logsearch service
