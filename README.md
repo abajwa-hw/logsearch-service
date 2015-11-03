@@ -166,9 +166,46 @@ curl -u admin:admin -H  X-Requested-By:ambari http://localhost:8080/api/v1/clust
 
 - You can use the Logsearch webapp user experience to explore cluster logs:
   - visualize histogram of log events based on level (fatal, error etc)
-  - drill into logs based on log level, custom time range, node, component etc
+  - drill into logs based on:
+    - log level
+    - custom time range
+    - node
+    - component
+    - etc
   - filter out (or in) messages based on keywords by selecting log text
   - view logs in tabular or file format
+  - ability to add your own logs by modifiying the json document under Ambari > Log Search > Configs > Advanced logfeeder env > logfeeder-env template
+    - first add the location of the log under 
+    ```
+    	{
+			"type":"myservice",
+			"rowtype":"service",
+			"path":"/var/log/myservice/myservice_*.log"
+		},
+    ```
+    - then add a grok entry for your service and include log4j format and message pattern 
+    ```
+    	{
+			"filter":"grok",
+			"conditions":{
+				"fields":{
+					"type":[
+						"myservice"
+					]
+				}
+			},
+			"log4j_format":"%d{DATE} %5p [%t] %c{1}:%L - %m%n",
+			"multiline_pattern":"^(%{USER_SYNC_DATE:logtime})",
+			"message_pattern":"(?m)^%{USER_SYNC_DATE:logtime}%{SPACE}%{LOGLEVEL:level}%{SPACE}\\[%{DATA:thread_name}\\]%{SPACE}%{JAVACLASS:logger_name}:%{INT:line_number}%{SPACE}-%{SPACE}%{GREEDYDATA:log_message}",
+			"post_map_values":{
+				"logtime":{
+					"map_date":{
+						"date_pattern":"dd MMM yyyy HH:mm:ss"
+					}
+				}
+			}
+		},
+    ```
 
 
 #### Remote management 
