@@ -1,6 +1,12 @@
 #### An Ambari Stack for Logsearch
 Ambari stack for easily installing and managing Logsearch on HDP cluster
 
+There are two options to deploy Logsearch from Ambari
+
+#### Option 1: Deploy Logsearch on existing cluster
+
+The below steps demonstrate how to deploy Logsearch on existing cluster using the sandbox as an example. The same process can be followed on an Ambari installed cluster.
+
 - Download HDP 2.2 sandbox VM image (Sandbox_HDP_2.2_VMware.ova) from [Hortonworks website](http://hortonworks.com/products/hortonworks-sandbox/)
 - Import Sandbox_HDP_2.2_VMware.ova into VMWare and set the VM memory size to 8GB
 - Now start the VM
@@ -47,8 +53,7 @@ On bottom left -> Actions -> Add service -> check Logsearch service -> Next -> N
 
 
 
-
-#### Automated deployment via blueprint
+#### Option 2: Automated cluster deployment via blueprint
 
 - Bring up 4 VMs imaged with RHEL/CentOS 6.x (e.g. node1-4 in this case)
 
