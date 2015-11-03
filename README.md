@@ -40,36 +40,13 @@ sudo service ambari-server restart
 
 On bottom left -> Actions -> Add service -> check Logsearch service -> Next -> Next -> Next -> Deploy
 
-- Also ensure that the install location you are choosing (/opt/Logsearch by default) does not exist
+- Also ensure that the install location you are choosing (/opt/logsearch by default) does not exist
 
-- On successful deployment you will see the Logsearch service as part of Ambari stack and will be able to start/stop the service from here:
-![Image](../master/screenshots/1.png?raw=true)
-
-- You can see the parameters you configured under 'Configs' tab
-![Image](../master/screenshots/2.png?raw=true)
+- Now follow the steps [below](https://github.com/abajwa-hw/logsearch-service#use-logsearch) to start using Logsearch
 
 
 
-- One benefit to wrapping the component in Ambari service is that you can now monitor/manage this service remotely via REST API
-```
-export SERVICE=LOGSEARCH
-export PASSWORD=admin
-export AMBARI_HOST=localhost
 
-#detect name of cluster
-output=`curl -u admin:$PASSWORD -i -H 'X-Requested-By: ambari'  http://$AMBARI_HOST:8080/api/v1/clusters`
-CLUSTER=`echo $output | sed -n 's/.*"cluster_name" : "\([^\"]*\)".*/\1/p'`
-
-
-#get service status
-curl -u admin:$PASSWORD -i -H 'X-Requested-By: ambari' -X GET http://$AMBARI_HOST:8080/api/v1/clusters/$CLUSTER/services/$SERVICE
-
-#start service
-curl -u admin:$PASSWORD -i -H 'X-Requested-By: ambari' -X PUT -d '{"RequestInfo": {"context" :"Start $SERVICE via REST"}, "Body": {"ServiceInfo": {"state": "STARTED"}}}' http://$AMBARI_HOST:8080/api/v1/clusters/$CLUSTER/services/$SERVICE
-
-#stop service
-curl -u admin:$PASSWORD -i -H 'X-Requested-By: ambari' -X PUT -d '{"RequestInfo": {"context" :"Stop $SERVICE via REST"}, "Body": {"ServiceInfo": {"state": "INSTALLED"}}}' http://$AMBARI_HOST:8080/api/v1/clusters/$CLUSTER/services/$SERVICE
-```
 
 #### Automated deployment via blueprint
 
@@ -163,8 +140,11 @@ curl -u admin:admin -H  X-Requested-By:ambari http://localhost:8080/api/v1/clust
 
 #### Use Logsearch 
 
-- Once completed, you will see the Logsearch component in Ambari
+- On successful deployment you will see the Logsearch service as part of Ambari stack and will be able to start/stop the service from here:
 ![Image](../master/screenshots/ambari-logsearch.png?raw=true)
+
+- You can see the parameters you configured under 'Configs' tab
+![Image](../master/screenshots/ambari-logsearch-config.png?raw=true)
 
 - The SolrCloud console should be available at http://sandbox.hortonworks.com:8886. Check that the hadoop_logs and history collections got created
 ![Image](../master/screenshots/logsearch-solr.png?raw=true)
@@ -186,6 +166,29 @@ curl -u admin:admin -H  X-Requested-By:ambari http://localhost:8080/api/v1/clust
   - view logs in tabular or file format
   - drill into custom 
 
+
+#### Remote management 
+
+- One benefit to wrapping the component in Ambari service is that you can now monitor/manage this service remotely via REST API
+```
+export SERVICE=LOGSEARCH
+export PASSWORD=admin
+export AMBARI_HOST=localhost
+
+#detect name of cluster
+output=`curl -u admin:$PASSWORD -i -H 'X-Requested-By: ambari'  http://$AMBARI_HOST:8080/api/v1/clusters`
+CLUSTER=`echo $output | sed -n 's/.*"cluster_name" : "\([^\"]*\)".*/\1/p'`
+
+
+#get service status
+curl -u admin:$PASSWORD -i -H 'X-Requested-By: ambari' -X GET http://$AMBARI_HOST:8080/api/v1/clusters/$CLUSTER/services/$SERVICE
+
+#start service
+curl -u admin:$PASSWORD -i -H 'X-Requested-By: ambari' -X PUT -d '{"RequestInfo": {"context" :"Start $SERVICE via REST"}, "Body": {"ServiceInfo": {"state": "STARTED"}}}' http://$AMBARI_HOST:8080/api/v1/clusters/$CLUSTER/services/$SERVICE
+
+#stop service
+curl -u admin:$PASSWORD -i -H 'X-Requested-By: ambari' -X PUT -d '{"RequestInfo": {"context" :"Stop $SERVICE via REST"}, "Body": {"ServiceInfo": {"state": "INSTALLED"}}}' http://$AMBARI_HOST:8080/api/v1/clusters/$CLUSTER/services/$SERVICE
+```
 
 #### Remove Logsearch service
 
