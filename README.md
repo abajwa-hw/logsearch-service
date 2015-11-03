@@ -53,7 +53,7 @@ On bottom left -> Actions -> Add service -> check Logsearch service -> Next -> N
 
 
 
-#### Option 2: Automated cluster deployment via blueprint
+#### Option 2: Automated deployment of fresh cluster via blueprint
 
 - Bring up 4 VMs imaged with RHEL/CentOS 6.x (e.g. node1-4 in this case)
 
