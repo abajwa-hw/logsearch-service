@@ -15,7 +15,7 @@ service_packagedir = os.path.realpath(__file__).split('/scripts')[0]
 java64_home = config['hostLevelParams']['java_home']  
 #get comma separated list of zookeeper hosts from clusterHostInfo
 zookeeper_hosts = ",".join(config['clusterHostInfo']['zookeeper_hosts'])
-cluster_name = config['configurations']['cluster-env']['cluster_name']  
+cluster_name = default('/configurations/cluster-env/cluster_name', 'unknown')
 
 #####################################
 #Solr configs
