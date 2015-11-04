@@ -42,7 +42,8 @@
         "add_fields" : { "cluster": "{{cluster_name}}"},
         "source" : "file",
         "tail" : "true",
-        "start_position" : "beginning"
+        "start_position" : "beginning",
+        "post_map_values" : {"logtime" : {"map_date": {"date_pattern" : "yyyy-MM-dd HH:mm:ss,SSS"}}}
     },
     "input": [
 		{
@@ -275,15 +276,11 @@
 			"rowtype":"service",
 			"path":"{{storm_log_dir}}/ui.log"
 		},
-		
-		
-        {
-            "type": "zookeeper",
+		{
+			"type": "zookeeper",
 			"rowtype":"service",                        
-            "path": "{{zk_log_dir}}/zookeeper/zookeeper*.out"
-        }
-
-
+			"path": "{{zk_log_dir}}/zookeeper/zookeeper*.out"
+		}
     ],
     "filter": [
 		{
@@ -522,7 +519,8 @@
 			},
 			"log4j_format":"",
 			"multiline_pattern":"^(%{TIMESTAMP_ISO8601:logtime})",
-			"message_pattern":"(?m)^%{TIMESTAMP_ISO8601:logtime}%{SPACE}%{JAVACLASS:logger_name}%{SPACE}\\[%{LOGLEVEL:level}\\]%{SPACE}%{SPACE}%{GREEDYDATA:log_message}"
+			"message_pattern":"(?m)^%{TIMESTAMP_ISO8601:logtime}%{SPACE}%{JAVACLASS:logger_name}%{SPACE}\\[%{LOGLEVEL:level}\\]%{SPACE}%{SPACE}%{GREEDYDATA:log_message}",
+			"post_map_values" : {"logtime" : {"map_date": {"date_pattern" : "yyyy-MM-dd HH:mm:ss.SSS"}}}			
 		},
 		{
 			"filter":"grok",
