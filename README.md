@@ -234,13 +234,22 @@ curl -u admin:$PASSWORD -i -H 'X-Requested-By: ambari' -X PUT -d '{"RequestInfo"
 #### Remove Logsearch service
 
 - To remove the Logsearch service: 
+  - Login as solr
+```
+su - solr
+```  
   - Delete the Solr collection
 ```
 export SOLR_INCLUDE=/etc/logsearch/solr/solr.in.sh
-sudo -u solr /opt/lucidworks-hdpsearch/solr/bin/solr delete -c hadoop_logs
-sudo -u solr /opt/lucidworks-hdpsearch/solr/bin/solr delete -c history
+/opt/lucidworks-hdpsearch/solr/bin/solr delete -c hadoop_logs
+/opt/lucidworks-hdpsearch/solr/bin/solr delete -c history
 ```  
   - Stop the service via Ambari
+  - Delete Logsearch Zookeeper dir
+```
+export JAVA_HOME=<JAVA_HOME used by Ambari>
+/opt/lucidworks-hdpsearch/solr/server/scripts/cloud-scripts/zkcli.sh -zkhost localhost:2181 -cmd clear /logsearch  
+```  
   - Delete the service from Ambari node
   
 ```
