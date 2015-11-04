@@ -106,7 +106,7 @@ class Master(Script):
     if params.solr_cloudmode:
       Execute ('echo "Creating znode" ' + params.solr_znode)
       Execute ('echo "' + params.cloud_scripts + '/zkcli.sh -zkhost ' + params.zookeeper_hosts + ' -cmd makepath ' + params.solr_znode + '"')
-      Execute (params.cloud_scripts + '/zkcli.sh -zkhost ' + params.zookeeper_hosts + ' -cmd makepath ' + params.solr_znode, user=params.solr_user, ignore_failures=True )  
+      Execute ('export JAVA_HOME='+params.java64_home+';'+params.cloud_scripts + '/zkcli.sh -zkhost ' + params.zookeeper_hosts + ' -cmd makepath ' + params.solr_znode, user=params.solr_user, ignore_failures=True )  
     
       cmd = params.service_packagedir + '/scripts/start_solrcloud.sh ' + params.solr_dir + ' ' + params.solr_log + ' ' + status_params.solr_pidfile + ' ' + params.solr_bindir + ' ' + params.logsearch_solr_conf + ' ' + params.logsearch_solr_datadir
     else:
