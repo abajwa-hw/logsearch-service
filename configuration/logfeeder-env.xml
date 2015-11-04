@@ -39,7 +39,7 @@
     <value>
 {
     "global" : {
-        "add_fields" : { "cluster": "unknown", "rowtype" : "service"},
+        "add_fields" : { "cluster": "{{cluster_name}}"},
         "source" : "file",
         "tail" : "true",
         "start_position" : "beginning"
