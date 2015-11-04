@@ -48,7 +48,7 @@ class Master(Script):
 
                
     if params.solr_downloadlocation == 'HDPSEARCH':
-      Execute('yum install -y lucidworks-hdpsearch')
+      Execute('export JAVA_HOME='+params.java64_home+';yum install -y lucidworks-hdpsearch')
         
     #form command to invoke setup_solr.sh with its arguments and execute it
     cmd = params.service_packagedir + '/scripts/setup_solr.sh ' + params.solr_dir + ' ' + params.solr_user + ' >> ' + params.solr_log
