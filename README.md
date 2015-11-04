@@ -236,6 +236,7 @@ curl -u admin:$PASSWORD -i -H 'X-Requested-By: ambari' -X PUT -d '{"RequestInfo"
 - To remove the Logsearch service: 
   - Delete the Solr collection
 ```
+export SOLR_INCLUDE=/etc/logsearch/solr/solr.in.sh
 sudo -u solr /opt/lucidworks-hdpsearch/solr/bin/solr delete -c hadoop_logs
 sudo -u solr /opt/lucidworks-hdpsearch/solr/bin/solr delete -c history
 ```  
