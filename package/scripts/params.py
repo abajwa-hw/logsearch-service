@@ -15,7 +15,7 @@ service_packagedir = os.path.realpath(__file__).split('/scripts')[0]
 java64_home = config['hostLevelParams']['java_home']  
 #get comma separated list of zookeeper hosts from clusterHostInfo
 zookeeper_hosts = ",".join(config['clusterHostInfo']['zookeeper_hosts'])
-cluster_name = default('/configurations/cluster-env/cluster_name', 'unknown')
+cluster_name=str(config['clusterName'])
 
 #####################################
 #Solr configs
@@ -29,7 +29,7 @@ solr_downloadlocation='HDPSEARCH'
 #solr_dir = config['configurations']['solr-config']['solr.dir']
 
 solr_znode = config['configurations']['solr-config']['solr.znode']
-solr_port = config['configurations']['solr-config']['solr.port']
+solr_port = config['configurations']['solr-env']['solr.port']
 solr_min_mem = config['configurations']['solr-config']['solr.minmem']
 solr_max_mem = config['configurations']['solr-config']['solr.maxmem']
 logsearch_solr_conf = config['configurations']['solr-config']['logsearch.solr.conf']
@@ -51,7 +51,7 @@ solr_group = config['configurations']['solr-env']['solr.group']
 solr_log_dir = config['configurations']['solr-env']['solr.log.dir']
 solr_log = solr_log_dir+'/solr-install.log'
 
-solr_piddir = config['configurations']['solr-env']['stack_piddir']
+solr_piddir = config['configurations']['solr-env']['solr_pid_dir']
 solr_pidfile = format("{solr_piddir}/solr-{solr_port}.pid")
 
 solr_env_content = config['configurations']['solr-env']['content']

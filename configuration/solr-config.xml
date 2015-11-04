@@ -30,12 +30,6 @@
     <value>/logsearch</value>
     <description>Zookeeper znode</description>
   </property>  
-  
-  <property>
-    <name>solr.port</name>
-    <value>8886</value>
-    <description>Solr port</description>
-  </property> 
 
   <property>
     <name>solr.minmem</name>

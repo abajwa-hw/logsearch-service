@@ -5,11 +5,17 @@
 <configuration>
 
   <property>
-    <name>stack_piddir</name>
+    <name>solr_pid_dir</name>
     <value>/var/run/solr</value>
     <description>Solr Process ID Directory</description>
   </property> 
 
+  <property>
+    <name>solr.port</name>
+    <value>8886</value>
+    <description>Solr port</description>
+  </property> 
+  
   <property>
     <name>solr.log.dir</name>
     <value>/var/log/solr</value>
