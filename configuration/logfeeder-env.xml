@@ -199,7 +199,7 @@
 		{
 			"type":"logsearch_feeder",
 			"rowtype":"service",
-			"path":"{{logsearch_log_dir}}/logfeeder.log"
+			"path":"{{logfeeder_log_dir}}/logfeeder.log"
 		},     
         {
             "type": "ranger_admin",
