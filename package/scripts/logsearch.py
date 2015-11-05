@@ -84,7 +84,6 @@ class Master(Script):
     Execute('echo hdfs_log_dir_prefix '+params.hdfs_log_dir_prefix+' >> ' + params.logsearch_log, user=params.logsearch_user)
     Execute('echo hive_log_dir '+params.hive_log_dir+' >> ' + params.logsearch_log, user=params.logsearch_user)
     Execute('echo kafka_log_dir '+params.kafka_log_dir+' >> ' + params.logsearch_log, user=params.logsearch_user)
-    Execute('echo logstash_log_dir '+params.logstash_log_dir+' >> ' + params.logsearch_log, user=params.logsearch_user)
     Execute('echo oozie_log_dir '+params.oozie_log_dir+' >> ' + params.logsearch_log, user=params.logsearch_user)
     Execute('echo ranger_usersync_log_dir '+params.ranger_usersync_log_dir+' >> ' + params.logsearch_log, user=params.logsearch_user)
     Execute('echo ranger_admin_log_dir '+params.ranger_admin_log_dir+' >> ' + params.logsearch_log, user=params.logsearch_user)
