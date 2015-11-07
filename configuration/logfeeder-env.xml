@@ -201,11 +201,6 @@
 			"rowtype":"service",
 			"path":"{{logfeeder_log_dir}}/logfeeder.log"
 		},     
-        {
-            "type": "ranger_admin",
-			"rowtype":"service",            
-            "path": "{{ranger_admin_log_dir}}/xa_portal*.log"
-        },
 		{
 			"type":"ranger_dbpatch",
 			"is_enabled":"true",
