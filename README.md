@@ -46,8 +46,9 @@ sudo service ambari-server restart
 
 ```
 - Then you can click on 'Add Service' from the 'Actions' dropdown menu in the bottom left of the Ambari dashboard:
-
+  - Note if running on multinode cluster, on the screen where you place the services, press the + button next to Solr to install it on all nodes
 On bottom left -> Actions -> Add service -> check Logsearch service -> Next -> Next -> Next -> Deploy
+
 
 - Also ensure that the install location you are choosing (/opt/logsearch by default) does not exist
 
