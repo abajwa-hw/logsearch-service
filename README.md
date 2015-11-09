@@ -14,19 +14,22 @@ The below steps demonstrate how to deploy Logsearch on existing cluster using th
 ```
 192.168.191.241 sandbox.hortonworks.com sandbox    
 ```
-- Connect to the VM via SSH (password hadoop) and start Ambari server
+- Connect to the VM via SSH (password hadoop) 
 ```
 ssh root@sandbox.hortonworks.com
-/root/start_ambari.sh
 ```
 
 - To deploy the Logsearch stack, run below
 ```
 VERSION=`hdp-select status hadoop-client | sed 's/hadoop-client - \([0-9]\.[0-9]\).*/\1/'`
-git clone https://github.com/abajwa-hw/logsearch-service.git /var/lib/ambari-server/resources/stacks/HDP/$VERSION/services/LOGSEARCH
+sudo git clone https://github.com/abajwa-hw/logsearch-service.git /var/lib/ambari-server/resources/stacks/HDP/$VERSION/services/LOGSEARCH
 ```
 
-- Edit the `/var/lib/ambari-server/resources/stacks/HDP/$VERSION/role_command_order.json` file by adding the below entries to the middle of the file
+- Edit the role_command_order.json file ...
+```
+sudo vi /var/lib/ambari-server/resources/stacks/HDP/$VERSION/role_command_order.json
+```
+...by adding the below entries to the middle of the file
 ```
     "LOGSEARCH_SOLR-START" : ["ZOOKEEPER_SERVER-START"],
     "LOGSEARCH_MASTER-START": ["LOGSEARCH_SOLR-START"],
