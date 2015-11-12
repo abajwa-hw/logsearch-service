@@ -39,10 +39,10 @@ logsearch_solr_data_resources_dir = os.path.join(logsearch_solr_datadir,'resourc
 
 if solr_downloadlocation == 'HDPSEARCH':
   solr_dir='/opt/lucidworks-hdpsearch/solr'
-  solr_bindir = solr_dir + '/bin/'
+  solr_bindir = solr_dir + '/bin'
   cloud_scripts=solr_dir+'/server/scripts/cloud-scripts'  
 else:
-  solr_bindir = solr_dir + '/latest/bin/' 
+  solr_bindir = solr_dir + '/latest/bin' 
   cloud_scripts=solr_dir+'/latest/server/scripts/cloud-scripts'
 
 

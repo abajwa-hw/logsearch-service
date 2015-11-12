@@ -98,7 +98,10 @@ class Master(Script):
     #import status properties defined in -env.xml file from status_params class
     import status_params
     self.configure(env)
-    
+
+    #this allows us to access the params.solr_pidfile property as format('{solr_pidfile}')
+    env.set_params(params)
+        
     Execute('find '+params.service_packagedir+' -iname "*.sh" | xargs chmod +x')
     
      
@@ -108,13 +111,14 @@ class Master(Script):
       Execute ('echo "' + params.cloud_scripts + '/zkcli.sh -zkhost ' + params.zookeeper_hosts + ' -cmd makepath ' + params.solr_znode + '"')
       Execute ('export JAVA_HOME='+params.java64_home+';'+params.cloud_scripts + '/zkcli.sh -zkhost ' + params.zookeeper_hosts + ' -cmd makepath ' + params.solr_znode, user=params.solr_user, ignore_failures=True )  
     
-      cmd = params.service_packagedir + '/scripts/start_solrcloud.sh ' + params.solr_dir + ' ' + params.solr_log + ' ' + status_params.solr_pidfile + ' ' + params.solr_bindir + ' ' + params.logsearch_solr_conf + ' ' + params.logsearch_solr_datadir
+      #$SOLR_IN_PATH/solr.in.sh ./solr start -cloud -noprompt -s $SOLR_DATA_DIR
+      Execute(format('SOLR_INCLUDE={logsearch_solr_conf}/solr.in.sh {solr_bindir}/solr start -cloud -noprompt -s {logsearch_solr_datadir} >> {solr_log}'), user=params.solr_user)
+      
     else:
       cmd = params.service_packagedir + '/scripts/start.sh ' + params.solr_dir + ' ' + params.solr_log + ' ' + status_params.solr_pidfile + ' ' + params.solr_bindir
-
+      Execute('echo "Running cmd: ' + cmd + '"')    
+      Execute(cmd, user=params.solr_user)
       
-    Execute('echo "Running cmd: ' + cmd + '"')    
-    Execute(cmd, user=params.solr_user)
 
   #Called to stop the service using the pidfile
   def stop(self, env):
@@ -130,10 +134,10 @@ class Master(Script):
     if os.path.isfile(status_params.solr_pidfile):
     
       #kill the instances of solr
-      Execute (format('SOLR_INCLUDE={logsearch_solr_conf}/solr.in.sh {solr_bindir}/solr stop -all'))  
+      Execute (format('SOLR_INCLUDE={logsearch_solr_conf}/solr.in.sh {solr_bindir}/solr stop -all >> {solr_log}'), user=params.solr_user)  
 
       #delete the pid file
-      Execute (format("rm -f {solr_pidfile}"), user=params.solr_user)
+      Execute (format("rm -f {solr_pidfile} >> {solr_log}"), user=params.solr_user)
       	
   #Called to get status of the service using the pidfile
   def status(self, env):
