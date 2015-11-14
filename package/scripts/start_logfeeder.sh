@@ -21,5 +21,5 @@ JMX="-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.ssl=false -Dc
  
 cd $LOGSEARCH_PATH
 echo "Starting Logsearch..."	
-$JAVA_HOME/bin/java -cp "$LOGFEEDER_CLI_CLASSPATH:/etc/logfeeder/conf:$script_dir/libs/*:$script_dir/classes:$script_dir/LogProcessor.jar" $LOGFEEDER_JAVA_MEM $JMX org.apache.ambari.logfeeder.LogFeeder $* >> $LOGFILE 2>&1 &	
+$JAVA_HOME/bin/java -cp "$LOGFEEDER_CLI_CLASSPATH:/etc/logfeeder/conf:libs/*:classes:LogProcessor.jar" $LOGFEEDER_JAVA_MEM $JMX org.apache.ambari.logfeeder.LogFeeder $* >> $LOGFILE 2>&1 &	
 echo $! > $PID_FILE
