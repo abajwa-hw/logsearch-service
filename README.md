@@ -1,6 +1,8 @@
 #### An Ambari Stack for Logsearch
 Ambari stack for easily installing and managing Logsearch on HDP cluster
 
+Limitations: current version expects Logsearch component to be located on one of the nodes where Solr Cloud is installed.
+
 There are two options to deploy Logsearch from Ambari
 
 #### Option 1: Deploy Logsearch on existing cluster
@@ -45,8 +47,11 @@ sudo service ambari restart
 sudo service ambari-server restart
 
 ```
-- Then you can click on 'Add Service' from the 'Actions' dropdown menu in the bottom left of the Ambari dashboard:
-  - Note if running on multinode cluster, on the screen where you place the services, press the + button next to Solr to install it on all nodes
+- Then you can click on 'Add Service' from the 'Actions' dropdown menu in the bottom left of the Ambari dashboard. 
+- **Note that if running on multinode cluster**:
+  - on the screen where you place the services, you can use press the + button next to Solr to install it on multiple nodes
+  - The current version of the service expects Logsearch component to be located on one of the nodes where Solr Cloud is installed.
+  
 On bottom left -> Actions -> Add service -> check Logsearch service -> Next -> Next -> Next -> Deploy
 
 
