@@ -96,12 +96,12 @@ class Master(Script):
     
     #create prerequisite Solr collections, if not already exist
     #cmd = params.solr_bindir+'solr create -c hadoop_logs -d '+params.logsearch_dir+'/solr_configsets/hadoop_logs/conf -s '+params.logsearch_numshards+' -rf ' + params.logsearch_repfactor    
-    cmd = format('SOLR_INCLUDE={logsearch_solr_conf}/solr.in.sh {solr_bindir}solr create -c hadoop_logs -d {logsearch_dir}/solr_configsets/hadoop_logs/conf -s {logsearch_numshards} -rf {logsearch_repfactor}')
+    cmd = format('SOLR_INCLUDE={logsearch_solr_conf}/solr.in.sh {solr_bindir}/solr create -c hadoop_logs -d {logsearch_dir}/solr_configsets/hadoop_logs/conf -s {logsearch_numshards} -rf {logsearch_repfactor}')
     Execute('echo '  + cmd)
     Execute(cmd, ignore_failures=True)
 
     #cmd = params.solr_bindir+'solr create -c history -d '+params.logsearch_dir+'/solr_configsets/history/conf -s '+params.logsearch_numshards+' -rf ' + params.logsearch_repfactor
-    cmd = format('SOLR_INCLUDE={logsearch_solr_conf}/solr.in.sh {solr_bindir}solr create -c history -d {logsearch_dir}/solr_configsets/history/conf -s {logsearch_numshards} -rf {logsearch_repfactor}')
+    cmd = format('SOLR_INCLUDE={logsearch_solr_conf}/solr.in.sh {solr_bindir}/solr create -c history -d {logsearch_dir}/solr_configsets/history/conf -s {logsearch_numshards} -rf {logsearch_repfactor}')
     Execute('echo '  + cmd)
     Execute(cmd, ignore_failures=True)
     						 

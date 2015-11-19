@@ -13,9 +13,13 @@ PID_FILE=$3
 
 JAVA_HOME=$4
 
+LOGFEEDER_JAVA_MEM="-Xmx512m"
+#Temporarily enabling JMX so we can monitor the memory and CPU utilization of the process
+JMX="-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.port=2098"
+
+#LOGFEEDER_CLI_CLASSPATH=
  
 cd $LOGSEARCH_PATH
 echo "Starting Logsearch..."	
-$JAVA_HOME/bin/java -cp 'libs/*:classes:LogProcessor.jar' org.apache.ambari.logfeeder.LogFeeder >> $LOGFILE 2>&1 &	
+$JAVA_HOME/bin/java -cp "$LOGFEEDER_CLI_CLASSPATH:/etc/logfeeder/conf:libs/*:classes:LogProcessor.jar" $LOGFEEDER_JAVA_MEM $JMX org.apache.ambari.logfeeder.LogFeeder $* >> $LOGFILE 2>&1 &	
 echo $! > $PID_FILE
-
