@@ -5,6 +5,31 @@
       "display_name": "Standard Logsearch Dashboard",
       "section_name": "LOGSEARCH_SUMMARY",
       "widgetLayoutInfo": [
+
+       {
+          "widget_name": "FakeMetric",
+          "description": "description",
+          "widget_type": "GRAPH",
+          "is_visible": true,
+          "metrics": [
+            {
+              "name": "FakeMetric",
+              "metric_path": "metrics/FakeMetric",
+              "service_name": "LOGSEARCH",
+              "component_name": "LOGSEARCH_MASTER"
+            }
+          ],
+          "values": [
+            {
+              "name": "Fake Metric",
+              "value": "${FakeMetric}"
+            }
+          ],
+          "properties": {
+            "graph_type": "LINE",
+            "time_range": "1"
+          }
+        },
       
 		 {
           "widget_name": "Active Threads",

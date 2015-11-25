@@ -4,7 +4,12 @@
         "type": "ganglia",
         "metrics": {
           "default": {
-
+          
+           "metrics/FakeMetric": {
+              "metric": "FakeMetric",
+              "pointInTime": false,
+              "temporal": true
+            },            
             "metrics/logsearch/ActiveThreads": {
               "metric": "ActiveThreads",
               "pointInTime": false,
