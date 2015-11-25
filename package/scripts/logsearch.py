@@ -71,7 +71,7 @@ class Master(Script):
     self.configure(env)
 
     env.set_params(params)
-    
+    Execute('echo metrics_collector_hosts ' + params.metrics_collector_hosts) 
     Execute('echo ambari_server_log_dir '+params.ambari_server_log_dir+' >> ' + params.logsearch_log, user=params.logsearch_user)
     Execute('echo ambari_agent_log_dir '+params.ambari_agent_log_dir+' >> ' + params.logsearch_log, user=params.logsearch_user)
     Execute('echo knox_log_dir '+params.knox_log_dir+' >> ' + params.logsearch_log, user=params.logsearch_user)

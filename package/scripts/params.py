@@ -11,11 +11,15 @@ hdp_version = default("/commandParams/version", None)
 #e.g. /var/lib/ambari-agent/cache/stacks/HDP/2.3/services/LOGSEARCH/package
 service_packagedir = os.path.realpath(__file__).split('/scripts')[0]
 
-#sahred configs
+#shared configs
 java64_home = config['hostLevelParams']['java_home']  
 #get comma separated list of zookeeper hosts from clusterHostInfo
 zookeeper_hosts = ",".join(config['clusterHostInfo']['zookeeper_hosts'])
 cluster_name=str(config['clusterName'])
+if 'metrics_collector_hosts' in config['clusterHostInfo']:
+  metrics_collector_hosts = ",".join(config['clusterHostInfo']['metrics_collector_hosts'])
+else:
+  metrics_collector_hosts = ''
 
 #####################################
 #Solr configs
