@@ -65,6 +65,8 @@
 	        	<config-type>logfeeder-config</config-type>
       	    </configuration-dependencies>
             <restartRequiredAfterChange>false</restartRequiredAfterChange>
+            <widgetsFileName>widgets.json</widgetsFileName>
+      		<metricsFileName>metrics.json</metricsFileName>                
         </service>
     </services>
 </metainfo>
