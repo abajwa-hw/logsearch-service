@@ -6,7 +6,7 @@
 
   <property>
     <name>solr_pid_dir</name>
-    <value>/var/run/solr</value>
+    <value>/var/run/solr/logsearch</value>
     <description>Solr Process ID Directory</description>
   </property> 
 
@@ -18,8 +18,8 @@
   
   <property>
     <name>solr.log.dir</name>
-    <value>/var/log/solr</value>
-    <description>Dir for Solr log</description>
+    <value>/var/log/solr/logsearch</value>
+    <description>Directory for Solr logs</description>
   </property> 
   
   <property>
@@ -107,12 +107,12 @@ SOLR_PID_DIR={{solr_piddir}}
 
 # Path to a directory where Solr creates index files, the specified directory
 # must contain a solr.xml; by default, Solr will use server/solr
-#SOLR_HOME=
+SOLR_HOME={{logsearch_solr_datadir}}
 
 # Solr provides a default Log4J configuration properties file in server/resources
 # however, you may want to customize the log settings and file appender location
 # so you can point the script to use a different log4j.properties file
-#LOG4J_PROPS=/var/solr/log4j.properties
+LOG4J_PROPS={{logsearch_solr_datadir}}/resources/log4j.properties
 
 # Location where Solr should write logs to; should agree with the file appender
 # settings in server/resources/log4j.properties
