@@ -2,9 +2,6 @@
 <?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
  
 <configuration>
-
-  
-
   <property>
     <name>logsearch_dir</name>
     <value>/opt/logsearch</value>
@@ -17,34 +14,23 @@
     <!-- <value>https://dl.dropboxusercontent.com/u/114020/logsearch/logsearch-portal.tar.gz</value> -->
     <description>Location to download Logsearch from. If set to RPM, it will install from rpm. Otherwise will download from tar.gaz (e.g. https://s3.amazonaws.com/publicrepo/logsearch-portal.tar.gz)</description>
   </property>  
-  
-  
-  
-   <property>
+
+  <property>
     <name>logsearch_collection_numshards</name>
     <value>1</value>
     <description>Number of shards for Solr collections</description>
   </property>   
   
-   <property>
+  <property>
     <name>logsearch_collection_rep_factor</name>
     <value>1</value>
     <description>Replication factor for Solr collections</description>
   </property> 
 
-  
-
-  <!-- <property>
-    <name>solr_host</name>
-    <value>localhost</value>
-    <description>Solr hostname - TODO: change to SolrCloud</description>
-  </property>  
-  
   <property>
-    <name>solr_port</name>
-    <value>8983</value>
-    <description>Solr port - TODO: change to SolrCloud</description>
-  </property> --> 
-    
-</configuration>
+    <name>logsearch_service_logs_max_retention</name>
+    <value>7</value>
+    <description>Days to retain the logs in Solr</description>
+  </property> 
 
+</configuration>

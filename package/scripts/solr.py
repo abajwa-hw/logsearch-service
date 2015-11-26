@@ -112,13 +112,14 @@ class Master(Script):
       Execute ('export JAVA_HOME='+params.java64_home+';'+params.cloud_scripts + '/zkcli.sh -zkhost ' + params.zookeeper_hosts + ' -cmd makepath ' + params.solr_znode, user=params.solr_user, ignore_failures=True )  
     
       #$SOLR_IN_PATH/solr.in.sh ./solr start -cloud -noprompt -s $SOLR_DATA_DIR
-      Execute(format('SOLR_INCLUDE={logsearch_solr_conf}/solr.in.sh {solr_bindir}/solr start -cloud -noprompt -s {logsearch_solr_datadir} >> {solr_log}'), user=params.solr_user)
+      Execute(format('SOLR_INCLUDE={logsearch_solr_conf}/solr.in.sh {solr_bindir}/solr start -cloud -noprompt -s {logsearch_solr_datadir} > {solr_log} 2>&1'), user=params.solr_user)
       
     else:
       cmd = params.service_packagedir + '/scripts/start.sh ' + params.solr_dir + ' ' + params.solr_log + ' ' + status_params.solr_pidfile + ' ' + params.solr_bindir
       Execute('echo "Running cmd: ' + cmd + '"')    
       Execute(cmd, user=params.solr_user)
-      
+      #Seems when logsearch comes up, solr is not ready. So let's give sometime for it to initialize
+      time.sleep(5)
 
   #Called to stop the service using the pidfile
   def stop(self, env):

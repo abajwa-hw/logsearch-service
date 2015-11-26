@@ -54,10 +54,14 @@ class Master(Script):
   def configure(self, env):
     import params
     env.set_params(params)
-    
+
     #write content in jinja text field to system.properties
-    env_content=InlineTemplate(params.logsearch_env_content)
+    env_content=InlineTemplate(params.logsearch_env_content)    
     File(format("{params.logsearch_dir}/classes/system.properties"), content=env_content, owner=params.logsearch_user)    
+
+    #write content in jinja text field to solrconfig.xml
+    file_content=InlineTemplate(params.logsearch_service_logs_solrconfig_content)    
+    File(format("{params.logsearch_dir}/solr_configsets/hadoop_logs/conf/solrconfig.xml"), content=file_content, owner=params.logsearch_user)    
     
 
   #Call start.sh to start the service
@@ -126,8 +130,8 @@ class Master(Script):
     if os.path.isfile(status_params.logsearch_pid_file):
       Execute (format('kill `cat {logsearch_pid_file}` >/dev/null 2>&1'), ignore_failures=True)
 
-      #delete the pid file
-      Execute (format("rm -f {logsearch_pid_file}"), user=params.logsearch_user)
+      #delete the pid file. Let's not, so startup can check and kill -9 if needed
+      #Execute (format("rm -f {logsearch_pid_file}"), user=params.logsearch_user)
       	
   #Called to get status of the service using the pidfile
   def status(self, env):

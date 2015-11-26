@@ -58,9 +58,6 @@ solr.enable=true
 restapi.log.enabled=false
 metrics.collector.hosts={{metrics_collector_hosts}}
 
-#db
-db.maxResults=50
-
 #Solr Core
 solr.core.logs=hadoop_logs
 solr.core.history=history
