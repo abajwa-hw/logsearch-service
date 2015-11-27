@@ -158,8 +158,9 @@ for host in config['clusterHostInfo']['zookeeper_hosts']:
 logfeeder_user = config['configurations']['logfeeder-env']['logfeeder_user']
 logfeeder_group = config['configurations']['logfeeder-env']['logfeeder_group']
 logfeeder_log_dir = config['configurations']['logfeeder-env']['logfeeder_log_dir']
-logfeeder_log = logfeeder_log_dir+'/logfeeder.log'
-
+logfeeder_log = logfeeder_log_dir+'/logfeeder.out'
+logfeeder_max_mem = config['configurations']['logsearch-env']['logfeeder_max_mem']
 logfeeder_env_content = config['configurations']['logfeeder-env']['content']
-
-
+logfeeder_config_content = config['configurations']['logfeeder-input-configs']['content']
+logfeeder_log4j_content = config['configurations']['logfeeder-log4j']['content']
+logfeeder_pid_dir = config['configurations']['logfeeder-env']['logfeeder_pid_dir']

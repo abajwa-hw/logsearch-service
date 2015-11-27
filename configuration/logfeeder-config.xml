@@ -18,6 +18,11 @@
     <description>Location to download logfeeder tarball from (e.g. https://dl.dropboxusercontent.com/u/114020/logfeeder/logfeeder-portal.tar.gz)</description>
   </property>  
   
+  <property>
+    <name>logfeeder_max_mem</name>
+    <value>512m</value>
+    <description>Max memory for LogFeeder</description>
+  </property> 
   
     
 </configuration>
