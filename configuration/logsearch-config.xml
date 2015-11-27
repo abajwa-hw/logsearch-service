@@ -33,4 +33,10 @@
     <description>Days to retain the logs in Solr</description>
   </property> 
 
+  <property>
+    <name>logsearch_app_max_mem</name>
+    <value>1g</value>
+    <description>Max memory for LogSearch</description>
+  </property> 
+
 </configuration>

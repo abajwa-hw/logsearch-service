@@ -59,10 +59,13 @@ class Master(Script):
     env_content=InlineTemplate(params.logsearch_env_content)    
     File(format("{params.logsearch_dir}/classes/system.properties"), content=env_content, owner=params.logsearch_user)    
 
+    #update the log4j
+    file_content=InlineTemplate(params.logsearch_app_log4j_content)    
+    File(format("{params.logsearch_dir}/classes/log4j.xml"), content=file_content, owner=params.logsearch_user)    
+
     #write content in jinja text field to solrconfig.xml
     file_content=InlineTemplate(params.logsearch_service_logs_solrconfig_content)    
     File(format("{params.logsearch_dir}/solr_configsets/hadoop_logs/conf/solrconfig.xml"), content=file_content, owner=params.logsearch_user)    
-    
 
   #Call start.sh to start the service
   def start(self, env):
@@ -112,7 +115,7 @@ class Master(Script):
     Execute('chmod -R ugo+r ' + params.logsearch_dir + '/solr_configsets')
     
     Execute('find '+params.service_packagedir+' -iname "*.sh" | xargs chmod +x')
-    cmd = params.service_packagedir + '/scripts/start_logsearch.sh ' + params.logsearch_dir + ' ' + params.logsearch_log + ' ' + status_params.logsearch_pid_file + ' ' + params.java64_home
+    cmd = params.service_packagedir + '/scripts/start_logsearch.sh ' + params.logsearch_dir + ' ' + params.logsearch_log + ' ' + status_params.logsearch_pid_file + ' ' + params.java64_home + ' ' + '-Xmx' + params.logsearch_app_max_mem
   
     Execute('echo "Running cmd: ' + cmd + '"')    
     Execute(cmd, user=params.logsearch_user)
