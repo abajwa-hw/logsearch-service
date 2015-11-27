@@ -78,7 +78,7 @@ class Master(Script):
     self.configure(env)
     
     Execute('find '+params.service_packagedir+' -iname "*.sh" | xargs chmod +x')
-    cmd = params.service_packagedir + '/scripts/start_logfeeder.sh ' + params.logfeeder_dir + ' ' + params.logfeeder_log + ' ' + status_params.logfeeder_pid_file + ' ' + params.java64_home
+    cmd = params.service_packagedir + '/scripts/start_logfeeder.sh ' + params.logfeeder_dir + ' ' + params.logfeeder_log + ' ' + status_params.logfeeder_pid_file + ' ' + params.java64_home + ' ' + '-Xmx' + params.logfeeder_max_mem
   
     Execute('echo "Running cmd: ' + cmd + '"')    
     Execute(cmd, user=params.logfeeder_user)
