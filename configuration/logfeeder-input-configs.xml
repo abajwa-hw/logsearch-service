@@ -107,7 +107,7 @@
             "path": "{{hdfs_log_dir_prefix}}/hdfs/hadoop-hdfs-zkfc-*.log"
         },             
 		{
-			"is_enabled":"false",
+			"is_enabled":"true",
 			"type":"hive_hiveserver2",
 			"rowtype":"service",
 			"path":"{{hive_log_dir}}/hiveserver2.log"
