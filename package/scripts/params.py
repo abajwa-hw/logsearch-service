@@ -3,6 +3,12 @@ from resource_management import *
 import os
 from resource_management.libraries.functions.default import default
 
+def get_port_from_url(address):
+  if not is_empty(address):
+    return address.split(':')[-1]
+  else:
+    return address
+    
 # config object that holds the configurations declared in the -config.xml file
 config = Script.get_config()
 
@@ -16,10 +22,21 @@ java64_home = config['hostLevelParams']['java_home']
 #get comma separated list of zookeeper hosts from clusterHostInfo
 zookeeper_hosts = ",".join(config['clusterHostInfo']['zookeeper_hosts'])
 cluster_name=str(config['clusterName'])
+
+
+#TODO: pass all collectors
+#if 'metrics_collector_hosts' in config['clusterHostInfo']:
+#  metrics_collector_hosts = ",".join(config['clusterHostInfo']['metrics_collector_hosts'])
+#else:
+#  metrics_collector_hosts = ''
+
+#for now just pick first collector
 if 'metrics_collector_hosts' in config['clusterHostInfo']:
-  metrics_collector_hosts = ",".join(config['clusterHostInfo']['metrics_collector_hosts'])
+  metrics_collector_hosts = str(config['clusterHostInfo']['metrics_collector_hosts'][0])
 else:
   metrics_collector_hosts = ''
+
+metrics_collector_port = str(get_port_from_url(config['configurations']['ams-site']['timeline.metrics.service.webapp.address']))
 
 #####################################
 #Solr configs

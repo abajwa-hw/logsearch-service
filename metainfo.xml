@@ -13,6 +13,7 @@
             
                 <component>
                   <name>LOGSEARCH_MASTER</name>
+                  <timelineAppid>logsearch</timelineAppid>                  
                   <displayName>Log Search</displayName>
                   <category>MASTER</category>
                   <cardinality>1</cardinality>
@@ -37,6 +38,7 @@
                 
                 <component>
                   <name>LOGSEARCH_LOGFEEDER</name>
+                  <timelineAppid>logfeeder</timelineAppid>                   
                   <displayName>Log Feeder</displayName>
                   <category>SLAVE</category>
                   <cardinality>ALL</cardinality>

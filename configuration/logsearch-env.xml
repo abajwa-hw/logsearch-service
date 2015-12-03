@@ -56,7 +56,7 @@
 solr.zkhosts={{zookeeper_quorum}}{{solr_znode}}
 solr.enable=true
 restapi.log.enabled=false
-metrics.collector.hosts={{metrics_collector_hosts}}
+metrics.collector.hosts=http://{{metrics_collector_hosts}}:{{metrics_collector_port}}/ws/v1/timeline/metrics
 
 #db
 db.maxResults=50
