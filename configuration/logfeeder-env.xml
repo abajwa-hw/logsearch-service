@@ -52,7 +52,7 @@
 # limitations under the License.
 
 logfeeder.checkpoint.folder={{logfeeder_pid_dir}}
-metrics.collector.hosts={{metrics_collector_hosts}}
+metrics.collector.hosts=http://{{metrics_collector_hosts}}:{{metrics_collector_port}}/ws/v1/timeline/metrics
     </value>
   </property>
 

@@ -12,7 +12,7 @@
         "source" : "file",
         "tail" : "true",
         "start_position" : "end",
-        "metrics_collector_hosts" : "{{metrics_collector_hosts}}",
+        "metrics_collector_hosts" : "http://{{metrics_collector_hosts}}:{{metrics_collector_port}}/ws/v1/timeline/metrics",
         "post_map_values" : {"logtime" : {"map_date": {"date_pattern" : "yyyy-MM-dd HH:mm:ss,SSS"}}}
     },
     "input": [
