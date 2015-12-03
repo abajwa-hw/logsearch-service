@@ -57,7 +57,14 @@ class Master(Script):
     
     #write content in jinja text field to system.properties
     env_content=InlineTemplate(params.logfeeder_env_content)
-    File(format("{params.logfeeder_dir}/classes/config.json"), content=env_content, owner=params.logfeeder_user)    
+    File(format("{params.logfeeder_dir}/classes/logfeeder.properties"), content=env_content, owner=params.logfeeder_user)    
+
+    #update the log4j
+    file_content=InlineTemplate(params.logfeeder_log4j_content)    
+    File(format("{params.logfeeder_dir}/classes/log4j.xml"), content=file_content, owner=params.logfeeder_user)    
+
+    config_content=InlineTemplate(params.logfeeder_config_content)
+    File(format("{params.logfeeder_dir}/classes/config.json"), content=config_content, owner=params.logfeeder_user)    
     
 
   #Call start.sh to start the service
@@ -71,7 +78,7 @@ class Master(Script):
     self.configure(env)
     
     Execute('find '+params.service_packagedir+' -iname "*.sh" | xargs chmod +x')
-    cmd = params.service_packagedir + '/scripts/start_logfeeder.sh ' + params.logfeeder_dir + ' ' + params.logfeeder_log + ' ' + status_params.logfeeder_pid_file + ' ' + params.java64_home
+    cmd = params.service_packagedir + '/scripts/start_logfeeder.sh ' + params.logfeeder_dir + ' ' + params.logfeeder_log + ' ' + status_params.logfeeder_pid_file + ' ' + params.java64_home + ' ' + '-Xmx' + params.logfeeder_max_mem
   
     Execute('echo "Running cmd: ' + cmd + '"')    
     Execute(cmd, user=params.logfeeder_user)

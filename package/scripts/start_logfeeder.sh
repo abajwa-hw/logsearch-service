@@ -1,25 +1,31 @@
 #!/bin/bash
 set -e
+if [ $# -lt 4 ]; then
+    echo "Error: Not enough parameters. Count=$# excpected 4 or more"
+    echo "Usage: <logfeeder path> <logfile> <pid file> <java_home> [java_mem]"
+    echo "Example: $0 /opt/logfeeder /var/log/logfeeder/logfeeder.log /var/run/logfeeder/logfeeder.pid /usr/jdk64/jdk1.8.0_45 -Xmx512m"
+    exit 1
+fi
 
+#!/bin/bash
+set -e
 
-#path containing logfeeder e.g. /opt/logfeeder
-LOGSEARCH_PATH=$1
+#path containing start.jar file e.g. /opt/solr/latest/server
+export LOGFEEDER_PATH=$1
 
 #Logfile e.g. /var/log/solr.log
-LOGFILE=$2
+export LOGFILE=$2
 
 #pid file e.g. /var/run/solr.pid
-PID_FILE=$3
+export PID_FILE=$3
 
-JAVA_HOME=$4
+export JAVA_HOME=$4
 
-LOGFEEDER_JAVA_MEM="-Xmx512m"
-#Temporarily enabling JMX so we can monitor the memory and CPU utilization of the process
-JMX="-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.port=2098"
+export LOGFEEDER_JAVA_MEM=$5
+if [ "$LOGFEEDER_JAVA_MEM" = "" ]; then
+    export LOGFEEDER_JAVA_MEM="-Xmx512m"
+fi
 
-#LOGFEEDER_CLI_CLASSPATH=
- 
-cd $LOGSEARCH_PATH
-echo "Starting Logsearch..."	
-$JAVA_HOME/bin/java -cp "$LOGFEEDER_CLI_CLASSPATH:/etc/logfeeder/conf:libs/*:classes:LogProcessor.jar" $LOGFEEDER_JAVA_MEM $JMX org.apache.ambari.logfeeder.LogFeeder $* >> $LOGFILE 2>&1 &	
-echo $! > $PID_FILE
+cd $LOGFEEDER_PATH
+echo "Starting Logfeeder logfile=$LOGFILE, PID_FILE=$PID_FILE, JAVA_HOME=$JAVA_HOME, MEM=$LOGFEEDER_JAVA_MEM ..."	
+./run.sh

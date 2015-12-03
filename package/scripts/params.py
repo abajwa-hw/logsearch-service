@@ -56,7 +56,8 @@ solr_max_mem = config['configurations']['solr-config']['solr.maxmem']
 logsearch_solr_conf = config['configurations']['solr-config']['logsearch.solr.conf']
 logsearch_solr_datadir = config['configurations']['solr-config']['logsearch.solr.datadir']
 logsearch_solr_data_resources_dir = os.path.join(logsearch_solr_datadir,'resources')
-
+logsearch_service_logs_max_retention = config['configurations']['logsearch-config']['logsearch_service_logs_max_retention']
+logsearch_app_max_mem = config['configurations']['logsearch-config']['logsearch_app_max_mem']
 
 if solr_downloadlocation == 'HDPSEARCH':
   solr_dir='/opt/lucidworks-hdpsearch/solr'
@@ -111,11 +112,12 @@ logsearch_repfactor = str(config['configurations']['logsearch-config']['logsearc
 logsearch_user = config['configurations']['logsearch-env']['logsearch_user']
 logsearch_group = config['configurations']['logsearch-env']['logsearch_group']
 logsearch_log_dir = config['configurations']['logsearch-env']['logsearch_log_dir']
-logsearch_log = logsearch_log_dir+'/logsearch.log'
+logsearch_log = logsearch_log_dir+'/logsearch.out'
 
 # store the log file for the service from the 'solr.log' property of the 'logsearch-env.xml' file
 logsearch_env_content = config['configurations']['logsearch-env']['content']
-
+logsearch_service_logs_solrconfig_content = config['configurations']['logsearch-service_logs-solrconfig']['content']
+logsearch_app_log4j_content = config['configurations']['logsearch-app-log4j']['content']
 
 #Log dirs
 ambari_server_log_dir = '/var/log/ambari-server'
@@ -173,8 +175,9 @@ for host in config['clusterHostInfo']['zookeeper_hosts']:
 logfeeder_user = config['configurations']['logfeeder-env']['logfeeder_user']
 logfeeder_group = config['configurations']['logfeeder-env']['logfeeder_group']
 logfeeder_log_dir = config['configurations']['logfeeder-env']['logfeeder_log_dir']
-logfeeder_log = logfeeder_log_dir+'/logfeeder.log'
-
+logfeeder_log = logfeeder_log_dir+'/logfeeder.out'
+logfeeder_max_mem = config['configurations']['logfeeder-config']['logfeeder_max_mem']
 logfeeder_env_content = config['configurations']['logfeeder-env']['content']
-
-
+logfeeder_config_content = config['configurations']['logfeeder-input-configs']['content']
+logfeeder_log4j_content = config['configurations']['logfeeder-log4j']['content']
+logfeeder_pid_dir = config['configurations']['logfeeder-env']['logfeeder_pid_dir']

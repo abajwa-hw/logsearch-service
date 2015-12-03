@@ -36,8 +36,7 @@
   <property>
     <name>content</name>
     <description>This is the jinja template for system.properties file</description>
-    <value>
-# Licensed to the Apache Software Foundation (ASF) under one or more
+    <value># Licensed to the Apache Software Foundation (ASF) under one or more
 # contributor license agreements.  See the NOTICE file distributed with
 # this work for additional information regarding copyright ownership.
 # The ASF licenses this file to You under the Apache License, Version 2.0
@@ -57,9 +56,6 @@ solr.zkhosts={{zookeeper_quorum}}{{solr_znode}}
 solr.enable=true
 restapi.log.enabled=false
 metrics.collector.hosts=http://{{metrics_collector_hosts}}:{{metrics_collector_port}}/ws/v1/timeline/metrics
-
-#db
-db.maxResults=50
 
 #Solr Core
 solr.core.logs=hadoop_logs
