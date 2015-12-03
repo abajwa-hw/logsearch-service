@@ -33,10 +33,12 @@ cluster_name=str(config['clusterName'])
 #for now just pick first collector
 if 'metrics_collector_hosts' in config['clusterHostInfo']:
   metrics_collector_hosts = str(config['clusterHostInfo']['metrics_collector_hosts'][0])
+  metrics_collector_port = str(get_port_from_url(config['configurations']['ams-site']['timeline.metrics.service.webapp.address']))
 else:
   metrics_collector_hosts = ''
+  metrics_collector_port = ''
 
-metrics_collector_port = str(get_port_from_url(config['configurations']['ams-site']['timeline.metrics.service.webapp.address']))
+
 
 #####################################
 #Solr configs
