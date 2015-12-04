@@ -1,274 +1,104 @@
 {
-  "layouts": [
-    {
-      "layout_name": "default_logsearch_dashboard",
-      "display_name": "Standard Logsearch Dashboard",
-      "section_name": "LOGSEARCH_SUMMARY",
-      "widgetLayoutInfo": [
+    "layouts": [
+	{
+	    "layout_name": "default_logsearch_dashboard",
+	    "display_name": "Logsearch Dashboard",
+	    "section_name": "LOGSEARCH_SUMMARY",
+	    "widgetLayoutInfo": [
+		{
+		    "widget_name": "Logs Read",
+		    "description": "Logs Read",
+		    "widget_type": "GRAPH",
+		    "is_visible": true,
+		    "metrics": [
+			{
+			    "name": "input.file._sum",
+			    "metric_path": "metrics/input/file",
+			    "service_name": "LOGSEARCH",
+			    "component_name": "LOGSEARCH_LOGFEEDER"
+			}
 
-       {
-          "widget_name": "FakeMetric",
-          "description": "description",
-          "widget_type": "GRAPH",
-          "is_visible": true,
-          "metrics": [
-            {
-              "name": "FakeMetric",
-              "metric_path": "metrics/FakeMetric",
-              "service_name": "LOGSEARCH",
-              "component_name": "LOGSEARCH_MASTER"
-            }
-          ],
-          "values": [
-            {
-              "name": "Fake Metric",
-              "value": "${FakeMetric}"
-            }
-          ],
-          "properties": {
-            "graph_type": "LINE",
-            "time_range": "1"
-          }
-        },
-      
-		 {
-          "widget_name": "Active Threads",
-          "description": "The number of active threads.",
-          "widget_type": "GRAPH",
-          "is_visible": true,
-          "metrics": [
-            {
-              "name": "ActiveThreads",
-              "metric_path": "metrics/logsearch/ActiveThreads",
-              "service_name": "LOGSEARCH",
-              "component_name": "LOGSEARCH_MASTER"
-            }
-          ],
-          "values": [
-            {
-              "name": "Active Threads",
-              "value": "${ActiveThreads}"
-            }
-          ],
-          "properties": {
-            "graph_type": "LINE",
-            "time_range": "1"
-          }
-        },
-              
-        {
-             "widget_name": "JVM Heap Used (MBs)",
-             "description": "Number of MBs being used on the JVM Heap.",
-             "widget_type": "NUMBER",
-             "is_visible": true,
-             "metrics": [
-               {
-                 "name": "jvm.heap_used",
-                 "metric_path": "metrics/jvm/heap_used",
-                 "service_name": "LOGSEARCH",
-                 "component_name": "LOGSEARCH_MASTER"
-               }
-             ],
-             "values": [
-               {
-                 "name": "JVM Heap Used",
-                 "value": "${jvm.heap_used/1024/1024}"
-               }
-             ],
-             "properties": {
-                "warning_threshold": "100000",
-                "error_threshold": "200000"
-             }
-        },
-        {
-             "widget_name": "JVM Heap Usage",
-             "description": "Precentage of JVM heap being used.",
-             "widget_type": "GAUGE",
-             "is_visible": true,
-             "metrics": [
-               {
-                 "name": "jvm.heap_usage",
-                 "metric_path": "metrics/jvm/heap_usage",
-                 "service_name": "LOGSEARCH",
-                 "component_name": "LOGSEARCH_MASTER"
-               }
-             ],
-             "values": [
-               {
-                 "name": "JVM Heap Usage",
-                 "value": "${jvm.heap_usage}"
-               }
-             ],
-             "properties": {
-               "warning_threshold": "0.8",
-               "error_threshold": "0.9"
-             }
-           },
-         {
-              "widget_name": "JVM File Descriptor Usage",
-              "description": "Precentage of file descriptors being used.",
-              "widget_type": "GAUGE",
-              "is_visible": true,
-              "metrics": [
-                {
-                  "name": "jvm.file_descriptor_usage",
-                  "metric_path": "metrics/jvm/file_descriptor_usage",
-                  "service_name": "LOGSEARCH",
-                  "component_name": "LOGSEARCH_MASTER"
-                }
-              ],
-              "values": [
-                {
-                  "name": "JVM File Descriptor Usage",
-                  "value": "${jvm.file_descriptor_usage}"
-                }
-              ],
-              "properties": {
-                "warning_threshold": "0.8",
-                "error_threshold": "0.9"
-              }
-            },
-           {
-                "widget_name": "Thread Count",
-                "description": "Number of threads in the JVM.",
-                "widget_type": "NUMBER",
-                "is_visible": true,
-                "metrics": [
-                  {
-                    "name": "jvm.thread_count",
-                    "metric_path": "metrics/jvm/thread_count",
-                    "service_name": "LOGSEARCH",
-                    "component_name": "LOGSEARCH_MASTER"
-                  }
-                ],
-                "values": [
-                  {
-                    "name": "Thread Count",
-                    "value": "${jvm.thread_count}"
-                  }
-                ],
-                "properties": {
-                }
-           },
-           {
-                "widget_name": "Daemon Thread Count",
-                "description": "Number of daemon threads in the JVM.",
-                "widget_type": "NUMBER",
-                "is_visible": true,
-                "metrics": [
-                  {
-                    "name": "jvm.daemon_thread_count",
-                    "metric_path": "metrics/jvm/daemon_thread_count",
-                    "service_name": "LOGSEARCH",
-                    "component_name": "LOGSEARCH_MASTER"
-                  }
-                ],
-                "values": [
-                  {
-                    "name": "Daemon Thread Count",
-                    "value": "${jvm.daemon_thread_count}"
-                  }
-                ],
-                "properties": {
-                }
-           },
-            {
-                 "widget_name": "Runnable Threads",
-                 "description": "Number of runnable threads in the JVM.",
-                 "widget_type": "GRAPH",
-                 "is_visible": false,
-                 "metrics": [
-                   {
-                     "name": "jvm.thread_states.runnable",
-                     "metric_path": "metrics/jvm/thread_states/runnable",
-                     "service_name": "LOGSEARCH",
-                     "component_name": "LOGSEARCH_MASTER"
-                   }
-                 ],
-                 "values": [
-                   {
-                     "name": "Runnable Threads",
-                     "value": "${jvm.thread_states.runnable}"
-                   }
-                 ],
-                 "properties": {
-                   "graph_type": "LINE",
-                   "time_range": "1"
-                 }
-            },
-            {
-                 "widget_name": "Blocked Threads",
-                 "description": "Number of blocked threads in the JVM.",
-                 "widget_type": "GRAPH",
-                 "is_visible": false,
-                 "metrics": [
-                   {
-                     "name": "jvm.thread_states.blocked",
-                     "metric_path": "metrics/jvm/thread_states/blocked",
-                     "service_name": "LOGSEARCH",
-                     "component_name": "LOGSEARCH_MASTER"
-                   }
-                 ],
-                 "values": [
-                   {
-                     "name": "Blocked Threads",
-                     "value": "${jvm.thread_states.blocked}"
-                   }
-                 ],
-                 "properties": {
-                   "graph_type": "LINE",
-                   "time_range": "1"
-                 }
-            },
-            {
-                 "widget_name": "Timed-Waiting Threads",
-                 "description": "Number of timed-waiting threads in the JVM.",
-                 "widget_type": "GRAPH",
-                 "is_visible": false,
-                 "metrics": [
-                   {
-                     "name": "jvm.thread_states.timed_waiting",
-                     "metric_path": "metrics/jvm/thread_states/timed_waiting",
-                     "service_name": "LOGSEARCH",
-                     "component_name": "LOGSEARCH_MASTER"
-                   }
-                 ],
-                 "values": [
-                   {
-                     "name": "Timed-Waiting Threads",
-                     "value": "${jvm.thread_states.timed_waiting}"
-                   }
-                 ],
-                 "properties": {
-                   "graph_type": "LINE",
-                   "time_range": "1"
-                 }
-            },
-            {
-                 "widget_name": "Terminated Threads",
-                 "description": "Number of terminated threads in the JVM.",
-                 "widget_type": "GRAPH",
-                 "is_visible": false,
-                 "metrics": [
-                   {
-                     "name": "jvm.thread_states.terminated",
-                     "metric_path": "metrics/jvm/thread_states/terminated",
-                     "service_name": "LOGSEARCH",
-                     "component_name": "LOGSEARCH_MASTER"
-                   }
-                 ],
-                 "values": [
-                   {
-                     "name": "Terminated Threads",
-                     "value": "${jvm.thread_states.terminated}"
-                   }
-                 ],
-                 "properties": {
-                   "graph_type": "LINE",
-                   "time_range": "1"
-                 }
-            }
-      ]
-    }
-  ]
+		    ],
+		    "values": [
+			{
+			    "name": "Logs from File",
+			    "value": "${input.file._sum}"
+			}
+		    ],
+		    "properties": {
+			"graph_type": "LINE",
+			"time_range": "1"
+		    }
+		},
+		{
+		    "widget_name": "Logs Published",
+		    "description": "Logs Published",
+		    "widget_type": "GRAPH",
+		    "is_visible": true,
+		    "metrics": [
+			{
+			    "name": "output.solr._sum",
+			    "metric_path": "metrics/output/solr",
+			    "service_name": "LOGSEARCH",
+			    "component_name": "LOGSEARCH_LOGFEEDER"
+			},
+			{
+			    "name": "output.kafka._sum",
+			    "metric_path": "metrics/output/kafka",
+			    "service_name": "LOGSEARCH",
+			    "component_name": "LOGSEARCH_LOGFEEDER"
+			}
+		    ],
+		    "values": [
+			{
+			    "name": "Logs to Solr",
+			    "value": "${output.solr._sum}"
+			},
+			{
+			    "name": "Logs to Kafka",
+			    "value": "${output.kafka._sum}"
+			}
+		    ],
+		    "properties": {
+			"graph_type": "LINE",
+			"time_range": "1"
+		    }
+		},
+		{
+		    "widget_name": "Parse Errors",
+		    "description": "Parse Errors",
+		    "widget_type": "GRAPH",
+		    "is_visible": true,
+		    "metrics": [
+			{
+			    "name": "filter.error.grok._sum",
+			    "metric_path": "metrics/filter/error/grok",
+			    "service_name": "LOGSEARCH",
+			    "component_name": "LOGSEARCH_LOGFEEDER"
+			},
+			{
+			    "name": "filter.error.truncate._sum",
+			    "metric_path": "metrics/filter/error/truncate",
+			    "service_name": "LOGSEARCH",
+			    "component_name": "LOGSEARCH_LOGFEEDER"
+			}
+		    ],
+		    "values": [
+			{
+			    "name": "Grok Errors",
+			    "value": "${filter.error.grok._sum}"
+			},
+			{
+			    "name": "Logs Truncated",
+			    "value": "${filter.error.truncate._sum}"
+			}
+		    ],
+		    "properties": {
+			"graph_type": "LINE",
+			"time_range": "1"
+		    }
+		}
+	    ]
+	}
+    ]
 }
