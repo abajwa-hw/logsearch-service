@@ -2,18 +2,36 @@
 <?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
  
 <configuration>
-  <property>
-    <name>logsearch_dir</name>
-    <value>/opt/logsearch</value>
-    <description>Location where Logsearch will be installed to. If download_location is set to RPM, logsearch will be downloaded to /usr/hdp/_version_/logsearch</description>
-  </property>  
 
   <property>
-    <name>logsearch_download_location</name>
-    <value>https://s3.amazonaws.com/publicrepo/logsearch-portal.tar.gz</value>
-    <!-- <value>https://dl.dropboxusercontent.com/u/114020/logsearch/logsearch-portal.tar.gz</value> -->
-    <description>Location to download Logsearch from. If set to RPM, it will install from rpm. Otherwise will download from tar.gaz (e.g. https://s3.amazonaws.com/publicrepo/logsearch-portal.tar.gz)</description>
-  </property>  
+    <name>solr_collection_service_logs</name>
+    <value>hadoop_logs</value>
+    <description>Name for the service logs collection</description>
+  </property>   
+
+  <property>
+    <name>solr_collection_audit_logs</name>
+    <value>audit_logs</value>
+    <description>Name for the audit logs collection</description>
+  </property>   
+
+  <property>
+    <name>solr_audit_logs_use_ranger</name>
+    <value>false</value>
+    <description>Use Ranger Audit collection. This is supported only if Ranger Solr is installed in SolrCloud mode</description>
+  </property>   
+
+  <property>
+    <name>solr_audit_logs_zk_quorum</name>
+    <value>{zookeeper_quorum}</value>
+    <description>Only needed if using custom solr cloud. E.g. zk1:2181,zk2:2182</description>
+  </property>   
+
+  <property>
+    <name>solr_audit_logs_zk_node</name>
+    <value>{solr_znode}</value>
+    <description>Only needed if using custom solr cloud. E.g. /audit_logs</description>
+  </property>   
 
   <property>
     <name>logsearch_collection_numshards</name>
@@ -30,7 +48,13 @@
   <property>
     <name>logsearch_service_logs_max_retention</name>
     <value>7</value>
-    <description>Days to retain the logs in Solr</description>
+    <description>Days to retain the service logs in Solr</description>
+  </property> 
+
+  <property>
+    <name>logsearch_audit_logs_max_retention</name>
+    <value>7</value>
+    <description>Days to retain the audit logs in Solr</description>
   </property> 
 
   <property>

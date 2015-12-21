@@ -6,14 +6,36 @@
 	    "section_name": "LOGSEARCH_SUMMARY",
 	    "widgetLayoutInfo": [
 		{
-		    "widget_name": "Logs Read",
-		    "description": "Logs Read",
+		    "widget_name": "Files Monitoring",
+		    "description": "Files that are been monitored",
+		    "widget_type": "NUMBER",
+		    "is_visible": true,
+		    "metrics": [
+			{
+			    "name": "input.files.count",
+			    "metric_path": "metrics/input/files/count",
+			    "service_name": "LOGSEARCH",
+			    "component_name": "LOGSEARCH_LOGFEEDER"
+			}
+		    ],
+		    "values": [
+			{
+			    "name": "Files count",
+			    "value": "${input.files.count}"
+			}
+		    ],
+		    "properties": {
+		    }
+		},
+		{
+		    "widget_name": "Lines Read",
+		    "description": "Lines Read",
 		    "widget_type": "GRAPH",
 		    "is_visible": true,
 		    "metrics": [
 			{
-			    "name": "input.file._sum",
-			    "metric_path": "metrics/input/file",
+			    "name": "input.files.read_lines._sum",
+			    "metric_path": "metrics/input/files/read_lines",
 			    "service_name": "LOGSEARCH",
 			    "component_name": "LOGSEARCH_LOGFEEDER"
 			}
@@ -21,11 +43,38 @@
 		    ],
 		    "values": [
 			{
-			    "name": "Logs from File",
-			    "value": "${input.file._sum}"
+			    "name": "Lines read from File",
+			    "value": "${input.files.read_lines._sum}"
 			}
 		    ],
 		    "properties": {
+			"display_unit": "lines",
+			"graph_type": "LINE",
+			"time_range": "1"
+		    }
+		},
+		{
+		    "widget_name": "Data Read",
+		    "description": "Data Read",
+		    "widget_type": "GRAPH",
+		    "is_visible": true,
+		    "metrics": [
+			{
+			    "name": "input.files.read_bytes._sum",
+			    "metric_path": "metrics/input/files/read_bytes",
+			    "service_name": "LOGSEARCH",
+			    "component_name": "LOGSEARCH_LOGFEEDER"
+			}
+
+		    ],
+		    "values": [
+			{
+			    "name": "Data read from File",
+			    "value": "${input.files.read_bytes._sum/(1024*1024)}"
+			}
+		    ],
+		    "properties": {
+			"display_unit": "MB",
 			"graph_type": "LINE",
 			"time_range": "1"
 		    }
@@ -37,14 +86,14 @@
 		    "is_visible": true,
 		    "metrics": [
 			{
-			    "name": "output.solr._sum",
-			    "metric_path": "metrics/output/solr",
+			    "name": "output.solr.write_logs._sum",
+			    "metric_path": "metrics/output/solr/write_logs",
 			    "service_name": "LOGSEARCH",
 			    "component_name": "LOGSEARCH_LOGFEEDER"
 			},
 			{
-			    "name": "output.kafka._sum",
-			    "metric_path": "metrics/output/kafka",
+			    "name": "output.kafka.write_logs._sum",
+			    "metric_path": "metrics/output/kafka/write_logs",
 			    "service_name": "LOGSEARCH",
 			    "component_name": "LOGSEARCH_LOGFEEDER"
 			}
@@ -52,14 +101,50 @@
 		    "values": [
 			{
 			    "name": "Logs to Solr",
-			    "value": "${output.solr._sum}"
+			    "value": "${output.solr.write_logs._sum}"
 			},
 			{
 			    "name": "Logs to Kafka",
-			    "value": "${output.kafka._sum}"
+			    "value": "${output.kafka.write_logs._sum}"
 			}
 		    ],
 		    "properties": {
+			"display_unit": "logs",
+			"graph_type": "LINE",
+			"time_range": "1"
+		    }
+		},
+		{
+		    "widget_name": "Data Published",
+		    "description": "Data Published",
+		    "widget_type": "GRAPH",
+		    "is_visible": true,
+		    "metrics": [
+			{
+			    "name": "output.solr.write_bytes._sum",
+			    "metric_path": "metrics/output/solr/write_bytes",
+			    "service_name": "LOGSEARCH",
+			    "component_name": "LOGSEARCH_LOGFEEDER"
+			},
+			{
+			    "name": "output.kafka.write_bytes._sum",
+			    "metric_path": "metrics/output/kafka/write_bytes",
+			    "service_name": "LOGSEARCH",
+			    "component_name": "LOGSEARCH_LOGFEEDER"
+			}
+		    ],
+		    "values": [
+			{
+			    "name": "Data to Solr",
+			    "value": "${output.solr.write_bytes._sum/(1024*1024)}"
+			},
+			{
+			    "name": "Data to Kafka",
+			    "value": "${output.kafka.write_bytes._sum/(1024*1024)}"
+			}
+		    ],
+		    "properties": {
+			"display_unit": "MB",
 			"graph_type": "LINE",
 			"time_range": "1"
 		    }

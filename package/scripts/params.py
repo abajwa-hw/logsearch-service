@@ -59,7 +59,18 @@ logsearch_solr_conf = config['configurations']['solr-config']['logsearch.solr.co
 logsearch_solr_datadir = config['configurations']['solr-config']['logsearch.solr.datadir']
 logsearch_solr_data_resources_dir = os.path.join(logsearch_solr_datadir,'resources')
 logsearch_service_logs_max_retention = config['configurations']['logsearch-config']['logsearch_service_logs_max_retention']
+logsearch_audit_logs_max_retention = config['configurations']['logsearch-config']['logsearch_audit_logs_max_retention']
 logsearch_app_max_mem = config['configurations']['logsearch-config']['logsearch_app_max_mem']
+
+zookeeper_port=default('/configurations/zoo.cfg/clientPort', None)
+#get comma separated list of zookeeper hosts from clusterHostInfo
+index = 0 
+zookeeper_quorum=""
+for host in config['clusterHostInfo']['zookeeper_hosts']:
+  zookeeper_quorum += host + ":"+str(zookeeper_port)
+  index += 1
+  if index < len(config['clusterHostInfo']['zookeeper_hosts']):
+    zookeeper_quorum += ","
 
 if solr_downloadlocation == 'HDPSEARCH':
   solr_dir='/opt/lucidworks-hdpsearch/solr'
@@ -91,20 +102,44 @@ solr_zoo_content = config['configurations']['solr-zoo-env']['content']
 #Logsearch configs
 #####################################
 
-logsearch_downloadlocation = config['configurations']['logsearch-config']['logsearch_download_location']
-
+logsearch_downloadlocation = config['configurations']['logsearch-env']['logsearch_download_location']
 if logsearch_downloadlocation == 'RPM':
   logsearch_dir = '/usr/hdp/'+hdp_version+'/logsearch'
 else:  
-  logsearch_dir = config['configurations']['logsearch-config']['logsearch_dir']
+  logsearch_dir = config['configurations']['logsearch-env']['logsearch_dir']
 
 
 
-logsearch_downloadlocation = config['configurations']['logsearch-config']['logsearch_download_location']
+logsearch_downloadlocation = config['configurations']['logsearch-env']['logsearch_download_location']
+logsearch_collection_service_logs = default('/configurations/logsearch-config/logsearch_collection_service_logs', 'hadoop_logs')
+logsearch_collection_audit_logs = default('/configurations/logsearch-config/logsearch_collection_audit_logs', 'audit_logs')
 logsearch_numshards = str(config['configurations']['logsearch-config']['logsearch_collection_numshards'])
 logsearch_repfactor = str(config['configurations']['logsearch-config']['logsearch_collection_rep_factor'])
 
-  
+solr_collection_service_logs = default('/configurations/logsearch-config/solr_collection_service_logs', 'hadoop_logs')
+solr_collection_audit_logs = default('/configurations/logsearch-config/solr_collection_audit_logs', 'audit_logs')
+
+solr_audit_logs_use_ranger = default('/configurations/logsearch-config/solr_audit_logs_use_ranger', 'false')
+solr_audit_logs_url = ''
+
+if solr_audit_logs_use_ranger:
+  #In Ranger, this contain the /zkNode also
+  ranger_audit_solr_zookeepers = default('/configurations/ranger-admin-site/ranger.audit.solr.zookeepers', None)
+  #TODO: ranger property already has zk node appended. We need to remove it.
+  #For now, let's assume it is going to be URL
+  solr_audit_logs_url = default('/configurations/ranger-admin-site/ranger.audit.solr.urls', solr_audit_logs_url)
+else:
+  solr_audit_logs_zk_quorum = default('/configurations/logsearch-config/solr_audit_logs_zk_quorum', None)
+  solr_audit_logs_zk_node = default('/configurations/logsearch-config/solr_audit_logs_zk_node', None)
+
+  solr_audit_logs_zk_node = format(solr_audit_logs_zk_node)
+  solr_audit_logs_zk_quorum = format(solr_audit_logs_zk_quorum)
+
+  if not(solr_audit_logs_zk_quorum):
+    solr_audit_logs_zk_quorum=zookeeper_quorum
+  if not(solr_audit_logs_zk_node):
+    solr_audit_logs_zk_node=solr_znode
+      
 #using zookeeper znode for solr instead of host/port now that logsearch system.properties supports it
 #solr_host = config['configurations']['logsearch-config']['solr_host']
 #solr_port = str(config['configurations']['logsearch-config']['solr_port'])
@@ -119,6 +154,7 @@ logsearch_log = logsearch_log_dir+'/logsearch.out'
 # store the log file for the service from the 'solr.log' property of the 'logsearch-env.xml' file
 logsearch_env_content = config['configurations']['logsearch-env']['content']
 logsearch_service_logs_solrconfig_content = config['configurations']['logsearch-service_logs-solrconfig']['content']
+logsearch_audit_logs_solrconfig_content = config['configurations']['logsearch-audit_logs-solrconfig']['content']
 logsearch_app_log4j_content = config['configurations']['logsearch-app-log4j']['content']
 
 #Log dirs
@@ -151,26 +187,30 @@ zk_log_dir = default('/configurations/zookeeper-env/zk_log_dir','/var/log/zookee
 #Logfeeder configs
 #####################################
 
-
-logfeeder_downloadlocation = config['configurations']['logfeeder-config']['logfeeder_download_location']
-
+logfeeder_downloadlocation = config['configurations']['logfeeder-env']['logfeeder_download_location']
 if logfeeder_downloadlocation == 'RPM':
   logfeeder_dir = '/usr/hdp/'+hdp_version+'/logfeeder'
 else:  
-  logfeeder_dir = config['configurations']['logfeeder-config']['logfeeder_dir']
+  logfeeder_dir = config['configurations']['logfeeder-env']['logfeeder_dir']
 
-logfeeder_downloadlocation = config['configurations']['logfeeder-config']['logfeeder_download_location']
+logfeeder_downloadlocation = config['configurations']['logfeeder-env']['logfeeder_download_location']
   
 
-zookeeper_port=default('/configurations/zoo.cfg/clientPort', None)
-#get comma separated list of zookeeper hosts from clusterHostInfo
-index = 0 
-zookeeper_quorum=""
-for host in config['clusterHostInfo']['zookeeper_hosts']:
-  zookeeper_quorum += host + ":"+str(zookeeper_port)
-  index += 1
-  if index < len(config['clusterHostInfo']['zookeeper_hosts']):
-    zookeeper_quorum += ","
+
+
+# logfeeder-config configs
+
+solr_service_logs_enable = default('/configurations/logfeeder-config/solr_service_logs_enable',True)
+solr_audit_logs_enable = default('/configurations/logfeeder-config/solr_audit_logs_enable',True)
+
+kafka_broker_list = default('/configurations/logfeeder-config/kafka_broker_list', '')
+kafka_security_protocol= default('/configurations/logfeeder-config/kafka_security_protocol', '')
+kafka_kerberos_service_name=default('/configurations/logfeeder-config/kafka_kerberos_service_name', '')
+
+kafka_service_logs_enable = default('/configurations/logfeeder-config/kafka_service_logs_enable',False)
+kafka_audit_logs_enable = default('/configurations/logfeeder-config/kafka_audit_logs_enable',False)
+kafka_topic_service_logs = default('/configurations/logfeeder-config/kafka_topic_service_logs','service_logs')
+kafka_topic_audit_logs = default('/configurations/logfeeder-config/kafka_topic_audit_logs','audit_logs')
 
 
 # logfeeder-env configs
@@ -178,7 +218,7 @@ logfeeder_user = config['configurations']['logfeeder-env']['logfeeder_user']
 logfeeder_group = config['configurations']['logfeeder-env']['logfeeder_group']
 logfeeder_log_dir = config['configurations']['logfeeder-env']['logfeeder_log_dir']
 logfeeder_log = logfeeder_log_dir+'/logfeeder.out'
-logfeeder_max_mem = config['configurations']['logfeeder-config']['logfeeder_max_mem']
+logfeeder_max_mem = config['configurations']['logfeeder-env']['logfeeder_max_mem']
 logfeeder_env_content = config['configurations']['logfeeder-env']['content']
 logfeeder_config_content = config['configurations']['logfeeder-input-configs']['content']
 logfeeder_log4j_content = config['configurations']['logfeeder-log4j']['content']

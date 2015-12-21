@@ -5,6 +5,12 @@
 <configuration>
 
   <property>
+    <name>logfeeder_dir</name>
+    <value>/opt/logfeeder</value>
+    <description>Location where logfeeder will be installed to. If download_location is set to RPM, logfeeder will be downloaded to /usr/hdp/_version_/logfeeder</description>
+  </property>  
+
+  <property>
     <name>logfeeder_pid_dir</name>
     <value>/var/run/logfeeder</value>
     <description>logfeeder Process ID Directory</description>
@@ -30,6 +36,18 @@
     <description>logfeeder group</description>
   </property> 
 
+  <property>
+    <name>logfeeder_max_mem</name>
+    <value>512m</value>
+    <description>Max memory for LogFeeder</description>
+  </property> 
+
+  <property>
+    <name>logfeeder_download_location</name>
+    <!-- <value>RPM</value> -->
+    <value>https://s3.amazonaws.com/publicrepo/logsearch-logfeeder.tgz</value>
+    <description>Location to download logfeeder tarball from (e.g. https://dl.dropboxusercontent.com/u/114020/logfeeder/logfeeder-portal.tar.gz)</description>
+  </property>  
 
   <!-- system.properties -->
 

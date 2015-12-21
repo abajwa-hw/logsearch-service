@@ -1225,7 +1225,7 @@
      --&gt;
   &lt;searchComponent name="spellcheck" class="solr.SpellCheckComponent"&gt;
 
-    &lt;str name="queryAnalyzerFieldType"&gt;text_general&lt;/str&gt;
+    &lt;str name="queryAnalyzerFieldType"&gt;key_lower_case&lt;/str&gt;
 
     &lt;!-- Multiple "Spell Checkers" can be declared and used by this
          component
@@ -1700,7 +1700,7 @@
       &lt;/arr&gt;
     &lt;/processor&gt;
     &lt;processor class="solr.AddSchemaFieldsUpdateProcessorFactory"&gt;
-      &lt;str name="defaultFieldType"&gt;text_general&lt;/str&gt;
+      &lt;str name="defaultFieldType"&gt;key_lower_case&lt;/str&gt;
       &lt;lst name="typeMapping"&gt;
         &lt;str name="valueClass"&gt;java.lang.Boolean&lt;/str&gt;
         &lt;str name="fieldType"&gt;booleans&lt;/str&gt;

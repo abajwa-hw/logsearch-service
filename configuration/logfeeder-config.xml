@@ -2,28 +2,59 @@
 <?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
  
 <configuration>
-
-  
-
   <property>
-    <name>logfeeder_dir</name>
-    <value>/opt/logfeeder</value>
-    <description>Location where logfeeder will be installed to. If download_location is set to RPM, logfeeder will be downloaded to /usr/hdp/_version_/logfeeder</description>
-  </property>  
-
-  <property>
-    <name>logfeeder_download_location</name>
-    <!-- <value>RPM</value> -->
-    <value>https://s3.amazonaws.com/publicrepo/logsearch-logfeeder.tgz</value>
-    <description>Location to download logfeeder tarball from (e.g. https://dl.dropboxusercontent.com/u/114020/logfeeder/logfeeder-portal.tar.gz)</description>
-  </property>  
-  
-  <property>
-    <name>logfeeder_max_mem</name>
-    <value>512m</value>
-    <description>Max memory for LogFeeder</description>
+    <name>solr_service_logs_enable</name>
+    <value>true</value>
+    <description>Enable service logs to Solr</description>
   </property> 
-  
-    
-</configuration>
 
+  <property>
+    <name>solr_audit_logs_enable</name>
+    <value>true</value>
+    <description>Enable audit logs to Solr</description>
+  </property> 
+
+  <property>
+    <name>kafka_service_logs_enable</name>
+    <value>false</value>
+    <description>Enable service logs to Kafka</description>
+  </property> 
+
+  <property>
+    <name>kafka_topic_service_logs</name>
+    <value>service_logs</value>
+    <description>Kafka topic for service logs</description>
+  </property> 
+
+  <property>
+    <name>kafka_audit_logs_enable</name>
+    <value>false</value>
+    <description>Enable audit logs to Kafka</description>
+  </property> 
+
+  <property>
+    <name>kafka_topic_audit_logs</name>
+    <value>audit_logs</value>
+    <description>Kafka topic for audit logs</description>
+  </property> 
+
+
+  <property>
+    <name>kafka_broker_list</name>
+    <value>NONE</value>
+    <description>List of brokers. e.g. broker1_host:port,broker2_host:port</description>
+  </property> 
+
+  <property>
+    <name>kafka_security_protocol</name>
+    <value>NONE</value>
+    <description>If security is enabled, then set this value. E.g. SASL_PLAINTEXT</description>
+  </property> 
+
+  <property>
+    <name>kafka_kerberos_service_name</name>
+    <value>NONE</value>
+    <description>If security is enabled, then set this value. E.g. kafka</description>
+  </property> 
+
+</configuration>

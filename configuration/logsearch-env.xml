@@ -5,6 +5,19 @@
 <configuration>
 
   <property>
+    <name>logsearch_dir</name>
+    <value>/opt/logsearch</value>
+    <description>Location where Logsearch will be installed to. If download_location is set to RPM, logsearch will be downloaded to /usr/hdp/_version_/logsearch</description>
+  </property>  
+
+  <property>
+    <name>logsearch_download_location</name>
+    <value>https://s3.amazonaws.com/publicrepo/logsearch-portal.tar.gz</value>
+    <!-- <value>https://dl.dropboxusercontent.com/u/114020/logsearch/logsearch-portal.tar.gz</value> -->
+    <description>Location to download Logsearch from. If set to RPM, it will install from rpm. Otherwise will download from tar.gaz (e.g. https://s3.amazonaws.com/publicrepo/logsearch-portal.tar.gz)</description>
+  </property>  
+
+  <property>
     <name>logsearch_pid_dir</name>
     <value>/var/run/logsearch</value>
     <description>Logsearch Process ID Directory</description>
@@ -52,14 +65,15 @@
 # limitations under the License.
 #solr.url=http://{{solr_host}}:{{solr_port}}/solr
 
+#Service Logs and History colletion
 solr.zkhosts={{zookeeper_quorum}}{{solr_znode}}
-solr.enable=true
-restapi.log.enabled=false
-metrics.collector.hosts=http://{{metrics_collector_hosts}}:{{metrics_collector_port}}/ws/v1/timeline/metrics
-
-#Solr Core
-solr.core.logs=hadoop_logs
+solr.core.logs={{logsearch_collection_service_logs}}
 solr.core.history=history
+
+#Audit logs
+auditlog.solr.zkhosts={{solr_audit_logs_zk_quorum}}{{solr_audit_logs_zk_node}}
+auditlog.solr.core.logs={{solr_collection_audit_logs}}
+auditlog.solr.url={{solr_audit_logs_url}}
     </value>
   </property>
 

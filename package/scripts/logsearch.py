@@ -63,9 +63,13 @@ class Master(Script):
     file_content=InlineTemplate(params.logsearch_app_log4j_content)    
     File(format("{params.logsearch_dir}/classes/log4j.xml"), content=file_content, owner=params.logsearch_user)    
 
-    #write content in jinja text field to solrconfig.xml
+    #write content in jinja text field to solrconfig.xml for service logs
     file_content=InlineTemplate(params.logsearch_service_logs_solrconfig_content)    
     File(format("{params.logsearch_dir}/solr_configsets/hadoop_logs/conf/solrconfig.xml"), content=file_content, owner=params.logsearch_user)    
+
+    #write content in jinja text field to solrconfig.xml for audit logs
+    file_content=InlineTemplate(params.logsearch_audit_logs_solrconfig_content)    
+    File(format("{params.logsearch_dir}/solr_configsets/audit_logs/conf/solrconfig.xml"), content=file_content, owner=params.logsearch_user)    
 
   #Call start.sh to start the service
   def start(self, env):
@@ -102,8 +106,8 @@ class Master(Script):
 
     
     #create prerequisite Solr collections, if not already exist
-    #cmd = params.solr_bindir+'solr create -c hadoop_logs -d '+params.logsearch_dir+'/solr_configsets/hadoop_logs/conf -s '+params.logsearch_numshards+' -rf ' + params.logsearch_repfactor    
-    cmd = format('SOLR_INCLUDE={logsearch_solr_conf}/solr.in.sh {solr_bindir}/solr create -c hadoop_logs -d {logsearch_dir}/solr_configsets/hadoop_logs/conf -s {logsearch_numshards} -rf {logsearch_repfactor}')
+    #cmd = params.solr_bindir+'solr create -c '+params.logsearch_collection_service_logs+' -d '+params.logsearch_dir+'/solr_configsets/hadoop_logs/conf -s '+params.logsearch_numshards+' -rf ' + params.logsearch_repfactor    
+    cmd = format('SOLR_INCLUDE={logsearch_solr_conf}/solr.in.sh {solr_bindir}/solr create -c {solr_collection_service_logs} -d {logsearch_dir}/solr_configsets/hadoop_logs/conf -s {logsearch_numshards} -rf {logsearch_repfactor}')
     Execute('echo '  + cmd)
     Execute(cmd, ignore_failures=True)
 
@@ -111,6 +115,11 @@ class Master(Script):
     cmd = format('SOLR_INCLUDE={logsearch_solr_conf}/solr.in.sh {solr_bindir}/solr create -c history -d {logsearch_dir}/solr_configsets/history/conf -s {logsearch_numshards} -rf {logsearch_repfactor}')
     Execute('echo '  + cmd)
     Execute(cmd, ignore_failures=True)
+
+    if not(params.solr_audit_logs_use_ranger):
+      cmd = format('SOLR_INCLUDE={logsearch_solr_conf}/solr.in.sh {solr_bindir}/solr create -c {solr_collection_audit_logs} -d {logsearch_dir}/solr_configsets/audit_logs/conf -s {logsearch_numshards} -rf {logsearch_repfactor}')
+      Execute('echo '  + cmd)
+      Execute(cmd, ignore_failures=True)
     						 
     Execute('chmod -R ugo+r ' + params.logsearch_dir + '/solr_configsets')
     
