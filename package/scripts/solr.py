@@ -88,7 +88,7 @@ class Master(Script):
     File(format("{logsearch_solr_datadir}/zoo.cfg"), content=zoo_content, owner=params.solr_user)    
 
     solr_sh_content=InlineTemplate(params.solr_sh_content)
-    File(format("{params.logsearch_dir}/solr.sh"), mode=0644, content=solr_sh_content, owner=params.logsearch_user)    
+    File(format("{params.logsearch_dir}/solr.sh"), mode=0755, content=solr_sh_content, owner=params.logsearch_user)    
       
 
   #Call start.sh to start the service
