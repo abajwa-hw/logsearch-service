@@ -97,6 +97,8 @@ solr_log4j_content = config['configurations']['solr-log4j-env']['content']
 
 solr_zoo_content = config['configurations']['solr-zoo-env']['content']
 
+solr_sh_content = config['configurations']['solr-sh']['content']
+
 
 #####################################
 #Logsearch configs
