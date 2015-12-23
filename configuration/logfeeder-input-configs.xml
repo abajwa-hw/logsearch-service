@@ -279,7 +279,8 @@
 			"add_fields":{
 				"logType":"HDFSAudit",
 				"enforcer":"hadoop-acl",
-				"repoType":"1"
+				"repoType":"1",
+				"repo": "hdfs"
 			},
 			"path":"{{hdfs_log_dir_prefix}}/hdfs/hdfs-audit.log"
 		}
