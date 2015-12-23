@@ -39,16 +39,18 @@ class Master(Script):
             content=''
     )
 
-        
-    if params.logsearch_downloadlocation == 'RPM':
-      Execute('rpm -ivh http://s3.amazonaws.com/dev2.hortonworks.com/ashishujjain/logsearch/logsearch_2_3_2_0_2950-0.0.1.2.3.2.0-2950.el6.x86_64.rpm')
-    else:  
-      Execute('cd ' + params.logsearch_dir + '; wget ' + params.logsearch_downloadlocation + ' -O logsearch-portal.tar.gz -a ' + params.logsearch_log, user=params.logsearch_user)
-      Execute('cd ' + params.logsearch_dir + '; tar -xvf logsearch-portal.tar.gz', user=params.logsearch_user)    
+    self.install_logsearch()    
   
-   
     Execute ('echo "Logsearch install complete"')
 
+
+  def install_logsearch(self):
+    import params
+    if params.logsearch_downloadlocation == 'RPM':
+      Execute('rpm -ivh http://s3.amazonaws.com/dev2.hortonworks.com/ashishujjain/logsearch/logsearch_2_3_2_0_2950-0.0.1.2.3.2.0-2950.el6.x86_64.rpm')
+    else:
+      Execute('cd ' + params.logsearch_dir + '; wget ' + params.logsearch_downloadlocation + ' -O logsearch-portal.tar.gz -a ' + params.logsearch_log, user=params.logsearch_user)
+      Execute('cd ' + params.logsearch_dir + '; tar -xvf logsearch-portal.tar.gz', user=params.logsearch_user)
 
 
   def configure(self, env):
@@ -155,7 +157,16 @@ class Master(Script):
     #use built-in method to check status using pidfile
     check_process_status(status_params.logsearch_pid_file)  
 
-
+  def update_logsearch(self, env):
+    import params
+    env.set_params(params)
+    Execute('echo Stopping logsearch')
+    self.stop(env)
+    Execute('echo Updating logsearch using latest install bits')
+    Execute(format("rm -rf {logsearch_dir}/*"))
+    self.install_logsearch()
+    Execute('echo Starting logsearch')
+    self.start(env)
 
 if __name__ == "__main__":
   Master().execute()

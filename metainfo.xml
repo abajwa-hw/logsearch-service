@@ -22,6 +22,17 @@
                     <scriptType>PYTHON</scriptType>
                     <timeout>5000</timeout>
                   </commandScript>
+	          <customCommands>
+        	    <customCommand>
+              		<name>UPDATE_LOGSEARCH</name>
+                	<commandScript>
+                  		<script>scripts/logsearch.py</script>
+                  		<scriptType>PYTHON</scriptType>
+                  		<timeout>600</timeout>
+            		</commandScript>
+                     </customCommand>
+          	  </customCommands>
+
                 </component>
                 
                 <component>
