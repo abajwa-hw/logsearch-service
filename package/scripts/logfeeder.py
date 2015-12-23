@@ -76,7 +76,16 @@ class Master(Script):
     #import status properties defined in -env.xml file from status_params class
     import status_params
     self.configure(env)
-    
+
+    #create pid/log dirs in case not there
+    Directory([params.logfeeder_log_dir, status_params.logfeeder_pid_dir],
+              mode=0755,
+              cd_access='a',
+              owner=params.logfeeder_user,
+              group=params.logfeeder_group,
+              recursive=True
+          )
+              
     Execute('find '+params.service_packagedir+' -iname "*.sh" | xargs chmod +x')
     cmd = params.service_packagedir + '/scripts/start_logfeeder.sh ' + params.logfeeder_dir + ' ' + params.logfeeder_log + ' ' + status_params.logfeeder_pid_file + ' ' + params.java64_home + ' ' + '-Xmx' + params.logfeeder_max_mem
   
