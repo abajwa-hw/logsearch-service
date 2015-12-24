@@ -14,17 +14,7 @@
 		"source":"file",
 		"tail":"true",
 		"gen_event_md5":"true",
-		"start_position":"beginning",
-		"post_map_values":{
-			"logtime":{
-				"map_date":{
-					"date_pattern":"yyyy-MM-dd HH:mm:ss,SSS"
-				}
-				
-			}
-			
-		}
-		
+		"start_position":"beginning"
 	},
 	"input":[
 		{
@@ -61,7 +51,7 @@
 			"type":"ambari_agent",
 			"rowtype":"service",
 			"path":"{{ambari_agent_log_dir}}/ambari-agent.log"
-		},		
+		},
 		{
 			"type":"ambari_server",
 			"rowtype":"service",
@@ -280,7 +270,7 @@
 				"logType":"HDFSAudit",
 				"enforcer":"hadoop-acl",
 				"repoType":"1",
-				"repo": "hdfs"
+				"repo":"hdfs"
 			},
 			"path":"{{hdfs_log_dir_prefix}}/hdfs/hdfs-audit.log"
 		}
@@ -300,7 +290,17 @@
 			},
 			"log4j_format":"%d{ISO8601} [%-8c{2}] %-5p: %m%n",
 			"multiline_pattern":"^(%{TIMESTAMP_ISO8601:logtime})",
-			"message_pattern":"(?m)^%{TIMESTAMP_ISO8601:logtime}%{SPACE}\\[%{JAVACLASS:logger_name}\\]%{SPACE}%{LOGLEVEL:level}:%{SPACE}%{GREEDYDATA:log_message}"
+			"message_pattern":"(?m)^%{TIMESTAMP_ISO8601:logtime}%{SPACE}\\[%{JAVACLASS:logger_name}\\]%{SPACE}%{LOGLEVEL:level}:%{SPACE}%{GREEDYDATA:log_message}",
+			"post_map_values":{
+				"logtime":{
+					"map_date":{
+						"date_pattern":"yyyy-MM-dd HH:mm:ss,SSS"
+					}
+					
+				}
+				
+			}
+			
 		},
 		{
 			"filter":"grok",
@@ -319,7 +319,17 @@
 			},
 			"log4j_format":"%d{ISO8601} [%-8c{2}] %-5p: %X{application} %m%n",
 			"multiline_pattern":"^(%{TIMESTAMP_ISO8601:logtime})",
-			"message_pattern":"(?m)^%{TIMESTAMP_ISO8601:logtime}%{SPACE}\\[%{JAVACLASS:logger_name}\\]%{SPACE}%{LOGLEVEL:level}%{SPACE}:%{SPACE}%{GREEDYDATA:log_message}"
+			"message_pattern":"(?m)^%{TIMESTAMP_ISO8601:logtime}%{SPACE}\\[%{JAVACLASS:logger_name}\\]%{SPACE}%{LOGLEVEL:level}%{SPACE}:%{SPACE}%{GREEDYDATA:log_message}",
+			"post_map_values":{
+				"logtime":{
+					"map_date":{
+						"date_pattern":"yyyy-MM-dd HH:mm:ss,SSS"
+					}
+					
+				}
+				
+			}
+			
 		},
 		{
 			"filter":"grok",
@@ -335,7 +345,17 @@
 			},
 			"log4j_format":"%d %-5p - [%t:%x] ~ %m (%c{1}:%L)%n",
 			"multiline_pattern":"^(%{TIMESTAMP_ISO8601:logtime})",
-			"message_pattern":"(?m)^%{TIMESTAMP_ISO8601:logtime}%{SPACE}%{LOGLEVEL:level}%{SPACE}%{SPACE}-%{SPACE}\\[%{DATA:thread_name}\\]%{SPACE}~%{SPACE}%{GREEDYDATA:log_message}"
+			"message_pattern":"(?m)^%{TIMESTAMP_ISO8601:logtime}%{SPACE}%{LOGLEVEL:level}%{SPACE}%{SPACE}-%{SPACE}\\[%{DATA:thread_name}\\]%{SPACE}~%{SPACE}%{GREEDYDATA:log_message}",
+			"post_map_values":{
+				"logtime":{
+					"map_date":{
+						"date_pattern":"yyyy-MM-dd HH:mm:ss,SSS"
+					}
+					
+				}
+				
+			}
+			
 		},
 		{
 			"filter":"grok",
@@ -350,7 +370,17 @@
 			},
 			"log4j_format":"%d{ISO8601} %p %c: %m%n",
 			"multiline_pattern":"^(%{TIMESTAMP_ISO8601:logtime})",
-			"message_pattern":"(?m)^%{TIMESTAMP_ISO8601:logtime}%{SPACE}%{LOGLEVEL:level}%{SPACE}%{JAVACLASS:logger_name}:%{SPACE}%{GREEDYDATA:log_message}"
+			"message_pattern":"(?m)^%{TIMESTAMP_ISO8601:logtime}%{SPACE}%{LOGLEVEL:level}%{SPACE}%{JAVACLASS:logger_name}:%{SPACE}%{GREEDYDATA:log_message}",
+			"post_map_values":{
+				"logtime":{
+					"map_date":{
+						"date_pattern":"yyyy-MM-dd HH:mm:ss,SSS"
+					}
+					
+				}
+				
+			}
+			
 		},
 		{
 			"filter":"grok",
@@ -368,7 +398,17 @@
 			},
 			"log4j_format":"%d{ISO8601} %-5p [%t] %c{2}: %m%n",
 			"multiline_pattern":"^(%{TIMESTAMP_ISO8601:logtime})",
-			"message_pattern":"(?m)^%{TIMESTAMP_ISO8601:logtime}%{SPACE}%{LOGLEVEL:level}%{SPACE}\\[%{DATA:thread_name}\\]%{SPACE}%{JAVACLASS:logger_name}:%{SPACE}%{GREEDYDATA:log_message}"
+			"message_pattern":"(?m)^%{TIMESTAMP_ISO8601:logtime}%{SPACE}%{LOGLEVEL:level}%{SPACE}\\[%{DATA:thread_name}\\]%{SPACE}%{JAVACLASS:logger_name}:%{SPACE}%{GREEDYDATA:log_message}",
+			"post_map_values":{
+				"logtime":{
+					"map_date":{
+						"date_pattern":"yyyy-MM-dd HH:mm:ss,SSS"
+					}
+					
+				}
+				
+			}
+			
 		},
 		{
 			"filter":"grok",
@@ -385,6 +425,12 @@
 			"multiline_pattern":"^(%{LOGLEVEL:level} %{TIMESTAMP_ISO8601:logtime})",
 			"message_pattern":"(?m)^%{LOGLEVEL:level} %{TIMESTAMP_ISO8601:logtime} %{JAVAFILE:file}:%{INT:line_number} - %{GREEDYDATA:log_message}",
 			"post_map_values":{
+				"logtime":{
+					"map_date":{
+						"date_pattern":"yyyy-MM-dd HH:mm:ss,SSS"
+					}
+					
+				},
 				"level":{
 					"map_fieldvalue":{
 						"pre_value":"WARNING",
@@ -447,7 +493,17 @@
 			},
 			"log4j_format":"%d{ISO8601} %-5p %c{2} (%F:%M(%L)) - %m%n",
 			"multiline_pattern":"^(%{TIMESTAMP_ISO8601:logtime})",
-			"message_pattern":"(?m)^%{TIMESTAMP_ISO8601:logtime}%{SPACE}%{LOGLEVEL:level}%{SPACE}%{JAVACLASS:logger_name}%{SPACE}\\(%{JAVAFILE:file}:%{JAVAMETHOD:method}\\(%{INT:line_number}\\)\\)%{SPACE}-%{SPACE}%{GREEDYDATA:log_message}"
+			"message_pattern":"(?m)^%{TIMESTAMP_ISO8601:logtime}%{SPACE}%{LOGLEVEL:level}%{SPACE}%{JAVACLASS:logger_name}%{SPACE}\\(%{JAVAFILE:file}:%{JAVAMETHOD:method}\\(%{INT:line_number}\\)\\)%{SPACE}-%{SPACE}%{GREEDYDATA:log_message}",
+			"post_map_values":{
+				"logtime":{
+					"map_date":{
+						"date_pattern":"yyyy-MM-dd HH:mm:ss,SSS"
+					}
+					
+				}
+				
+			}
+			
 		},
 		{
 			"filter":"grok",
@@ -463,7 +519,17 @@
 			},
 			"log4j_format":"%d{ISO8601} %-5p [%t]: %c{2} (%F:%M(%L)) - %m%n",
 			"multiline_pattern":"^(%{TIMESTAMP_ISO8601:logtime})",
-			"message_pattern":"(?m)^%{TIMESTAMP_ISO8601:logtime}%{SPACE}%{LOGLEVEL:level}%{SPACE}\\[%{DATA:thread_name}\\]:%{SPACE}%{JAVACLASS:logger_name}%{SPACE}\\(%{JAVAFILE:file}:%{JAVAMETHOD:method}\\(%{INT:line_number}\\)\\)%{SPACE}-%{SPACE}%{GREEDYDATA:log_message}"
+			"message_pattern":"(?m)^%{TIMESTAMP_ISO8601:logtime}%{SPACE}%{LOGLEVEL:level}%{SPACE}\\[%{DATA:thread_name}\\]:%{SPACE}%{JAVACLASS:logger_name}%{SPACE}\\(%{JAVAFILE:file}:%{JAVAMETHOD:method}\\(%{INT:line_number}\\)\\)%{SPACE}-%{SPACE}%{GREEDYDATA:log_message}",
+			"post_map_values":{
+				"logtime":{
+					"map_date":{
+						"date_pattern":"yyyy-MM-dd HH:mm:ss,SSS"
+					}
+					
+				}
+				
+			}
+			
 		},
 		{
 			"filter":"grok",
@@ -480,7 +546,17 @@
 			},
 			"log4j_format":"[%d] %p %m (%c)%n",
 			"multiline_pattern":"^(\\[%{TIMESTAMP_ISO8601:logtime}\\])",
-			"message_pattern":"(?m)^\\[%{TIMESTAMP_ISO8601:logtime}\\]%{SPACE}%{LOGLEVEL:level}%{SPACE}\\[%{DATA:thread_name}\\]%{SPACE}%{GREEDYDATA:log_message}"
+			"message_pattern":"(?m)^\\[%{TIMESTAMP_ISO8601:logtime}\\]%{SPACE}%{LOGLEVEL:level}%{SPACE}\\[%{DATA:thread_name}\\]%{SPACE}%{GREEDYDATA:log_message}",
+			"post_map_values":{
+				"logtime":{
+					"map_date":{
+						"date_pattern":"yyyy-MM-dd HH:mm:ss,SSS"
+					}
+					
+				}
+				
+			}
+			
 		},
 		{
 			"filter":"grok",
@@ -497,7 +573,17 @@
 			},
 			"log4j_format":"[%d] %p %m (%c)%n",
 			"multiline_pattern":"^(\\[%{TIMESTAMP_ISO8601:logtime}\\])",
-			"message_pattern":"(?m)^\\[%{TIMESTAMP_ISO8601:logtime}\\]%{SPACE}%{LOGLEVEL:level}%{SPACE}%{GREEDYDATA:log_message}"
+			"message_pattern":"(?m)^\\[%{TIMESTAMP_ISO8601:logtime}\\]%{SPACE}%{LOGLEVEL:level}%{SPACE}%{GREEDYDATA:log_message}",
+			"post_map_values":{
+				"logtime":{
+					"map_date":{
+						"date_pattern":"yyyy-MM-dd HH:mm:ss,SSS"
+					}
+					
+				}
+				
+			}
+			
 		},
 		{
 			"filter":"grok",
@@ -512,7 +598,17 @@
 			},
 			"log4j_format":"%d{ISO8601} %5p %c{1}:%L - SERVER[${oozie.instance.id}] %m%n",
 			"multiline_pattern":"^(%{TIMESTAMP_ISO8601:logtime})",
-			"message_pattern":"(?m)^%{TIMESTAMP_ISO8601:logtime}%{SPACE}%{LOGLEVEL:level}%{SPACE}%{DATA:logger_name}:%{INT:line_number}%{SPACE}-%{SPACE}%{GREEDYDATA:log_message}"
+			"message_pattern":"(?m)^%{TIMESTAMP_ISO8601:logtime}%{SPACE}%{LOGLEVEL:level}%{SPACE}%{DATA:logger_name}:%{INT:line_number}%{SPACE}-%{SPACE}%{GREEDYDATA:log_message}",
+			"post_map_values":{
+				"logtime":{
+					"map_date":{
+						"date_pattern":"yyyy-MM-dd HH:mm:ss,SSS"
+					}
+					
+				}
+				
+			}
+			
 		},
 		{
 			"filter":"grok",
@@ -530,7 +626,17 @@
 			},
 			"log4j_format":"%d [%t] %-5p %C{6} (%F:%L) - %m%n",
 			"multiline_pattern":"^(%{TIMESTAMP_ISO8601:logtime})",
-			"message_pattern":"(?m)^%{TIMESTAMP_ISO8601:logtime}%{SPACE}\\[%{DATA:thread_name}\\]%{SPACE}%{LOGLEVEL:level}%{SPACE}%{JAVACLASS:logger_name}%{SPACE}\\(%{JAVAFILE:file}:%{INT:line_number}\\)%{SPACE}-%{SPACE}%{GREEDYDATA:log_message}"
+			"message_pattern":"(?m)^%{TIMESTAMP_ISO8601:logtime}%{SPACE}\\[%{DATA:thread_name}\\]%{SPACE}%{LOGLEVEL:level}%{SPACE}%{JAVACLASS:logger_name}%{SPACE}\\(%{JAVAFILE:file}:%{INT:line_number}\\)%{SPACE}-%{SPACE}%{GREEDYDATA:log_message}",
+			"post_map_values":{
+				"logtime":{
+					"map_date":{
+						"date_pattern":"yyyy-MM-dd HH:mm:ss,SSS"
+					}
+					
+				}
+				
+			}
+			
 		},
 		{
 			"filter":"grok",
@@ -545,7 +651,17 @@
 			},
 			"log4j_format":"%d{ISO8601} %-5p %c{1} - %m%n",
 			"multiline_pattern":"^(%{TIMESTAMP_ISO8601:logtime})",
-			"message_pattern":"(?m)^%{TIMESTAMP_ISO8601:logtime}%{SPACE}%{LOGLEVEL:level}%{SPACE}%{JAVACLASS:logger_name}%{SPACE}-%{SPACE}%{GREEDYDATA:log_message}"
+			"message_pattern":"(?m)^%{TIMESTAMP_ISO8601:logtime}%{SPACE}%{LOGLEVEL:level}%{SPACE}%{JAVACLASS:logger_name}%{SPACE}-%{SPACE}%{GREEDYDATA:log_message}",
+			"post_map_values":{
+				"logtime":{
+					"map_date":{
+						"date_pattern":"yyyy-MM-dd HH:mm:ss,SSS"
+					}
+					
+				}
+				
+			}
+			
 		},
 		{
 			"filter":"grok",
@@ -615,7 +731,17 @@
 			},
 			"log4j_format":"%d{ISO8601} - %-5p [%t:%C{1}@%L] - %m%n",
 			"multiline_pattern":"^(%{TIMESTAMP_ISO8601:logtime})",
-			"message_pattern":"(?m)^%{TIMESTAMP_ISO8601:logtime}%{SPACE}-%{SPACE}%{LOGLEVEL:level}%{SPACE}\\[%{DATA:thread_name}\\@%{INT:line_number}\\]%{SPACE}-%{SPACE}%{GREEDYDATA:log_message}"
+			"message_pattern":"(?m)^%{TIMESTAMP_ISO8601:logtime}%{SPACE}-%{SPACE}%{LOGLEVEL:level}%{SPACE}\\[%{DATA:thread_name}\\@%{INT:line_number}\\]%{SPACE}-%{SPACE}%{GREEDYDATA:log_message}",
+			"post_map_values":{
+				"logtime":{
+					"map_date":{
+						"date_pattern":"yyyy-MM-dd HH:mm:ss,SSS"
+					}
+					
+				}
+				
+			}
+			
 		},
 		{
 			"filter":"grok",
@@ -630,7 +756,17 @@
 			},
 			"log4j_format":"%d{ISO8601} %-5p %c{2} (%F:%M(%L)) - %m%n",
 			"multiline_pattern":"^(%{TIMESTAMP_ISO8601:evtTime})",
-			"message_pattern":"(?m)^%{TIMESTAMP_ISO8601:evtTime}%{SPACE}%{LOGLEVEL:level}%{SPACE}%{JAVACLASS:logger_name}:%{SPACE}%{GREEDYDATA:log_message}"
+			"message_pattern":"(?m)^%{TIMESTAMP_ISO8601:evtTime}%{SPACE}%{LOGLEVEL:level}%{SPACE}%{JAVACLASS:logger_name}:%{SPACE}%{GREEDYDATA:log_message}",
+			"post_map_values":{
+				"evtTime":{
+					"map_date":{
+						"date_pattern":"yyyy-MM-dd HH:mm:ss,SSS"
+					}
+					
+				}
+				
+			}
+			
 		},
 		{
 			"filter":"keyvalue",
@@ -648,12 +784,6 @@
 			"value_split":"=",
 			"field_split":"\t",
 			"post_map_values":{
-				"evtTime":{
-					"map_date":{
-						"date_pattern":"yyyy-MM-dd HH:mm:ss,SSS"
-					}
-					
-				},
 				"src":{
 					"map_fieldname":{
 						"new_fieldname":"resource"
