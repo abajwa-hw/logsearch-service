@@ -28,58 +28,6 @@
 		    }
 		},
 		{
-		    "widget_name": "Lines Read",
-		    "description": "Lines Read",
-		    "widget_type": "GRAPH",
-		    "is_visible": true,
-		    "metrics": [
-			{
-			    "name": "input.files.read_lines._sum",
-			    "metric_path": "metrics/input/files/read_lines",
-			    "service_name": "LOGSEARCH",
-			    "component_name": "LOGSEARCH_LOGFEEDER"
-			}
-
-		    ],
-		    "values": [
-			{
-			    "name": "Lines read from File",
-			    "value": "${input.files.read_lines._sum}"
-			}
-		    ],
-		    "properties": {
-			"display_unit": "lines",
-			"graph_type": "LINE",
-			"time_range": "1"
-		    }
-		},
-		{
-		    "widget_name": "Data Read",
-		    "description": "Data Read",
-		    "widget_type": "GRAPH",
-		    "is_visible": true,
-		    "metrics": [
-			{
-			    "name": "input.files.read_bytes._sum",
-			    "metric_path": "metrics/input/files/read_bytes",
-			    "service_name": "LOGSEARCH",
-			    "component_name": "LOGSEARCH_LOGFEEDER"
-			}
-
-		    ],
-		    "values": [
-			{
-			    "name": "Data read from File",
-			    "value": "${input.files.read_bytes._sum/(1024*1024)}"
-			}
-		    ],
-		    "properties": {
-			"display_unit": "MB",
-			"graph_type": "LINE",
-			"time_range": "1"
-		    }
-		},
-		{
 		    "widget_name": "Logs Published",
 		    "description": "Logs Published",
 		    "widget_type": "GRAPH",
@@ -101,25 +49,57 @@
 		    "values": [
 			{
 			    "name": "Logs to Solr",
-			    "value": "${output.solr.write_logs._sum}"
+			    "value": "${output.solr.write_logs._sum/1000}"
 			},
 			{
 			    "name": "Logs to Kafka",
-			    "value": "${output.kafka.write_logs._sum}"
+			    "value": "${output.kafka.write_logs._sum/1000}"
 			}
 		    ],
 		    "properties": {
-			"display_unit": "logs",
+			"display_unit": "K",
 			"graph_type": "LINE",
 			"time_range": "1"
 		    }
 		},
 		{
-		    "widget_name": "Data Published",
-		    "description": "Data Published",
+		    "widget_name": "Lines Read",
+		    "description": "Lines Read",
 		    "widget_type": "GRAPH",
 		    "is_visible": true,
 		    "metrics": [
+			{
+			    "name": "input.files.read_lines._sum",
+			    "metric_path": "metrics/input/files/read_lines",
+			    "service_name": "LOGSEARCH",
+			    "component_name": "LOGSEARCH_LOGFEEDER"
+			}
+
+		    ],
+		    "values": [
+			{
+			    "name": "Lines read from File",
+			    "value": "${input.files.read_lines._sum/1024}"
+			}
+		    ],
+		    "properties": {
+			"display_unit": "K",
+			"graph_type": "LINE",
+			"time_range": "1"
+		    }
+		},
+		{
+		    "widget_name": "Read/Write Bytes",
+		    "description": "Bytes read and written",
+		    "widget_type": "GRAPH",
+		    "is_visible": true,
+		    "metrics": [
+			{
+			    "name": "input.files.read_bytes._sum",
+			    "metric_path": "metrics/input/files/read_bytes",
+			    "service_name": "LOGSEARCH",
+			    "component_name": "LOGSEARCH_LOGFEEDER"
+			},
 			{
 			    "name": "output.solr.write_bytes._sum",
 			    "metric_path": "metrics/output/solr/write_bytes",
@@ -135,11 +115,15 @@
 		    ],
 		    "values": [
 			{
-			    "name": "Data to Solr",
+			    "name": "Data read from File",
+			    "value": "${input.files.read_bytes._sum/(1024*1024)}"
+			},
+			{
+			    "name": "Data sent to Solr",
 			    "value": "${output.solr.write_bytes._sum/(1024*1024)}"
 			},
 			{
-			    "name": "Data to Kafka",
+			    "name": "Data sent to Kafka",
 			    "value": "${output.kafka.write_bytes._sum/(1024*1024)}"
 			}
 		    ],
