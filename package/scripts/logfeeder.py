@@ -39,18 +39,20 @@ class Master(Script):
             content=''
     )
 
-        
+          
+    self.install_logfeeder()          
+    Execute ('echo "logfeeder install complete"')
+
+
+  def install_logfeeder(self):
+    import params  
     if params.logfeeder_downloadlocation == 'RPM':
       Execute('rpm -ivh http://TBD.rpm')
     else:  
       Execute('cd ' + params.logfeeder_dir + '; wget ' + params.logfeeder_downloadlocation + ' -O logfeeder.tar.gz -a ' + params.logfeeder_log, user=params.logfeeder_user)
       Execute('cd ' + params.logfeeder_dir + '; tar -xvf logfeeder.tar.gz', user=params.logfeeder_user)    
-  
-          
-    Execute ('echo "logfeeder install complete"')
 
-
-
+    
   def configure(self, env):
     import params
     env.set_params(params)
@@ -118,6 +120,16 @@ class Master(Script):
     #use built-in method to check status using pidfile
     check_process_status(status_params.logfeeder_pid_file)  
 
+  def update_logfeeder(self, env):
+    import params
+    env.set_params(params)
+    Execute('echo Stopping logfeeder')
+    self.stop(env)
+    Execute('echo Updating logfeeder using latest install bits')
+    Execute(format("rm -rf {logfeeder_dir}/*"))
+    self.install_logfeeder()
+    Execute('echo Starting logfeeder')
+    self.start(env)
 
 
 if __name__ == "__main__":
