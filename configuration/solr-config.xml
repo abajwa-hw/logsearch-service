@@ -33,19 +33,19 @@
 
   <property>
     <name>solr.minmem</name>
-    <value>512m</value>
+    <value>{smart_solr_memory}</value>
     <description>Solr minimum heap size e.g.512m </description>
   </property> 
 
   <property>
     <name>solr.maxmem</name>
-    <value>512m</value>
+    <value>{smart_solr_memory}</value>
     <description>Solr maximum heap size e.g. 512m</description>
   </property> 
 
   <property>
     <name>logsearch.solr.datadir</name>
-    <value>/opt/logsearch_solr/data</value>
+    <value>{smart_solr_datadir}</value>
     <description>Dir for Logsearch Solr data</description>
   </property> 
   

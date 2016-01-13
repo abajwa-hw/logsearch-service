@@ -38,7 +38,11 @@ else:
   metrics_collector_hosts = ''
   metrics_collector_port = ''
 
-
+####################################
+#Smart Config
+####################################
+smart_solr_memory = config['configurations']['alpha-smart-config']['solr_memory']
+smart_solr_datadir = config['configurations']['alpha-smart-config']['solr_datadir']
 
 #####################################
 #Solr configs
@@ -53,10 +57,11 @@ solr_downloadlocation='HDPSEARCH'
 
 solr_znode = config['configurations']['solr-config']['solr.znode']
 solr_port = config['configurations']['solr-env']['solr.port']
-solr_min_mem = config['configurations']['solr-config']['solr.minmem']
-solr_max_mem = config['configurations']['solr-config']['solr.maxmem']
+solr_min_mem = format(config['configurations']['solr-config']['solr.minmem'])
+solr_max_mem = format(config['configurations']['solr-config']['solr.maxmem'])
+solr_instance_count = len(config['clusterHostInfo']['zookeeper_hosts'])
 logsearch_solr_conf = config['configurations']['solr-config']['logsearch.solr.conf']
-logsearch_solr_datadir = config['configurations']['solr-config']['logsearch.solr.datadir']
+logsearch_solr_datadir = format(config['configurations']['solr-config']['logsearch.solr.datadir'])
 logsearch_solr_data_resources_dir = os.path.join(logsearch_solr_datadir,'resources')
 logsearch_service_logs_max_retention = config['configurations']['logsearch-config']['logsearch_service_logs_max_retention']
 logsearch_audit_logs_max_retention = config['configurations']['logsearch-config']['logsearch_audit_logs_max_retention']
@@ -115,7 +120,8 @@ else:
 logsearch_downloadlocation = config['configurations']['logsearch-env']['logsearch_download_location']
 logsearch_collection_service_logs = default('/configurations/logsearch-config/logsearch_collection_service_logs', 'hadoop_logs')
 logsearch_collection_audit_logs = default('/configurations/logsearch-config/logsearch_collection_audit_logs', 'audit_logs')
-logsearch_numshards = str(config['configurations']['logsearch-config']['logsearch_collection_numshards'])
+#logsearch_numshards = str(config['configurations']['logsearch-config']['logsearch_collection_numshards'])
+logsearch_numshards = format(str(solr_instance_count))
 logsearch_repfactor = str(config['configurations']['logsearch-config']['logsearch_collection_rep_factor'])
 
 solr_collection_service_logs = default('/configurations/logsearch-config/solr_collection_service_logs', 'hadoop_logs')
