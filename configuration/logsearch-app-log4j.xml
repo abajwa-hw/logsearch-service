@@ -35,10 +35,12 @@
     &lt;/layout&gt;
   &lt;/appender&gt;
 
-  &lt;appender name="daily_rolling_file" class="org.apache.log4j.DailyRollingFileAppender"&gt; 
+  &lt;appender name="rolling_file" class="org.apache.log4j.RollingFileAppender"&gt; 
     &lt;param name="file" value="{{logsearch_log_dir}}/logsearch.log" /&gt; 
     &lt;param name="datePattern"  value="'.'yyyy-MM-dd" /&gt; 
     &lt;param name="append" value="true" /&gt; 
+    &lt;param name="maxFileSize" value="10MB" /&gt; 
+    &lt;param name="maxBackupIndex" value="10" /&gt; 
     &lt;layout class="org.apache.log4j.PatternLayout"&gt; 
       &lt;param name="ConversionPattern" value="%d [%t] %-5p %C{6} (%F:%L) - %m%n"/&gt; 
     &lt;/layout&gt; 
@@ -46,12 +48,12 @@
 
   &lt;category name="org.apache.ambari.logsearch" additivity="false"&gt;
     &lt;priority value="info" /&gt;
-    &lt;appender-ref ref="daily_rolling_file" /&gt;
+    &lt;appender-ref ref="rolling_file" /&gt;
   &lt;/category&gt;
 
   &lt;root&gt;
     &lt;priority value="warn" /&gt;
-    &lt;appender-ref ref="daily_rolling_file" /&gt;
+    &lt;appender-ref ref="rolling_file" /&gt;
   &lt;/root&gt;
 &lt;/log4j:configuration&gt;  
     </value>
