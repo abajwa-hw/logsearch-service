@@ -953,7 +953,7 @@
 			
 		},
 		{
-			"is_enabled":"{{kafka_topic_service_logs}}",
+			"is_enabled":"{{kafka_audit_logs_enable}}",
 			"destination":"kafka",
 			"broker_list":"{{kafka_broker_list}}",
 			"topic":"{{kafka_topic_audit_logs}}",
