@@ -55,7 +55,27 @@ class Master(Script):
     
   def configure(self, env):
     import params
+    import status_params
+
     env.set_params(params)
+
+    #Duplicated here, because if the machine restarts /var/run folder is wiped out
+    Directory([params.logfeeder_log_dir, status_params.logfeeder_pid_dir, params.logfeeder_dir],
+              mode=0755,
+              cd_access='a',
+              owner=params.logfeeder_user,
+              group=params.logfeeder_group,
+              recursive=True
+          )
+
+
+    File(params.logfeeder_log,
+            mode=0644,
+            owner=params.logfeeder_user,
+            group=params.logfeeder_group,
+            content=''
+    )
+
     
     #write content in jinja text field to system.properties
     env_content=InlineTemplate(params.logfeeder_env_content)

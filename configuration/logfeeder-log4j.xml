@@ -37,7 +37,6 @@
 
   &lt;appender name="rolling_file" class="org.apache.log4j.RollingFileAppender"&gt; 
     &lt;param name="file" value="{{logfeeder_log_dir}}/logfeeder.log" /&gt; 
-    &lt;param name="datePattern"  value="'.'yyyy-MM-dd" /&gt; 
     &lt;param name="append" value="true" /&gt; 
     &lt;param name="maxFileSize" value="10MB" /&gt; 
     &lt;param name="maxBackupIndex" value="10" /&gt; 

@@ -66,14 +66,26 @@
 #solr.url=http://{{solr_host}}:{{solr_port}}/solr
 
 #Service Logs and History colletion
+
 solr.zkhosts={{zookeeper_quorum}}{{solr_znode}}
 solr.core.logs={{logsearch_collection_service_logs}}
+
+solr.service_logs.split_interval_mins={{service_logs_collection_splits_interval_mins}}
+solr.service_logs.shards={{logsearch_numshards}}
+solr.service_logs.replication_factor={{logsearch_repfactor}}
+
+
 solr.core.history=history
 
 #Audit logs
 auditlog.solr.zkhosts={{solr_audit_logs_zk_quorum}}{{solr_audit_logs_zk_node}}
 auditlog.solr.core.logs={{solr_collection_audit_logs}}
 auditlog.solr.url={{solr_audit_logs_url}}
+
+solr.audit_logs.split_interval_mins={{audit_logs_collection_splits_interval_mins}}
+solr.audit_logs.shards={{logsearch_numshards}}
+solr.audit_logs.replication_factor={{logsearch_repfactor}}
+
     </value>
   </property>
 
