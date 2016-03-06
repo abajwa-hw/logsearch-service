@@ -71,7 +71,26 @@ class Master(Script):
 
   def configure(self, env):
     import params
+    import status_params
+
     env.set_params(params)
+
+    #This is duplicated because if the machine restarts, the /var/run folder is deleted
+    Directory([params.solr_log_dir, status_params.solr_piddir, params.solr_dir, params.logsearch_solr_conf, params.logsearch_solr_datadir, params.logsearch_solr_data_resources_dir],
+              mode=0755,
+              cd_access='a',
+              owner=params.solr_user,
+              group=params.solr_group,
+              recursive=True
+          )
+
+
+    File(params.solr_log,
+            mode=0644,
+            owner=params.solr_user,
+            group=params.solr_group,
+            content=''
+    )
     
     #write content in jinja text field to solr.in.sh
     env_content=InlineTemplate(params.solr_env_content)

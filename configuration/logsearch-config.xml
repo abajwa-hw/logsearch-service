@@ -4,6 +4,12 @@
 <configuration>
 
   <property>
+    <name>audit_logs_collection_split_interval_mins</name>
+    <value>15</value>
+    <description>Will switch the shard after the interval specified. Valid values are none and greater than 1</description>
+  </property>   
+
+  <property>
     <name>solr_collection_service_logs</name>
     <value>hadoop_logs</value>
     <description>Name for the service logs collection</description>
@@ -34,8 +40,14 @@
   </property>   
 
   <property>
+    <name>service_logs_collection_split_interval_mins</name>
+    <value>15</value>
+    <description>Will create multiple collections and use alias. Valid values are single,hour_week</description>
+  </property>   
+
+  <property>
     <name>logsearch_collection_numshards</name>
-    <value>1</value>
+    <value>10</value>
     <description>Number of shards for Solr collections</description>
   </property>   
   
@@ -44,6 +56,7 @@
     <value>1</value>
     <description>Replication factor for Solr collections</description>
   </property> 
+
 
   <property>
     <name>logsearch_service_logs_max_retention</name>
