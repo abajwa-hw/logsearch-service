@@ -1,7 +1,12 @@
 #### An Ambari Stack for Logsearch
 Ambari stack for easily installing and managing Logsearch on HDP cluster
 
-Limitations: current version expects Logsearch component to be located on one of the nodes where Solr Cloud is installed.
+Limitations:
+
+- This is not an officially supported service and *is not meant to be deployed in production systems*. It is only meant for testing demo/purposes
+- It does not support Ambari/HDP upgrade process and will cause upgrade problems if not removed prior to upgrade
+- current version expects Logsearch component to be located on one of the nodes where Solr Cloud is installed.
+
 
 There are two options to deploy Logsearch from Ambari:
   - Option 1: Deploy Logsearch on existing cluster
