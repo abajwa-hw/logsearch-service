@@ -45,7 +45,7 @@
   <property>
     <name>logfeeder_download_location</name>
     <!-- <value>RPM</value> -->
-    <value>https://s3.amazonaws.com/publicrepo/logsearch-logfeeder.tgz</value>
+    <value>https://s3.amazonaws.com/publicrepo/ambari-logsearch-logfeeder.tgz</value>
     <description>Location to download logfeeder tarball from (e.g. https://dl.dropboxusercontent.com/u/114020/logfeeder/logfeeder-portal.tar.gz)</description>
   </property>  
 

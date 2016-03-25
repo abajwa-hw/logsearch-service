@@ -12,8 +12,7 @@
 
   <property>
     <name>logsearch_download_location</name>
-    <value>https://s3.amazonaws.com/publicrepo/logsearch-portal.tar.gz</value>
-    <!-- <value>https://dl.dropboxusercontent.com/u/114020/logsearch/logsearch-portal.tar.gz</value> -->
+    <value>https://s3.amazonaws.com/publicrepo/ambari-logsearch-portal.tar.gz</value>
     <description>Location to download Logsearch from. If set to RPM, it will install from rpm. Otherwise will download from tar.gaz (e.g. https://s3.amazonaws.com/publicrepo/logsearch-portal.tar.gz)</description>
   </property>  
 

@@ -22,6 +22,14 @@ class Master(Script):
                           gid=params.logfeeder_group, 
                           groups=[params.logfeeder_group], 
                           ignore_failures=True)    
+          
+    self.install_logfeeder()          
+    Execute ('echo "logfeeder install complete"')
+
+
+  def install_logfeeder(self):
+    import params  
+    import status_params
 
     Directory([params.logfeeder_log_dir, status_params.logfeeder_pid_dir, params.logfeeder_dir],
               mode=0755,
@@ -39,13 +47,6 @@ class Master(Script):
             content=''
     )
 
-          
-    self.install_logfeeder()          
-    Execute ('echo "logfeeder install complete"')
-
-
-  def install_logfeeder(self):
-    import params  
     if params.logfeeder_downloadlocation == 'RPM':
       Execute('rpm -ivh http://TBD.rpm')
     else:  
@@ -147,7 +148,7 @@ class Master(Script):
     self.stop(env)
     Execute('echo Updating logfeeder using latest install bits')
     Execute(format("rm -rf {logfeeder_dir}/*"))
-    self.install_logfeeder()
+    self.install()
     Execute('echo Starting logfeeder')
     self.start(env)
 

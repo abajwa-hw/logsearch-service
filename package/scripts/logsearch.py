@@ -23,6 +23,16 @@ class Master(Script):
                           groups=[params.logsearch_group], 
                           ignore_failures=True)    
 
+
+    self.install_logsearch()    
+  
+    Execute ('echo "Logsearch install complete"')
+
+
+  def install_logsearch(self):
+    import params
+    import status_params
+
     Directory([params.logsearch_log_dir, status_params.logsearch_pid_dir, params.logsearch_dir],
               mode=0755,
               cd_access='a',
@@ -39,13 +49,6 @@ class Master(Script):
             content=''
     )
 
-    self.install_logsearch()    
-  
-    Execute ('echo "Logsearch install complete"')
-
-
-  def install_logsearch(self):
-    import params
     if params.logsearch_downloadlocation == 'RPM':
       Execute('rpm -ivh http://s3.amazonaws.com/dev2.hortonworks.com/ashishujjain/logsearch/logsearch_2_3_2_0_2950-0.0.1.2.3.2.0-2950.el6.x86_64.rpm')
     else:
@@ -125,50 +128,14 @@ class Master(Script):
     Execute('echo mapred_log_dir_prefix '+params.mapred_log_dir_prefix+' >> ' + params.logsearch_log, user=params.logsearch_user)
     Execute('echo zk_log_dir '+params.zk_log_dir+' >> ' + params.logsearch_log, user=params.logsearch_user)
 
+    cmd = format('{logsearch_dir}/add_config_set.sh {solr_dir} {zookeeper_quorum}{solr_znode} hadoop_logs {logsearch_dir}/solr_configsets/hadoop_logs/conf')
+    Execute(cmd)
 
-    my_random = random.random()
+    cmd = format('{logsearch_dir}/add_config_set.sh {solr_dir} {zookeeper_quorum}{solr_znode} audit_logs {logsearch_dir}/solr_configsets/audit_logs/conf')
+    Execute(cmd)
 
-    #Check whether we need to add service log config to zookeeper.
-    tmp_folder='/tmp/solr_config_hadoop_logs_' + str(my_random)
-    cmd = format('{cloud_scripts}/zkcli.sh -zkhost {zookeeper_quorum}{solr_znode} -cmd downconfig -confdir ' + tmp_folder + ' -confname hadoop_logs')
-    Execute(cmd, ignore_failures=True)
-    if not os.path.exists( tmp_folder ):
-      Execute ('echo "Adding config for service logs"')
-      #Adding service logs config to zookeeper
-      cmd = format('{cloud_scripts}/zkcli.sh -zkhost {zookeeper_quorum}{solr_znode} -cmd upconfig -confdir {logsearch_dir}/solr_configsets/hadoop_logs/conf -confname hadoop_logs')
-      Execute(cmd)
-    else:
-      Execute ('echo "Config for hadoop_logs already present in zookeeper. Will not add it"')
-
-
-    #create prerequisite Solr collections, if not already exist
-    #cmd = params.solr_bindir+'solr create -c '+params.logsearch_collection_service_logs+' -d '+params.logsearch_dir+'/solr_configsets/hadoop_logs/conf -s '+params.logsearch_numshards+' -rf ' + params.logsearch_repfactor    
-
-#    cmd = format('SOLR_INCLUDE={logsearch_solr_conf}/solr.in.sh {solr_bindir}/solr create -c {solr_collection_service_logs} -d {logsearch_dir}/solr_configsets/hadoop_logs/conf -s {logsearch_numshards} -rf {logsearch_repfactor}')
-#    Execute('echo '  + cmd)
-#    Execute(cmd, ignore_failures=True)
-
-    #cmd = params.solr_bindir+'solr create -c history -d '+params.logsearch_dir+'/solr_configsets/history/conf -s '+params.logsearch_numshards+' -rf ' + params.logsearch_repfactor
-    cmd = format('SOLR_INCLUDE={logsearch_solr_conf}/solr.in.sh {solr_bindir}/solr create -c history -d {logsearch_dir}/solr_configsets/history/conf -s 1 -rf {logsearch_repfactor}')
-    Execute('echo '  + cmd)
-    Execute(cmd, ignore_failures=True)
-
-    #Check whether we need to add service log config to zookeeper.
-    tmp_folder='/tmp/solr_config_audit_logs_' + str(my_random)
-    cmd = format('{cloud_scripts}/zkcli.sh -zkhost {zookeeper_quorum}{solr_znode} -cmd downconfig -confdir ' + tmp_folder + ' -confname audit_logs')
-    Execute(cmd, ignore_failures=True)
-    if not os.path.exists( tmp_folder ):
-      Execute ('echo "Adding config for  audit_logs"')
-      #Adding service logs config to zookeeper
-      cmd = format('{cloud_scripts}/zkcli.sh -zkhost {zookeeper_quorum}{solr_znode} -cmd upconfig -confdir {logsearch_dir}/solr_configsets/audit_logs/conf -confname audit_logs')
-      Execute(cmd)
-    else:
-      Execute ('echo "Config for audit_logs already present in zookeeper. Will not add it"')
-
-#    if not(params.solr_audit_logs_use_ranger):
-#      cmd = format('SOLR_INCLUDE={logsearch_solr_conf}/solr.in.sh {solr_bindir}/solr create -c {solr_collection_audit_logs} -d {logsearch_dir}/solr_configsets/audit_logs/conf -s {logsearch_numshards} -rf {logsearch_repfactor}')
-#      Execute('echo '  + cmd)
-#      Execute(cmd, ignore_failures=True)
+    cmd = format('{logsearch_dir}/add_config_set.sh {solr_dir} {zookeeper_quorum}{solr_znode} history {logsearch_dir}/solr_configsets/history/conf')
+    Execute(cmd)
     						 
     Execute('chmod -R ugo+r ' + params.logsearch_dir + '/solr_configsets')
     
