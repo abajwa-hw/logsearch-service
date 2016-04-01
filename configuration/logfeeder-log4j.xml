@@ -55,6 +55,7 @@
     &lt;appender-ref ref="rolling_file" /&gt;
   &lt;/category&gt;
 
+
   &lt;root&gt;
     &lt;priority value="warn" /&gt;
     &lt;appender-ref ref="rolling_file" /&gt;

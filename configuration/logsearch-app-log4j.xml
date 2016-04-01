@@ -70,7 +70,7 @@
    &lt;appender-ref ref="audit_rolling_file" /&gt;
   &lt;/logger&gt;
   
-  &lt;logger name="org.apache.ambari.logsearch.perfomance" additivity="false"&gt;
+  &lt;logger name="org.apache.ambari.logsearch.performance" additivity="false"&gt;
    &lt;appender-ref ref="performance_analyzer" /&gt;
   &lt;/logger&gt;
 
