@@ -79,9 +79,9 @@ class Master(Script):
             content=''
     )
 
-    #write content in jinja text field to system.properties
+    #write content in jinja text field to logsearch.properties
     env_content=InlineTemplate(params.logsearch_env_content)    
-    File(format("{params.logsearch_dir}/classes/system.properties"), content=env_content, owner=params.logsearch_user)    
+    File(format("{params.logsearch_dir}/classes/logsearch.properties"), content=env_content, owner=params.logsearch_user)    
 
     #update the log4j
     file_content=InlineTemplate(params.logsearch_app_log4j_content)    

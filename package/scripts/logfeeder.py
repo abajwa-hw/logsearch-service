@@ -78,7 +78,7 @@ class Master(Script):
     )
 
     
-    #write content in jinja text field to system.properties
+    #write content in jinja text field to logfeeder.properties
     env_content=InlineTemplate(params.logfeeder_env_content)
     File(format("{params.logfeeder_dir}/classes/logfeeder.properties"), content=env_content, owner=params.logfeeder_user)    
 

@@ -76,4 +76,22 @@
     <description>Max memory for LogSearch</description>
   </property> 
 
+  <property>
+    <name>logsearch_auth_file_enable</name>
+    <value>true</value>
+    <description>Enable file based authentication</description>
+  </property> 
+
+  <property>
+    <name>logsearch_auth_ldap_enable</name>
+    <value>false</value>
+    <description>Enable LDAP based authentication</description>
+  </property> 
+
+  <property>
+    <name>logsearch_auth_simple_enable</name>
+    <value>false</value>
+    <description>Enable no password authentication. Both File and LDAP based authentication should be turned off for this</description>
+  </property> 
+
 </configuration>

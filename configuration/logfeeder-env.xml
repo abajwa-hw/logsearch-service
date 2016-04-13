@@ -49,7 +49,7 @@
     <description>Location to download logfeeder tarball from (e.g. https://dl.dropboxusercontent.com/u/114020/logfeeder/logfeeder-portal.tar.gz)</description>
   </property>  
 
-  <!-- system.properties -->
+  <!-- logfeeder.properties -->
 
   <property>
     <name>content</name>
