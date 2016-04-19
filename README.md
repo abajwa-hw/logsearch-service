@@ -16,8 +16,8 @@ There are two options to deploy Logsearch from Ambari:
 
 The below steps demonstrate how to deploy Logsearch on existing cluster using the sandbox as an example. The same process can be followed on an Ambari installed cluster.
 
-- Download HDP 2.2 sandbox VM image (Sandbox_HDP_2.2_VMware.ova) from [Hortonworks website](http://hortonworks.com/products/hortonworks-sandbox/)
-- Import Sandbox_HDP_2.2_VMware.ova into VMWare and set the VM memory size to 8GB
+- Download HDP 2.4 sandbox VM image (Hortonworks_sanbox_with_hdp_2_4_vmware.ova) from [Hortonworks website](http://hortonworks.com/products/hortonworks-sandbox/)
+- Import Hortonworks_sanbox_with_hdp_2_4_vmware.ova into VMWare and set the VM memory size to 8GB
 - Now start the VM
 - After it boots up, find the IP address of the VM and add an entry into your machines hosts file e.g.
 ```
@@ -84,11 +84,11 @@ curl -sSL https://raw.githubusercontent.com/seanorama/ambari-bootstrap/master/am
 export install_ambari_server=true
 curl -sSL https://raw.githubusercontent.com/seanorama/ambari-bootstrap/master/ambari-bootstrap.sh | sudo -E sh
 yum install -y git
-git clone https://github.com/abajwa-hw/logsearch-service.git /var/lib/ambari-server/resources/stacks/HDP/2.3/services/LOGSEARCH
+git clone https://github.com/abajwa-hw/logsearch-service.git /var/lib/ambari-server/resources/stacks/HDP/2.4/services/LOGSEARCH
 ```
 
 
-- Edit the `/var/lib/ambari-server/resources/stacks/HDP/2.3/role_command_order.json` file to include below:
+- Edit the `/var/lib/ambari-server/resources/stacks/HDP/2.4/role_command_order.json` file to include below:
 ```
     "LOGSEARCH_SOLR-START" : ["ZOOKEEPER_SERVER-START"],
     "LOGSEARCH_MASTER-START": ["LOGSEARCH_SOLR-START"],
@@ -170,7 +170,7 @@ curl -u admin:admin -H  X-Requested-By:ambari http://localhost:8080/api/v1/clust
 - The SolrCloud console should be available at http://sandbox.hortonworks.com:8886. Check that the hadoop_logs and history collections got created
 ![Image](../master/screenshots/logsearch-solr.png?raw=true)
 
-- Launch the Logsearch webapp via navigating to http://sandbox.hortonworks.com:8888/
+- Launch the Logsearch webapp via navigating to http://sandbox.hortonworks.com:61888/
 ![Image](../master/screenshots/logsearch-dashboard.png?raw=true)
 
 - Alternatively, you can launch it from Ambari via [iFrame view](https://github.com/abajwa-hw/iframe-view)
@@ -293,7 +293,7 @@ rm -rf /var/run/log*
 ```
   - (Optional) Remove Logsearch Ambari service from Ambari node
 ```  
-rm -rf /var/lib/ambari-server/resources/stacks/HDP/2.3/services/LOGSEARCH
+rm -rf /var/lib/ambari-server/resources/stacks/HDP/2.4/services/LOGSEARCH
 ```
   - Restart Ambari
 ```
