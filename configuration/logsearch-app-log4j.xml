@@ -45,6 +45,16 @@
     &lt;/layout&gt; 
   &lt;/appender&gt; 
 
+  &lt;appender name="audit_rolling_file" class="org.apache.log4j.RollingFileAppender"&gt; 
+    &lt;param name="file" value="{{logsearch_log_dir}}/logsearch-audit.log" /&gt; 
+    &lt;param name="append" value="true" /&gt; 
+    &lt;param name="maxFileSize" value="10MB" /&gt; 
+    &lt;param name="maxBackupIndex" value="10" /&gt; 
+    &lt;layout class="org.apache.log4j.PatternLayout"&gt; 
+      &lt;param name="ConversionPattern" value="%d [%t] %-5p %C{6} (%F:%L) - %m%n"/&gt; 
+    &lt;/layout&gt; 
+  &lt;/appender&gt; 
+
   &lt;appender name="performance_analyzer" class="org.apache.log4j.RollingFileAppender"&gt;
     &lt;param name="file" value="{{logsearch_log_dir}}/logsearch-performance.log" /&gt;
     &lt;param name="Threshold" value="info" /&gt;
@@ -55,8 +65,12 @@
       &lt;param name="ConversionPattern" value="%d [%t] %-5p %C{6} (%F:%L) - %m%n" /&gt;
     &lt;/layout&gt;
   &lt;/appender&gt;
+
+  &lt;logger name="org.apache.ambari.logsearch.audit" additivity="true"&gt;
+   &lt;appender-ref ref="audit_rolling_file" /&gt;
+  &lt;/logger&gt;
   
-  &lt;logger name="org.apache.ambari.logsearch.perfomance" additivity="false"&gt;
+  &lt;logger name="org.apache.ambari.logsearch.performance" additivity="false"&gt;
    &lt;appender-ref ref="performance_analyzer" /&gt;
   &lt;/logger&gt;
 

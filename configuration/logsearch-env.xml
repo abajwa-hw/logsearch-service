@@ -12,8 +12,7 @@
 
   <property>
     <name>logsearch_download_location</name>
-    <value>https://s3.amazonaws.com/publicrepo/logsearch-portal.tar.gz</value>
-    <!-- <value>https://dl.dropboxusercontent.com/u/114020/logsearch/logsearch-portal.tar.gz</value> -->
+    <value>https://s3.amazonaws.com/publicrepo/ambari-logsearch-portal.tar.gz</value>
     <description>Location to download Logsearch from. If set to RPM, it will install from rpm. Otherwise will download from tar.gaz (e.g. https://s3.amazonaws.com/publicrepo/logsearch-portal.tar.gz)</description>
   </property>  
 
@@ -44,11 +43,11 @@
   </property> 
 
 
-  <!-- system.properties -->
+  <!-- logsearch.properties -->
 
   <property>
     <name>content</name>
-    <description>This is the jinja template for system.properties file</description>
+    <description>This is the jinja template for logsearch.properties file</description>
     <value># Licensed to the Apache Software Foundation (ASF) under one or more
 # contributor license agreements.  See the NOTICE file distributed with
 # this work for additional information regarding copyright ownership.
@@ -85,6 +84,12 @@ auditlog.solr.url={{solr_audit_logs_url}}
 solr.audit_logs.split_interval_mins={{audit_logs_collection_splits_interval_mins}}
 solr.audit_logs.shards={{logsearch_numshards}}
 solr.audit_logs.replication_factor={{logsearch_repfactor}}
+
+#Authentication settings
+#Note: Simple will be supported only if both file and ldap is disabled.
+logsearch.auth.file.enable={{logsearch_auth_file_enable}}
+logsearch.auth.ldap.enable={{logsearch_auth_ldap_enable}}
+logsearch.auth.simple.enable={{logsearch_auth_simple_enable}}
 
     </value>
   </property>

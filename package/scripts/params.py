@@ -67,6 +67,10 @@ logsearch_service_logs_max_retention = config['configurations']['logsearch-confi
 logsearch_audit_logs_max_retention = config['configurations']['logsearch-config']['logsearch_audit_logs_max_retention']
 logsearch_app_max_mem = config['configurations']['logsearch-config']['logsearch_app_max_mem']
 
+logsearch_auth_file_enable = config['configurations']['logsearch-config']['logsearch_auth_file_enable']
+logsearch_auth_ldap_enable = config['configurations']['logsearch-config']['logsearch_auth_ldap_enable']
+logsearch_auth_simple_enable = config['configurations']['logsearch-config']['logsearch_auth_simple_enable']
+
 audit_logs_collection_splits_interval_mins = config['configurations']['logsearch-config']['audit_logs_collection_split_interval_mins']
 service_logs_collection_splits_interval_mins = config['configurations']['logsearch-config']['service_logs_collection_split_interval_mins']
 
@@ -157,10 +161,6 @@ else:
   if not(solr_audit_logs_zk_node):
     solr_audit_logs_zk_node=solr_znode
       
-#using zookeeper znode for solr instead of host/port now that logsearch system.properties supports it
-#solr_host = config['configurations']['logsearch-config']['solr_host']
-#solr_port = str(config['configurations']['logsearch-config']['solr_port'])
-
 
 # logsearch-env configs
 logsearch_user = config['configurations']['logsearch-env']['logsearch_user']
