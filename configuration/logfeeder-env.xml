@@ -70,6 +70,11 @@
 # limitations under the License.
 
 metrics.collector.hosts=http://{{metrics_collector_hosts}}:{{metrics_collector_port}}/ws/v1/timeline/metrics
+logfeeder.solr.zkhosts={{zookeeper_quorum}}{{solr_znode}}
+logfeeder.solr.core.history=history
+logfeeder.log.filter.enable=true
+#Internal to fetch filter config from solr in sec
+logfeeder.solr.config.internal=5
     </value>
   </property>
 

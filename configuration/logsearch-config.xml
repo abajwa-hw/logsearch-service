@@ -47,7 +47,7 @@
 
   <property>
     <name>logsearch_collection_numshards</name>
-    <value>10</value>
+    <value>5</value>
     <description>Number of shards for Solr collections</description>
   </property>   
   
