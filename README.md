@@ -7,6 +7,11 @@ Limitations:
 - It does not support Ambari/HDP upgrade process and will cause upgrade problems if not removed prior to upgrade
 - current version expects Logsearch component to be located on one of the nodes where Solr Cloud is installed.
 
+##### Deprecation notice:
+Logsearch is now officially available via Ambari in HDP 2.5 so as of this release this project is not longer needed.
+Official Logsearch Ambari service code can be found in Apache github [here](https://github.com/apache/ambari/tree/trunk/ambari-server/src/main/resources/common-services/LOGSEARCH)
+
+
 
 There are two options to deploy Logsearch from Ambari:
   - Option 1: Deploy Logsearch on existing cluster

@@ -5,7 +5,7 @@
         <service>
             <name>LOGSEARCH</name>
             <displayName>Log Search</displayName>
-            <comment>Log aggregation, analysis, and visualization for Hadoop</comment>
+            <comment>Log aggregation, analysis, and visualization for Hadoop. This service is for &lt;b&gt;Demo purposes only&lt;/b&gt; and is &lt;b&gt;not officially supported&lt;/b&gt;</comment>
             <version>0.0.1</version>
             
 
